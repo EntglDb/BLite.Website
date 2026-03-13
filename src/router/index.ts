@@ -2,6 +2,13 @@ import { type RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 import Docs from '../views/Docs.vue'
 import Studio from '../views/Studio.vue'
+import ServerDocs from '../views/ServerDocs.vue'
+import ServerOverview from '../views/server-docs/Overview.vue'
+import ServerInstallation from '../views/server-docs/ServerInstallation.vue'
+import ServerProtocol from '../views/server-docs/Protocol.vue'
+import ServerStudio from '../views/server-docs/ServerStudio.vue'
+import ServerClients from '../views/server-docs/Clients.vue'
+import ServerVersionMatrix from '../views/server-docs/VersionMatrix.vue'
 import GettingStarted from '../views/docs/GettingStarted.vue'
 import Installation from '../views/docs/Installation.vue'
 import Transactions from '../views/docs/Transactions.vue'
@@ -176,6 +183,61 @@ export const routes: RouteRecordRaw[] = [
             title: 'BLite Studio – GUI for Embedded NoSQL Databases (.NET)',
             description: 'Download BLite Studio, the official cross-platform GUI for browsing, querying, and managing BLite embedded NoSQL databases. Available for Windows, Linux, and macOS.'
         }
+    },
+    {
+        path: '/server',
+        component: ServerDocs,
+        redirect: '/server/overview',
+        children: [
+            {
+                path: 'overview',
+                component: ServerOverview,
+                meta: {
+                    title: 'BLite.Server – Networked BLite Database Server (Preview)',
+                    description: 'BLite.Server exposes the embedded BLite engine as a gRPC + REST network service with multi-tenancy, API-key auth, ACID transactions, and a built-in Blazor Web Studio. Currently in public preview.'
+                }
+            },
+            {
+                path: 'installation',
+                component: ServerInstallation,
+                meta: {
+                    title: 'Install BLite.Server – Docker, Windows, Linux (Preview)',
+                    description: 'Install BLite.Server using Docker, the Windows installer, or the Linux binary with systemd. Configure ports, data directories, and TLS for the gRPC, REST, and Blazor Studio endpoints.'
+                }
+            },
+            {
+                path: 'protocol',
+                component: ServerProtocol,
+                meta: {
+                    title: 'BLite.Server Protocol & REST API – gRPC, BLQL, Authentication',
+                    description: 'BLite.Server gRPC services, REST /api/v1 endpoints, API-key authentication, permission flags, BLQL filter operators, and ACID transaction protocol.'
+                }
+            },
+            {
+                path: 'studio',
+                component: ServerStudio,
+                meta: {
+                    title: 'BLite Web Studio – Browser-Based Database Management UI',
+                    description: 'BLite.Server ships a Blazor Server management UI at port 2628. Browse databases, edit documents, run BLQL queries, and manage users — no desktop app required.'
+                }
+            },
+            {
+                path: 'clients',
+                component: ServerClients,
+                meta: {
+                    title: 'BLite Client SDKs – .NET, TypeScript, Java',
+                    description: 'Official BLite.Server client SDKs for .NET (NuGet BLite.Client), TypeScript/Node.js (@blite/client), and Java (io.blite:blite-client-java). Feature matrix and quick-start code.'
+                }
+            },
+            {
+                path: 'version-matrix',
+                component: ServerVersionMatrix,
+                meta: {
+                    title: 'BLite.Server Version Matrix – Engine & Client Compatibility',
+                    description: 'Match BLite.Server releases to the underlying BLite engine version and compatible client SDKs for .NET, TypeScript, and Java.'
+                }
+            }
+        ]
     }
 ]
 

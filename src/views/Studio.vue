@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const VERSION = '3.6.2'
+const VERSION = '3.6.4'
 const BASE = `https://github.com/EntglDb/BLite/releases/download/studio-v${VERSION}`
 
 const downloads = [

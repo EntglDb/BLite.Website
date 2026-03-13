@@ -168,8 +168,10 @@
 }</code></pre>
 
       <div class="info-box success">
-        <strong>✨ Recent Improvements (v1.3.0 – v3.6.2):</strong>
+        <strong>✨ Recent Improvements (v1.3.0 – v3.6.4):</strong>
         <ul>
+          <li>✅ <strong>v3.6.4</strong> — <strong>BLite.Server public preview</strong>: first preview release of BLite.Server — gRPC + REST network server, Blazor Web Studio, multi-tenancy, API-key auth, TypeScript and Java client SDKs.</li>
+          <li>✅ <strong>v3.6.3</strong> — <strong>Coerced BSON numeric reads</strong>: numeric values stored as one integer type (e.g. <code>int32</code>) are now correctly read back as a wider type (<code>int64</code>, <code>double</code>) without a deserialization error. JSON round-trips preserve the original type.</li>
           <li>✅ <strong>v3.6.2</strong> — <strong>HNSW vector search correctness</strong>: full correctness pass on the HNSW implementation &mdash; fixes <code>AllocateNode</code> overflow, neighbor link integrity, <code>SelectNeighbors</code> heuristic, random level distribution (<code>mL = 1/ln(M)</code>), and index persistence across close/reopen. 12 new edge-case tests added.</li>
           <li>✅ <strong>v3.6.0</strong> — <strong>CDC Watch on <code>DynamicCollection</code></strong>: <code>DynamicCollection.Watch()</code> now supported &mdash; real-time change streams available on the schema-less API, not just on typed <code>DocumentCollection&lt;TId, T&gt;</code>.</li>
           <li>✅ <strong>v3.5.0</strong> — <strong><code>IDocumentCollection&lt;TId, T&gt;</code> abstraction</strong>: typed collections implement a clean interface covering CRUD, LINQ, async, and bulk operations. Sync <code>Update</code>, <code>UpdateBulk</code>, <code>Delete</code>, and <code>DeleteBulk</code> are part of the interface (v3.5.1). Simplifies DI and mocking.</li>

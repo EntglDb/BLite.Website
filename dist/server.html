@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><!-- Primary meta --><title>BLite.Server – Networked BLite Database Server (Preview)</title><meta name="description" content="BLite.Server exposes the embedded BLite engine as a gRPC + REST network service with multi-tenancy, API-key auth, ACID transactions, and a built-in Blazor Web Studio. Currently in public preview."><meta name="keywords" content="embedded NoSQL database for .NET, embedded NoSQL .NET, NoSQL database C#, embedded document database .NET, BSON document store, embedded database .NET, zero allocation .NET database, ACID transactions .NET, LiteDB alternative, local-first database .NET, .NET 10 database, netstandard2.1 database, .NET Standard database, Unity embedded database, Xamarin database, NoSQL NuGet package, embedded database NuGet, document store C#, BLite"><meta name="author" content="BLite Project"><meta name="robots" content="index, follow"><meta name="theme-color" content="#e74c3c"><link rel="canonical" href="https://blitedb.com/server/overview"><!-- Favicon --><link rel="icon" type="image/svg+xml" href="/icon.svg"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="BLite"><meta property="og:url" content="https://blitedb.com/server/overview"><meta property="og:title" content="BLite.Server – Networked BLite Database Server (Preview)"><meta property="og:description" content="BLite.Server exposes the embedded BLite engine as a gRPC + REST network service with multi-tenancy, API-key auth, ACID transactions, and a built-in Blazor Web Studio. Currently in public preview."><meta property="og:image" content="https://blitedb.com/og-image.png"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="BLite.Server – Networked BLite Database Server (Preview)"><meta name="twitter:description" content="BLite.Server exposes the embedded BLite engine as a gRPC + REST network service with multi-tenancy, API-key auth, ACID transactions, and a built-in Blazor Web Studio. Currently in public preview."><meta name="twitter:image" content="https://blitedb.com/og-image.png"><!-- JSON-LD Structured Data --><script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "BLite",
+    "alternateName": "BLite Embedded NoSQL Database",
+    "url": "https://blitedb.com",
+    "description": "BLite is the high-performance embedded NoSQL database for .NET. Zero-allocation BSON document store with ACID transactions, Change Data Capture streams, R-Tree spatial indexing, and compile-time source generators. No cloud, no server — install via NuGet.",
+    "applicationCategory": "DeveloperApplication",
+    "applicationSubCategory": "Embedded NoSQL Database",
+    "operatingSystem": "Windows, Linux, macOS",
+    "programmingLanguage": "C#",
+    "softwareVersion": "3.6.4",
+    "license": "https://opensource.org/licenses/MIT",
+    "codeRepository": "https://github.com/EntglDb/BLite",
+    "downloadUrl": "https://www.nuget.org/packages/BLite",
+    "featureList": [
+      "Embedded NoSQL document store for .NET",
+      "Zero-allocation BSON serialization",
+      "ACID transactions with Write-Ahead Logging",
+      "Change Data Capture (CDC) with 1000+ subscribers",
+      "R-Tree spatial and vector indexing",
+      "Compile-time source generators — no reflection",
+      "LINQ IQueryable provider",
+      "Schema-less DynamicCollection API",
+      "BLQL query language",
+      "netstandard2.1 compatible — Unity, Xamarin, MAUI, .NET 5+",
+      "Local-first, no cloud required"
+    ],
+    "keywords": "embedded NoSQL database for .NET, embedded database .NET, BSON document store, NoSQL C#, ACID .NET, zero allocation, LiteDB alternative",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }</script><!-- FAQ Structured Data --><script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is BLite?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "BLite is a high-performance embedded NoSQL database for .NET. It stores BSON documents locally inside your application with zero allocations, ACID transactions, and no external server or cloud dependency."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I install BLite in a .NET project?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Run 'dotnet add package BLite' in your .NET project. BLite targets .NET 10 and .NET Standard 2.1, and is available on NuGet."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is BLite a good alternative to LiteDB for .NET?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. BLite offers significantly higher throughput and zero heap allocations compared to LiteDB, plus modern features like Change Data Capture, R-Tree spatial indexing, and compile-time source generators."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does BLite require a cloud service or external server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. BLite is a fully embedded database that runs entirely inside your .NET process. There is no external server, no cloud service, and no network dependency."
+        }
+      }
+    ]
+  }</script><script type="module" async="" crossorigin="" src="/assets/app-DVVML4i8.js"></script><link rel="stylesheet" crossorigin="" href="/assets/app-C0ZxcF02.css"></head><body><div id="app" data-server-rendered="true"><div class="app-layout" data-v-8d351d2c=""><header class="main-header glass-panel" data-v-8d351d2c=""><div class="container header-content" data-v-8d351d2c=""><a href="/" class="logo-link" data-v-8d351d2c=""><img src="/icon.svg" alt="BLite" class="logo-img" data-v-8d351d2c=""><div class="logo-text" data-v-8d351d2c="">BLite<span class="dot" data-v-8d351d2c="">.</span></div></a><nav data-v-8d351d2c=""><a href="/" class="" data-v-8d351d2c="">Home</a><a href="/docs" class="" data-v-8d351d2c="">Docs</a><a href="/server" class="router-link-active" data-v-8d351d2c="">Server</a><a href="/studio" class="" data-v-8d351d2c="">Studio</a><a href="/comparisons" class="" data-v-8d351d2c="">Comparisons</a><a href="https://github.com/EntglDb/BLite" target="_blank" class="github-link" data-v-8d351d2c="">GitHub ↗</a></nav></div></header><main data-v-8d351d2c=""><div class="docs-layout" data-v-8d351d2c="" data-v-f1f8d2d0=""><aside class="docs-sidebar" data-v-f1f8d2d0=""><div class="sidebar-header" data-v-f1f8d2d0=""><h2 data-v-f1f8d2d0="">BLite.Server</h2><span class="preview-badge" data-v-f1f8d2d0="">Preview</span></div><nav class="sidebar-nav" data-v-f1f8d2d0=""><!--[--><a aria-current="page" href="/server/overview" class="router-link-active router-link-exact-active active nav-item" data-v-f1f8d2d0=""><span class="nav-icon" data-v-f1f8d2d0="">🖥️</span><span class="nav-label" data-v-f1f8d2d0="">Overview</span></a><a href="/server/installation" class="nav-item" data-v-f1f8d2d0=""><span class="nav-icon" data-v-f1f8d2d0="">📦</span><span class="nav-label" data-v-f1f8d2d0="">Installation</span></a><a href="/server/protocol" class="nav-item" data-v-f1f8d2d0=""><span class="nav-icon" data-v-f1f8d2d0="">🔌</span><span class="nav-label" data-v-f1f8d2d0="">Protocol &amp; API</span></a><a href="/server/studio" class="nav-item" data-v-f1f8d2d0=""><span class="nav-icon" data-v-f1f8d2d0="">🎨</span><span class="nav-label" data-v-f1f8d2d0="">Web Studio</span></a><a href="/server/clients" class="nav-item" data-v-f1f8d2d0=""><span class="nav-icon" data-v-f1f8d2d0="">📡</span><span class="nav-label" data-v-f1f8d2d0="">Client SDKs</span></a><a href="/server/version-matrix" class="nav-item" data-v-f1f8d2d0=""><span class="nav-icon" data-v-f1f8d2d0="">🔗</span><span class="nav-label" data-v-f1f8d2d0="">Version Matrix</span></a><!--]--></nav></aside><main class="docs-content" data-v-f1f8d2d0=""><div class="container" data-v-f1f8d2d0=""><div class="doc-page" data-v-f1f8d2d0="" data-v-c29b4ff2=""><div class="page-header" data-v-c29b4ff2=""><span class="preview-chip" data-v-c29b4ff2="">⚠ Preview — v0.1.2</span><h1 data-v-c29b4ff2="">🖥️ <span class="title-gradient" data-v-c29b4ff2="">BLite.Server</span></h1></div><p class="lead" data-v-c29b4ff2="">BLite.Server turns the embedded BLite engine into a network-accessible database with gRPC, a REST API, user authentication, multi-tenancy, and an integrated Blazor Web Studio — all shipping as a single <code data-v-c29b4ff2="">.exe</code> or Docker image.</p><div class="warning-box" data-v-c29b4ff2=""><strong data-v-c29b4ff2="">⚠ Preview Software.</strong> BLite.Server is currently in public preview. The wire protocol, REST paths and configuration keys are stable for testing, but may change before the 1.0 general availability release. Use in production at your own risk.</div><section data-v-c29b4ff2=""><h2 data-v-c29b4ff2="">What is BLite.Server?</h2><p data-v-c29b4ff2="">BLite is an <strong data-v-c29b4ff2="">embedded</strong> NoSQL database — it runs inside your .NET process with no external dependencies. BLite.Server wraps that same engine and exposes it as a standalone service that multiple clients can connect to simultaneously.</p><ul data-v-c29b4ff2=""><li data-v-c29b4ff2=""><strong data-v-c29b4ff2="">gRPC endpoint</strong> — high-throughput, binary protocol on port <code data-v-c29b4ff2="">2626</code></li><li data-v-c29b4ff2=""><strong data-v-c29b4ff2="">REST API</strong> — JSON over HTTP on port <code data-v-c29b4ff2="">2627</code> with OpenAPI / Swagger UI</li><li data-v-c29b4ff2=""><strong data-v-c29b4ff2="">Blazor Web Studio</strong> — browser-based management UI on port <code data-v-c29b4ff2="">2628</code></li><li data-v-c29b4ff2=""><strong data-v-c29b4ff2="">Multi-tenancy</strong> — isolated databases per user or namespace</li><li data-v-c29b4ff2=""><strong data-v-c29b4ff2="">API-key auth</strong> — fine-grained per-collection permissions</li><li data-v-c29b4ff2=""><strong data-v-c29b4ff2="">BLQL</strong> — full MQL-style query language available over both gRPC and REST</li><li data-v-c29b4ff2=""><strong data-v-c29b4ff2="">Transactions</strong> — cross-collection ACID transactions over the network</li></ul></section><section data-v-c29b4ff2=""><h2 data-v-c29b4ff2="">Architecture</h2><p data-v-c29b4ff2="">A single ASP.NET Core 10 host serves all three endpoints and delegates every operation to the embedded engine:</p><pre data-v-c29b4ff2=""><code data-v-c29b4ff2="">┌────────────────────────────────────────────────────┐
+│                    BLite.Server                    │
+│                                                    │
+│  ┌──────────┐  ┌─────────────────┐  ┌──────────┐  │
+│  │   gRPC   │  │   REST /api/v1  │  │  Studio  │  │
+│  │  :2626   │  │      :2627      │  │  :2628   │  │
+│  └────┬─────┘  └────────┬────────┘  └────┬─────┘  │
+│       │                 │                │         │
+│       └─────────┬────── ┘                │         │
+│                 ▼                        │         │
+│        ┌────────────────┐                │         │
+│        │  EngineRegistry│◄───────────────┘         │
+│        │  (singleton)   │                          │
+│        └───────┬────────┘                          │
+│                │  one BLiteEngine per database      │
+│                ▼                                   │
+│        ┌────────────────┐                          │
+│        │  BLiteEngine   │  (embedded BLite core)   │
+│        └────────────────┘                          │
+└────────────────────────────────────────────────────┘</code></pre></section><section data-v-c29b4ff2=""><h2 data-v-c29b4ff2="">Endpoints at a Glance</h2><table class="info-table" data-v-c29b4ff2=""><thead data-v-c29b4ff2=""><tr data-v-c29b4ff2=""><th data-v-c29b4ff2="">Endpoint</th><th data-v-c29b4ff2="">Default Port</th><th data-v-c29b4ff2="">Protocol</th><th data-v-c29b4ff2="">Description</th></tr></thead><tbody data-v-c29b4ff2=""><tr data-v-c29b4ff2=""><td data-v-c29b4ff2=""><strong data-v-c29b4ff2="">gRPC</strong></td><td data-v-c29b4ff2=""><code data-v-c29b4ff2="">2626</code></td><td data-v-c29b4ff2="">HTTP/2</td><td data-v-c29b4ff2="">Binary, streaming, high-throughput. Primary interface for the official client SDKs.</td></tr><tr data-v-c29b4ff2=""><td data-v-c29b4ff2=""><strong data-v-c29b4ff2="">REST API</strong></td><td data-v-c29b4ff2=""><code data-v-c29b4ff2="">2627</code></td><td data-v-c29b4ff2="">HTTP/1.1 + HTTP/2</td><td data-v-c29b4ff2="">JSON over HTTP. Full CRUD + BLQL queries. Includes Swagger UI at <code data-v-c29b4ff2="">/swagger</code>.</td></tr><tr data-v-c29b4ff2=""><td data-v-c29b4ff2=""><strong data-v-c29b4ff2="">Studio</strong></td><td data-v-c29b4ff2=""><code data-v-c29b4ff2="">2628</code></td><td data-v-c29b4ff2="">HTTP/1.1 + HTTP/2</td><td data-v-c29b4ff2="">Blazor Server web application. Management UI for databases, collections, users.</td></tr></tbody></table></section><section data-v-c29b4ff2=""><h2 data-v-c29b4ff2="">Key Concepts</h2><h3 data-v-c29b4ff2="">Databases &amp; Collections</h3><p data-v-c29b4ff2="">Each database maps to a separate <code data-v-c29b4ff2="">.db</code> file managed by its own <code data-v-c29b4ff2="">BLiteEngine</code> instance. Collections are created on demand. The system database (key <code data-v-c29b4ff2="">""</code>) hosts the <code data-v-c29b4ff2="">_users</code> collection.</p><h3 data-v-c29b4ff2="">Namespaces</h3><p data-v-c29b4ff2="">Users with a <code data-v-c29b4ff2="">Namespace</code> field work inside a transparent prefix: logical name <code data-v-c29b4ff2="">"orders"</code> is stored as <code data-v-c29b4ff2="">"tenant1:orders"</code>. This enables multiple tenants to share a single database engine without data leakage.</p><h3 data-v-c29b4ff2="">API Keys</h3><p data-v-c29b4ff2="">Every request must carry an API key via the <code data-v-c29b4ff2="">x-api-key</code> header or <code data-v-c29b4ff2="">Authorization: Bearer &lt;key&gt;</code>. Keys are stored as SHA-256 hex hashes — the plaintext is returned exactly once at creation time.</p><h3 data-v-c29b4ff2="">Dev Mode</h3><p data-v-c29b4ff2="">When no users exist yet (fresh install, before running <code data-v-c29b4ff2="">/setup</code>), the server operates in <em data-v-c29b4ff2="">Dev Mode</em>: all requests are authenticated as a synthetic root user with full permissions. This makes local development frictionless while remaining safe by default in production (setup creates the first real user).</p></section><section data-v-c29b4ff2=""><h2 data-v-c29b4ff2="">Quick Links</h2><div class="link-grid" data-v-c29b4ff2=""><a href="/server/installation" class="link-card" data-v-c29b4ff2=""><span class="lc-icon" data-v-c29b4ff2="">📦</span><span class="lc-text" data-v-c29b4ff2="">Installation</span><span class="lc-arrow" data-v-c29b4ff2="">→</span></a><a href="/server/protocol" class="link-card" data-v-c29b4ff2=""><span class="lc-icon" data-v-c29b4ff2="">🔌</span><span class="lc-text" data-v-c29b4ff2="">Protocol &amp; API</span><span class="lc-arrow" data-v-c29b4ff2="">→</span></a><a href="/server/studio" class="link-card" data-v-c29b4ff2=""><span class="lc-icon" data-v-c29b4ff2="">🎨</span><span class="lc-text" data-v-c29b4ff2="">Web Studio</span><span class="lc-arrow" data-v-c29b4ff2="">→</span></a><a href="/server/clients" class="link-card" data-v-c29b4ff2=""><span class="lc-icon" data-v-c29b4ff2="">📡</span><span class="lc-text" data-v-c29b4ff2="">Client SDKs</span><span class="lc-arrow" data-v-c29b4ff2="">→</span></a></div></section></div></div></main></div></main><footer class="main-footer" data-v-8d351d2c=""><div class="container footer-inner" data-v-8d351d2c=""><div class="footer-col" data-v-8d351d2c=""><p data-v-8d351d2c="">© 2026 BLite Project. Open Source (MIT).</p><p class="tagline" data-v-8d351d2c="">"Sky is Blite, no Clouds today."</p></div><div class="footer-col footer-downloads" data-v-8d351d2c=""><p class="footer-dl-title" data-v-8d351d2c="">⬇ Download BLite Studio v3.6.4</p><div class="footer-dl-links" data-v-8d351d2c=""><a href="https://github.com/EntglDb/BLite/releases/download/studio-v3.6.4/BLite.Studio-3.6.4-win-x64.msi" data-v-8d351d2c="">🪟 Windows MSI</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v3.6.4/BLite.Studio-3.6.4-win-x64-portable.zip" data-v-8d351d2c="">🪟 Windows Portable</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v3.6.4/blite-studio_3.6.4_amd64.deb" data-v-8d351d2c="">🐧 Linux .deb</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v3.6.4/BLite.Studio-3.6.4-linux-x64.tar.gz" data-v-8d351d2c="">🐧 Linux tar.gz</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v3.6.4/BLite.Studio-3.6.4-osx-arm64.dmg" data-v-8d351d2c="">🍎 macOS Apple Silicon</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v3.6.4/BLite.Studio-3.6.4-osx-x64.dmg" data-v-8d351d2c="">🍎 macOS Intel</a></div></div></div></footer></div></div></body></html>

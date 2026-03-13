@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><!-- Primary meta --><title>Install BLite.Server – Docker, Windows, Linux (Preview)</title><meta name="description" content="Install BLite.Server using Docker, the Windows installer, or the Linux binary with systemd. Configure ports, data directories, and TLS for the gRPC, REST, and Blazor Studio endpoints."><meta name="keywords" content="embedded NoSQL database for .NET, embedded NoSQL .NET, NoSQL database C#, embedded document database .NET, BSON document store, embedded database .NET, zero allocation .NET database, ACID transactions .NET, LiteDB alternative, local-first database .NET, .NET 10 database, netstandard2.1 database, .NET Standard database, Unity embedded database, Xamarin database, NoSQL NuGet package, embedded database NuGet, document store C#, BLite"><meta name="author" content="BLite Project"><meta name="robots" content="index, follow"><meta name="theme-color" content="#e74c3c"><link rel="canonical" href="https://blitedb.com/server/installation"><!-- Favicon --><link rel="icon" type="image/svg+xml" href="/icon.svg"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="BLite"><meta property="og:url" content="https://blitedb.com/server/installation"><meta property="og:title" content="Install BLite.Server – Docker, Windows, Linux (Preview)"><meta property="og:description" content="Install BLite.Server using Docker, the Windows installer, or the Linux binary with systemd. Configure ports, data directories, and TLS for the gRPC, REST, and Blazor Studio endpoints."><meta property="og:image" content="https://blitedb.com/og-image.png"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Install BLite.Server – Docker, Windows, Linux (Preview)"><meta name="twitter:description" content="Install BLite.Server using Docker, the Windows installer, or the Linux binary with systemd. Configure ports, data directories, and TLS for the gRPC, REST, and Blazor Studio endpoints."><meta name="twitter:image" content="https://blitedb.com/og-image.png"><!-- JSON-LD Structured Data --><script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "BLite",
+    "alternateName": "BLite Embedded NoSQL Database",
+    "url": "https://blitedb.com",
+    "description": "BLite is the high-performance embedded NoSQL database for .NET. Zero-allocation BSON document store with ACID transactions, Change Data Capture streams, R-Tree spatial indexing, and compile-time source generators. No cloud, no server — install via NuGet.",
+    "applicationCategory": "DeveloperApplication",
+    "applicationSubCategory": "Embedded NoSQL Database",
+    "operatingSystem": "Windows, Linux, macOS",
+    "programmingLanguage": "C#",
+    "softwareVersion": "3.6.4",
+    "license": "https://opensource.org/licenses/MIT",
+    "codeRepository": "https://github.com/EntglDb/BLite",
+    "downloadUrl": "https://www.nuget.org/packages/BLite",
+    "featureList": [
+      "Embedded NoSQL document store for .NET",
+      "Zero-allocation BSON serialization",
+      "ACID transactions with Write-Ahead Logging",
+      "Change Data Capture (CDC) with 1000+ subscribers",
+      "R-Tree spatial and vector indexing",
+      "Compile-time source generators — no reflection",
+      "LINQ IQueryable provider",
+      "Schema-less DynamicCollection API",
+      "BLQL query language",
+      "netstandard2.1 compatible — Unity, Xamarin, MAUI, .NET 5+",
+      "Local-first, no cloud required"
+    ],
+    "keywords": "embedded NoSQL database for .NET, embedded database .NET, BSON document store, NoSQL C#, ACID .NET, zero allocation, LiteDB alternative",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }</script><!-- FAQ Structured Data --><script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is BLite?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "BLite is a high-performance embedded NoSQL database for .NET. It stores BSON documents locally inside your application with zero allocations, ACID transactions, and no external server or cloud dependency."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I install BLite in a .NET project?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Run 'dotnet add package BLite' in your .NET project. BLite targets .NET 10 and .NET Standard 2.1, and is available on NuGet."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is BLite a good alternative to LiteDB for .NET?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. BLite offers significantly higher throughput and zero heap allocations compared to LiteDB, plus modern features like Change Data Capture, R-Tree spatial indexing, and compile-time source generators."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does BLite require a cloud service or external server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. BLite is a fully embedded database that runs entirely inside your .NET process. There is no external server, no cloud service, and no network dependency."
+        }
+      }
+    ]
+  }</script><script type="module" async="" crossorigin="" src="/assets/app-DVVML4i8.js"></script><link rel="stylesheet" crossorigin="" href="/assets/app-C0ZxcF02.css"></head><body><div id="app" data-server-rendered="true"><div class="app-layout" data-v-8d351d2c=""><header class="main-header glass-panel" data-v-8d351d2c=""><div class="container header-content" data-v-8d351d2c=""><a href="/" class="logo-link" data-v-8d351d2c=""><img src="/icon.svg" alt="BLite" class="logo-img" data-v-8d351d2c=""><div class="logo-text" data-v-8d351d2c="">BLite<span class="dot" data-v-8d351d2c="">.</span></div></a><nav data-v-8d351d2c=""><a href="/" class="" data-v-8d351d2c="">Home</a><a href="/docs" class="" data-v-8d351d2c="">Docs</a><a href="/server" class="router-link-active" data-v-8d351d2c="">Server</a><a href="/studio" class="" data-v-8d351d2c="">Studio</a><a href="/comparisons" class="" data-v-8d351d2c="">Comparisons</a><a href="https://github.com/EntglDb/BLite" target="_blank" class="github-link" data-v-8d351d2c="">GitHub ↗</a></nav></div></header><main data-v-8d351d2c=""><div class="docs-layout" data-v-8d351d2c="" data-v-f1f8d2d0=""><aside class="docs-sidebar" data-v-f1f8d2d0=""><div class="sidebar-header" data-v-f1f8d2d0=""><h2 data-v-f1f8d2d0="">BLite.Server</h2><span class="preview-badge" data-v-f1f8d2d0="">Preview</span></div><nav class="sidebar-nav" data-v-f1f8d2d0=""><!--[--><a href="/server/overview" class="nav-item" data-v-f1f8d2d0=""><span class="nav-icon" data-v-f1f8d2d0="">🖥️</span><span class="nav-label" data-v-f1f8d2d0="">Overview</span></a><a aria-current="page" href="/server/installation" class="router-link-active router-link-exact-active active nav-item" data-v-f1f8d2d0=""><span class="nav-icon" data-v-f1f8d2d0="">📦</span><span class="nav-label" data-v-f1f8d2d0="">Installation</span></a><a href="/server/protocol" class="nav-item" data-v-f1f8d2d0=""><span class="nav-icon" data-v-f1f8d2d0="">🔌</span><span class="nav-label" data-v-f1f8d2d0="">Protocol &amp; API</span></a><a href="/server/studio" class="nav-item" data-v-f1f8d2d0=""><span class="nav-icon" data-v-f1f8d2d0="">🎨</span><span class="nav-label" data-v-f1f8d2d0="">Web Studio</span></a><a href="/server/clients" class="nav-item" data-v-f1f8d2d0=""><span class="nav-icon" data-v-f1f8d2d0="">📡</span><span class="nav-label" data-v-f1f8d2d0="">Client SDKs</span></a><a href="/server/version-matrix" class="nav-item" data-v-f1f8d2d0=""><span class="nav-icon" data-v-f1f8d2d0="">🔗</span><span class="nav-label" data-v-f1f8d2d0="">Version Matrix</span></a><!--]--></nav></aside><main class="docs-content" data-v-f1f8d2d0=""><div class="container" data-v-f1f8d2d0=""><div class="doc-page" data-v-f1f8d2d0="" data-v-3cc64538=""><h1 data-v-3cc64538="">📦 <span class="title-gradient" data-v-3cc64538="">Installation</span></h1><p class="lead" data-v-3cc64538="">BLite.Server ships as a Docker image, a Windows installer, and a Linux binary. Pick the option that fits your environment.</p><section data-v-3cc64538=""><h2 data-v-3cc64538="">Docker (Recommended)</h2><p data-v-3cc64538="">The fastest way to get started. Pull and run the official image:</p><pre data-v-3cc64538=""><code data-v-3cc64538="">docker pull ghcr.io/entgldb/blite-server:latest
+
+docker run -d \
+  --name blite \
+  -p 2626:2626 \
+  -p 2627:2627 \
+  -p 2628:2628 \
+  -v ./blite-data:/app/data \
+  ghcr.io/entgldb/blite-server:latest</code></pre><p data-v-3cc64538="">Then open the first-run setup wizard in your browser:</p><pre data-v-3cc64538=""><code data-v-3cc64538="">https://localhost:2628/setup</code></pre><div class="info-box" data-v-3cc64538=""><strong data-v-3cc64538="">📁 Persistent data:</strong> Always mount a host volume to <code data-v-3cc64538="">/app/data</code>. Without it, all databases and configuration are lost when the container stops.</div><h3 data-v-3cc64538="">Docker Compose</h3><pre data-v-3cc64538=""><code data-v-3cc64538=""><span class="keyword" data-v-3cc64538="">services</span>:
+  <span class="type" data-v-3cc64538="">blite</span>:
+    <span class="keyword" data-v-3cc64538="">image</span>: <span class="string" data-v-3cc64538="">ghcr.io/entgldb/blite-server:latest</span>
+    <span class="keyword" data-v-3cc64538="">restart</span>: <span class="string" data-v-3cc64538="">unless-stopped</span>
+    <span class="keyword" data-v-3cc64538="">ports</span>:
+      - <span class="string" data-v-3cc64538="">"2626:2626"</span>   <span class="comment" data-v-3cc64538=""># gRPC</span>
+      - <span class="string" data-v-3cc64538="">"2627:2627"</span>   <span class="comment" data-v-3cc64538=""># REST</span>
+      - <span class="string" data-v-3cc64538="">"2628:2628"</span>   <span class="comment" data-v-3cc64538=""># Studio</span>
+    <span class="keyword" data-v-3cc64538="">volumes</span>:
+      - <span class="string" data-v-3cc64538="">./blite-data:/app/data</span>
+    <span class="keyword" data-v-3cc64538="">environment</span>:
+      - <span class="string" data-v-3cc64538="">Studio__Enabled=true</span></code></pre></section><section data-v-3cc64538=""><h2 data-v-3cc64538="">Windows Installer</h2><p data-v-3cc64538="">The Windows package is an Inno Setup installer that registers BLite.Server as a Windows Service, installs the binary under <code data-v-3cc64538="">Program Files\BLite</code>, and adds a firewall exception for ports <code data-v-3cc64538="">2626</code>–<code data-v-3cc64538="">2628</code>.</p><p data-v-3cc64538="">Download from the GitHub releases page:</p><pre data-v-3cc64538=""><code data-v-3cc64538="">https://github.com/EntglDb/BLite.Server/releases/latest</code></pre><p data-v-3cc64538="">After installation the service is started automatically. Open the Studio at <code data-v-3cc64538="">https://localhost:2628/setup</code> to create the root user.</p><div class="info-box" data-v-3cc64538=""><strong data-v-3cc64538="">🔒 TLS:</strong> The installer generates a self-signed certificate on first run. Replace <code data-v-3cc64538="">%ProgramData%\BLite\server.pfx</code> with your own certificate to enable trusted HTTPS.</div></section><section data-v-3cc64538=""><h2 data-v-3cc64538="">Linux (systemd)</h2><p data-v-3cc64538="">Download the prebuilt binary and set up a systemd unit:</p><pre data-v-3cc64538=""><code data-v-3cc64538=""><span class="comment" data-v-3cc64538=""># Download and extract</span>
+wget https://github.com/EntglDb/BLite.Server/releases/latest/download/blite-server-linux-x64.tar.gz
+tar -xzf blite-server-linux-x64.tar.gz -C /opt/blite
+
+<span class="comment" data-v-3cc64538=""># Create data directory</span>
+mkdir -p /var/lib/blite/data
+
+<span class="comment" data-v-3cc64538=""># Copy service unit</span>
+cp /opt/blite/blite-server.service /etc/systemd/system/
+
+<span class="comment" data-v-3cc64538=""># Enable and start</span>
+systemctl daemon-reload
+systemctl enable --now blite-server</code></pre><h3 data-v-3cc64538="">Service Unit (blite-server.service)</h3><pre data-v-3cc64538=""><code data-v-3cc64538="">[<span class="type" data-v-3cc64538="">Unit</span>]
+<span class="keyword" data-v-3cc64538="">Description</span>=BLite Server
+<span class="keyword" data-v-3cc64538="">After</span>=network.target
+
+[<span class="type" data-v-3cc64538="">Service</span>]
+<span class="keyword" data-v-3cc64538="">Type</span>=notify
+<span class="keyword" data-v-3cc64538="">WorkingDirectory</span>=<span class="string" data-v-3cc64538="">/opt/blite</span>
+<span class="keyword" data-v-3cc64538="">ExecStart</span>=<span class="string" data-v-3cc64538="">/opt/blite/BLite.Server</span>
+<span class="keyword" data-v-3cc64538="">Restart</span>=always
+<span class="keyword" data-v-3cc64538="">User</span>=blite
+<span class="keyword" data-v-3cc64538="">Environment</span>=<span class="string" data-v-3cc64538="">ASPNETCORE_ENVIRONMENT=Production</span>
+<span class="keyword" data-v-3cc64538="">Environment</span>=<span class="string" data-v-3cc64538="">BLiteServer__DatabasePath=/var/lib/blite/blite.db</span>
+<span class="keyword" data-v-3cc64538="">Environment</span>=<span class="string" data-v-3cc64538="">BLiteServer__DatabasesDirectory=/var/lib/blite/data</span>
+
+[<span class="type" data-v-3cc64538="">Install</span>]
+<span class="keyword" data-v-3cc64538="">WantedBy</span>=multi-user.target</code></pre></section><section data-v-3cc64538=""><h2 data-v-3cc64538="">Configuration (appsettings.json)</h2><p data-v-3cc64538="">All settings live in <code data-v-3cc64538="">appsettings.json</code> next to the binary (or via environment variables):</p><pre data-v-3cc64538=""><code data-v-3cc64538="">{
+  <span class="keyword" data-v-3cc64538="">"BLiteServer"</span>: {
+    <span class="keyword" data-v-3cc64538="">"DatabasePath"</span>:      <span class="string" data-v-3cc64538="">"blite.db"</span>,          <span class="comment" data-v-3cc64538="">// system database file path</span>
+    <span class="keyword" data-v-3cc64538="">"MaxPageSizeBytes"</span>:  <span class="number" data-v-3cc64538="">16384</span>,              <span class="comment" data-v-3cc64538="">// BLiteEngine page size</span>
+    <span class="keyword" data-v-3cc64538="">"DatabasesDirectory"</span>: <span class="string" data-v-3cc64538="">"data/tenants"</span>    <span class="comment" data-v-3cc64538="">// tenant .db files</span>
+  },
+  <span class="keyword" data-v-3cc64538="">"Studio"</span>: {
+    <span class="keyword" data-v-3cc64538="">"Enabled"</span>: <span class="string" data-v-3cc64538="">true</span>                       <span class="comment" data-v-3cc64538="">// enable Blazor Studio (off by default in Docker)</span>
+  },
+  <span class="keyword" data-v-3cc64538="">"Kestrel"</span>: {
+    <span class="keyword" data-v-3cc64538="">"Endpoints"</span>: {
+      <span class="keyword" data-v-3cc64538="">"Grpc"</span>:   { <span class="keyword" data-v-3cc64538="">"Url"</span>: <span class="string" data-v-3cc64538="">"https://*:2626"</span>, <span class="keyword" data-v-3cc64538="">"Protocols"</span>: <span class="string" data-v-3cc64538="">"Http2"</span> },
+      <span class="keyword" data-v-3cc64538="">"Rest"</span>:   { <span class="keyword" data-v-3cc64538="">"Url"</span>: <span class="string" data-v-3cc64538="">"https://*:2627"</span>, <span class="keyword" data-v-3cc64538="">"Protocols"</span>: <span class="string" data-v-3cc64538="">"Http1AndHttp2"</span> },
+      <span class="keyword" data-v-3cc64538="">"Studio"</span>: { <span class="keyword" data-v-3cc64538="">"Url"</span>: <span class="string" data-v-3cc64538="">"https://*:2628"</span>, <span class="keyword" data-v-3cc64538="">"Protocols"</span>: <span class="string" data-v-3cc64538="">"Http1AndHttp2"</span> }
+    }
+  },
+  <span class="keyword" data-v-3cc64538="">"Transactions"</span>: {
+    <span class="keyword" data-v-3cc64538="">"TimeoutSeconds"</span>: <span class="number" data-v-3cc64538="">60</span>
+  }
+}</code></pre><h3 data-v-3cc64538="">Environment Variable Override</h3><p data-v-3cc64538="">Any setting can be overridden via environment variables using <code data-v-3cc64538="">__</code> as the section separator:</p><pre data-v-3cc64538=""><code data-v-3cc64538=""><span class="comment" data-v-3cc64538=""># Examples</span>
+BLiteServer__DatabasePath=<span class="string" data-v-3cc64538="">/data/system.db</span>
+Studio__Enabled=<span class="string" data-v-3cc64538="">true</span>
+Transactions__TimeoutSeconds=<span class="string" data-v-3cc64538="">120</span></code></pre></section><section data-v-3cc64538=""><h2 data-v-3cc64538="">First Run</h2><p data-v-3cc64538="">On the very first start, no users exist yet. Navigate to the Studio setup wizard to create the root user:</p><pre data-v-3cc64538=""><code data-v-3cc64538="">https://localhost:2628/setup</code></pre><p data-v-3cc64538="">Create the root admin API key. <strong data-v-3cc64538="">Store the plaintext key immediately</strong> — it cannot be recovered after the setup screen is closed. All subsequent requests require this key (or a key created for a sub-user).</p><div class="info-box" data-v-3cc64538=""><strong data-v-3cc64538="">🛡 Dev Mode:</strong> Until setup is complete, the server operates in Dev Mode — all requests are authenticated as a synthetic root user. Dev Mode ends permanently once the first real user is saved.</div></section><section data-v-3cc64538=""><h2 data-v-3cc64538="">Next Steps</h2><a href="/server/protocol" class="cta-button" data-v-3cc64538="">Protocol &amp; API →</a></section></div></div></main></div></main><footer class="main-footer" data-v-8d351d2c=""><div class="container footer-inner" data-v-8d351d2c=""><div class="footer-col" data-v-8d351d2c=""><p data-v-8d351d2c="">© 2026 BLite Project. Open Source (MIT).</p><p class="tagline" data-v-8d351d2c="">"Sky is Blite, no Clouds today."</p></div><div class="footer-col footer-downloads" data-v-8d351d2c=""><p class="footer-dl-title" data-v-8d351d2c="">⬇ Download BLite Studio v3.6.4</p><div class="footer-dl-links" data-v-8d351d2c=""><a href="https://github.com/EntglDb/BLite/releases/download/studio-v3.6.4/BLite.Studio-3.6.4-win-x64.msi" data-v-8d351d2c="">🪟 Windows MSI</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v3.6.4/BLite.Studio-3.6.4-win-x64-portable.zip" data-v-8d351d2c="">🪟 Windows Portable</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v3.6.4/blite-studio_3.6.4_amd64.deb" data-v-8d351d2c="">🐧 Linux .deb</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v3.6.4/BLite.Studio-3.6.4-linux-x64.tar.gz" data-v-8d351d2c="">🐧 Linux tar.gz</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v3.6.4/BLite.Studio-3.6.4-osx-arm64.dmg" data-v-8d351d2c="">🍎 macOS Apple Silicon</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v3.6.4/BLite.Studio-3.6.4-osx-x64.dmg" data-v-8d351d2c="">🍎 macOS Intel</a></div></div></div></footer></div></div></body></html>
