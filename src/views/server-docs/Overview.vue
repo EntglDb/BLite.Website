@@ -1,7 +1,7 @@
 <template>
   <div class="doc-page">
     <div class="page-header">
-      <span class="preview-chip">⚠ Preview — v0.1.3</span>
+      <span class="preview-chip">⚠ Preview — v0.1.4</span>
       <h1>🖥️ <span class="title-gradient">BLite.Server</span></h1>
     </div>
     <p class="lead">

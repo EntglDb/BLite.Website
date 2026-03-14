@@ -80,9 +80,9 @@
   "src/views/docs/Transactions.vue?vue&type=style&index=0&scoped=0f65e990&lang.css": [],
   "src/views/server-docs/Clients.vue": [],
   "src/views/server-docs/Clients.vue?vue&type=script&setup=true&lang.ts": [],
-  "src/views/server-docs/Clients.vue?vue&type=style&index=0&scoped=2926da93&lang.css": [],
+  "src/views/server-docs/Clients.vue?vue&type=style&index=0&scoped=40c526bc&lang.css": [],
   "src/views/server-docs/Overview.vue": [],
-  "src/views/server-docs/Overview.vue?vue&type=style&index=0&scoped=72589411&lang.css": [],
+  "src/views/server-docs/Overview.vue?vue&type=style&index=0&scoped=aa33a282&lang.css": [],
   "src/views/server-docs/Protocol.vue": [],
   "src/views/server-docs/Protocol.vue?vue&type=style&index=0&scoped=6c3b8f52&lang.css": [],
   "src/views/server-docs/ServerInstallation.vue": [],
@@ -91,5 +91,5 @@
   "src/views/server-docs/ServerStudio.vue?vue&type=style&index=0&scoped=888a9fd9&lang.css": [],
   "src/views/server-docs/VersionMatrix.vue": [],
   "src/views/server-docs/VersionMatrix.vue?vue&type=script&setup=true&lang.ts": [],
-  "src/views/server-docs/VersionMatrix.vue?vue&type=style&index=0&scoped=e1266f1a&lang.css": []
+  "src/views/server-docs/VersionMatrix.vue?vue&type=style&index=0&scoped=c8e26d7a&lang.css": []
 }
