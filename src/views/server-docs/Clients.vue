@@ -136,10 +136,10 @@ builder.Services.AddBLiteClient(o =>
 &lt;<span class="keyword">dependency</span>&gt;
   &lt;<span class="keyword">groupId</span>&gt;<span class="string">io.blite</span>&lt;/<span class="keyword">groupId</span>&gt;
   &lt;<span class="keyword">artifactId</span>&gt;<span class="string">blite-client-java</span>&lt;/<span class="keyword">artifactId</span>&gt;
-  &lt;<span class="keyword">version</span>&gt;<span class="string">0.1.2</span>&lt;/<span class="keyword">version</span>&gt;
+  &lt;<span class="keyword">version</span>&gt;<span class="string">0.1.3</span>&lt;/<span class="keyword">version</span>&gt;
 &lt;/<span class="keyword">dependency</span>&gt;</code></pre>
       <pre><code><span class="comment">// Gradle (Kotlin DSL)</span>
-implementation(<span class="string">"io.blite:blite-client-java:0.1.2"</span>)</code></pre>
+implementation(<span class="string">"io.blite:blite-client-java:0.1.3"</span>)</code></pre>
 
       <h3>Quick Start</h3>
       <pre><code><span class="keyword">import</span> io.blite.client.BLiteClient;

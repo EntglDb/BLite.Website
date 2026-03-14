@@ -87,7 +87,7 @@
       <ul>
         <li><strong>Major version (0 → 1):</strong> may include breaking changes to gRPC service definitions, REST path structure, or the BLQL filter serialization format.</li>
         <li><strong>Minor version (0.1 → 0.2):</strong> additive changes only — new RPC methods, new REST endpoints, new filter operators. Older clients continue to work.</li>
-        <li><strong>Patch version (0.1.1 → 0.1.2):</strong> bug fixes and security patches. No protocol changes.</li>
+        <li><strong>Patch version (0.1.1 → 0.1.3):</strong> bug fixes and security patches. No protocol changes.</li>
       </ul>
       <div class="warning-box">
         <strong>⚠ Preview period (0.x):</strong> Until the 1.0 release, even minor version bumps may include breaking changes.
@@ -116,7 +116,7 @@ interface ClientRow {
 
 const serverMatrix: ServerRow[] = [
   {
-    server: '0.1.2',
+    server: '0.1.3',
     engine: '3.6.4',
     status: 'preview',
     statusLabel: 'Preview',
