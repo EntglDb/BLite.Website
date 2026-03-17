@@ -2,15 +2,16 @@
   <div class="comparisons-page">
     <div class="container">
     <h1>⚖️ <span class="title-gradient">Comparisons & Positioning</span></h1>
-    <p class="lead">How BLite fits in the .NET embedded database landscape — and why it's unlike anything else available today.</p>
+    <p class="lead">How BLite compares to LiteDB, SQLite, CouchbaseLite, and DuckDB — and why the fastest path to your data is eliminating the hidden overhead of intermediate representations.</p>
 
     <section>
       <h2>The Embedded Database Landscape</h2>
-      <p>The .NET ecosystem has several options for embedded or local data storage. Each one makes different trade-offs between performance, size, flexibility, and modernity. BLite was designed to fill a gap that none of the existing solutions cover.</p>
+      <p>The .NET ecosystem offers several embedded storage options, each making different trade-offs between performance, flexibility, and developer experience. BLite was built around a specific insight that none of the existing solutions address: the dominant overhead is rarely raw I/O — it's the hidden cost of <strong>materializing data through intermediate representations</strong> before it reaches your C# types.</p>
     </section>
 
     <section>
       <h2>Feature Comparison</h2>
+      <p>Stacked against the embedded database engines we benchmark, plus Realm .NET as a notable mobile alternative.</p>
       <div class="table-scroll">
         <table>
           <thead>
@@ -19,9 +20,9 @@
               <th class="highlight-col">BLite</th>
               <th>LiteDB</th>
               <th>SQLite + EF Core</th>
+              <th>CouchbaseLite</th>
+              <th>DuckDB</th>
               <th>Realm .NET</th>
-              <th>RavenDB Embedded</th>
-              <th>Akavache</th>
             </tr>
           </thead>
           <tbody>
@@ -30,9 +31,9 @@
               <td class="highlight-col"><strong>Document (BSON)</strong></td>
               <td>Document (BSON)</td>
               <td>Relational</td>
-              <td>Object</td>
               <td>Document (JSON)</td>
-              <td>Key-Value</td>
+              <td>Relational / Columnar</td>
+              <td>Object</td>
             </tr>
             <tr>
               <td>NativeAOT / Trimming</td>
@@ -57,27 +58,27 @@
               <td class="highlight-col"><span class="badge-good">✅ Roslyn</span></td>
               <td><span class="badge-bad">❌</span></td>
               <td><span class="badge-bad">❌</span></td>
+              <td><span class="badge-bad">❌</span></td>
+              <td><span class="badge-bad">❌</span></td>
               <td>Fody weaver</td>
-              <td><span class="badge-bad">❌</span></td>
-              <td><span class="badge-bad">❌</span></td>
             </tr>
             <tr>
               <td>Dependencies</td>
               <td class="highlight-col"><span class="badge-good">0</span></td>
               <td>0</td>
               <td>Many (EF Core)</td>
+              <td>Native (LiteCore)</td>
+              <td>Native (DuckDB)</td>
               <td>Native (C++)</td>
-              <td>Many</td>
-              <td>Reactive Ext.</td>
             </tr>
             <tr>
               <td>Native Code</td>
               <td class="highlight-col"><span class="badge-good">None (pure C#)</span></td>
               <td>None</td>
               <td>SQLite native lib</td>
+              <td>C++ LiteCore</td>
+              <td>C++ DuckDB</td>
               <td>C++ core</td>
-              <td>C++ Voron engine</td>
-              <td>SQLite native lib</td>
             </tr>
             <tr>
               <td>Spatial Indexing</td>
@@ -85,7 +86,7 @@
               <td><span class="badge-bad">❌</span></td>
               <td>Extension</td>
               <td><span class="badge-bad">❌</span></td>
-              <td><span class="badge-good">✅</span></td>
+              <td>Extension</td>
               <td><span class="badge-bad">❌</span></td>
             </tr>
             <tr>
@@ -94,8 +95,8 @@
               <td><span class="badge-bad">❌</span></td>
               <td><span class="badge-bad">❌</span></td>
               <td>Notifications</td>
-              <td>Subscriptions</td>
               <td><span class="badge-bad">❌</span></td>
+              <td>Notifications</td>
             </tr>
             <tr>
               <td>ACID Transactions</td>
@@ -104,14 +105,14 @@
               <td><span class="badge-good">✅</span></td>
               <td><span class="badge-good">✅</span></td>
               <td><span class="badge-good">✅</span></td>
-              <td><span class="badge-bad">❌</span></td>
+              <td><span class="badge-good">✅</span></td>
             </tr>
             <tr>
               <td>Async API</td>
               <td class="highlight-col"><span class="badge-good">✅ Full</span></td>
               <td><span class="badge-bad">❌</span></td>
               <td><span class="badge-good">✅</span></td>
-              <td><span class="badge-good">✅</span></td>
+              <td><span class="badge-mid">⚠️ Partial</span></td>
               <td><span class="badge-good">✅</span></td>
               <td><span class="badge-good">✅</span></td>
             </tr>
@@ -120,18 +121,18 @@
               <td class="highlight-col"><span class="badge-good">✅ via EntglDb</span></td>
               <td><span class="badge-bad">❌</span></td>
               <td><span class="badge-bad">❌</span></td>
-              <td>Atlas Sync</td>
-              <td>Cluster mode</td>
+              <td>Sync Gateway</td>
               <td><span class="badge-bad">❌</span></td>
+              <td>Atlas Sync</td>
             </tr>
             <tr>
-              <td>Platforms</td>
+              <td>Primary Use Case</td>
               <td class="highlight-col">Any .NET</td>
               <td>.NET Framework/Core</td>
               <td>Any .NET</td>
               <td>iOS, Android, .NET</td>
-              <td>Server-side</td>
-              <td>Xamarin / MAUI</td>
+              <td>.NET (analytics / OLAP)</td>
+              <td>iOS, Android, .NET</td>
             </tr>
             <tr>
               <td>License</td>
@@ -139,8 +140,8 @@
               <td>MIT</td>
               <td>Mixed</td>
               <td>Apache 2.0</td>
-              <td>AGPL / Commercial</td>
               <td>MIT</td>
+              <td>Apache 2.0</td>
             </tr>
           </tbody>
         </table>
@@ -148,33 +149,118 @@
     </section>
 
     <section>
+      <h2>⚡ The Hidden Cost of Data Materialization</h2>
+      <p>BLite was designed from first principles to eliminate the <strong>hidden friction</strong> that slows every other embedded database: the <em>materialization pipeline</em> — the chain of intermediate transformations between raw storage bytes and the typed C# object your application actually uses.</p>
+
+      <h3>The Traditional Pipeline</h3>
+      <p>Every conventional embedded database — LiteDB with its <code>BsonDocument</code> mapper, CouchbaseLite bridging through its C++ LiteCore, SQLite deserializing rows and mapping through Dapper or EF Core — routes your data through multiple intermediate representations before it reaches your code:</p>
+      <div class="pipeline">
+        <div class="pipe-step">
+          <div class="pipe-num">1</div>
+          <div class="pipe-body">
+            <div class="pipe-label">Interpret Query</div>
+            <div class="pipe-sub">Parse expression tree or SQL string; reflect over type metadata to build an execution plan</div>
+          </div>
+        </div>
+        <div class="pipe-connector">↓</div>
+        <div class="pipe-step">
+          <div class="pipe-num">2</div>
+          <div class="pipe-body">
+            <div class="pipe-label">Apply &amp; Filter</div>
+            <div class="pipe-sub">Traverse index or scan pages; evaluate predicates against stored data</div>
+          </div>
+        </div>
+        <div class="pipe-connector">↓</div>
+        <div class="pipe-step">
+          <div class="pipe-num">3</div>
+          <div class="pipe-body">
+            <div class="pipe-label">Read Raw Bytes</div>
+            <div class="pipe-sub">Load BSON payload, SQLite row, or JSON string from disk</div>
+          </div>
+        </div>
+        <div class="pipe-connector pipe-connector-costly">↓</div>
+        <div class="pipe-step pipe-costly">
+          <div class="pipe-num">4</div>
+          <div class="pipe-body">
+            <div class="pipe-label">Intermediate Format <span class="pipe-tag">overhead</span></div>
+            <div class="pipe-sub">Deserialize into a temporary <code>BsonDocument</code>, <code>IDataReader</code>, or JSON string — an untyped copy of your data never needed by the caller</div>
+          </div>
+        </div>
+        <div class="pipe-connector pipe-connector-costly">↓</div>
+        <div class="pipe-step pipe-costly">
+          <div class="pipe-num">5</div>
+          <div class="pipe-body">
+            <div class="pipe-label">Object Mapping <span class="pipe-tag">overhead</span></div>
+            <div class="pipe-sub">Reflect over type fields; copy values one by one into your <code>CustomerOrder</code> — then discard every intermediate object</div>
+          </div>
+        </div>
+      </div>
+      <p>Steps 4 and 5 are pure overhead — temporary allocations that exist only to bridge the gap between what the database returns and what your application needs. LiteDB produces ~48 KB of intermediate data just to return a single 7 KB document.</p>
+
+      <h3>BLite: Direct Serialization</h3>
+      <p>BLite source generators emit a <code>BsonWriter&lt;T&gt;</code> and <code>BsonReader&lt;T&gt;</code> for each of your types at compile time. They know the exact field layout of <code>CustomerOrder</code> before the first line of code runs — no intermediate <code>BsonDocument</code>, no runtime reflection, no temporary copies:</p>
+      <div class="pipeline pipeline-blite">
+        <div class="pipe-step">
+          <div class="pipe-num">1</div>
+          <div class="pipe-body">
+            <div class="pipe-label">Resolve Index</div>
+            <div class="pipe-sub">O(1) B-Tree or R-Tree lookup — no query string parsing</div>
+          </div>
+        </div>
+        <div class="pipe-connector">↓</div>
+        <div class="pipe-step">
+          <div class="pipe-num">2</div>
+          <div class="pipe-body">
+            <div class="pipe-label">Read Raw Bytes</div>
+            <div class="pipe-sub">Load BSON payload from page cache</div>
+          </div>
+        </div>
+        <div class="pipe-connector">↓</div>
+        <div class="pipe-step pipe-blite">
+          <div class="pipe-num">3</div>
+          <div class="pipe-body">
+            <div class="pipe-label">Direct Deserialization <span class="pipe-tag pipe-tag-good">source-generated</span></div>
+            <div class="pipe-sub">Generated <code>BsonReader&lt;CustomerOrder&gt;</code> writes bytes directly into your typed object — zero reflection, zero intermediate allocation, zero wasted copies</div>
+          </div>
+        </div>
+      </div>
+      <p>The same principle applies on write: <code>BsonWriter&lt;CustomerOrder&gt;</code> serializes your object straight to BSON bytes — without ever building a <code>Dictionary</code> or <code>BsonDocument</code> first. This is why BLite's <code>FindById</code> allocates <strong>7 KB</strong> vs. <strong>48 KB</strong> for LiteDB: the intermediate document that every other engine creates is simply never produced.</p>
+    </section>
+
+    <section>
       <h2>Performance at a Glance</h2>
-      <p>Measured on a realistic e-commerce <code>CustomerOrder</code> document (~1–2 KB). Environment: Windows 11, i7-13800H, .NET 10.0.4, BDN v0.15.8 — March 12, 2026.</p>
+      <p>Measured on a realistic e-commerce <code>CustomerOrder</code> document (~1–2 KB). Environment: Windows 11, i7-13800H, .NET 10.0.4, BDN v0.15.8 — March 17, 2026.</p>
 
       <h3>Insert</h3>
       <div class="table-scroll">
         <table>
           <thead>
-            <tr><th>Operation</th><th class="highlight-col">BLite</th><th>LiteDB 5.0.21</th><th>SQLite+JSON</th></tr>
+            <tr><th>Operation</th><th class="highlight-col">BLite</th><th>LiteDB 5.0.21</th><th>SQLite+JSON</th><th>CouchbaseLite 4.0.3</th><th>DuckDB 1.3.0</th></tr>
           </thead>
           <tbody>
             <tr>
               <td>Single Insert (latency)</td>
-              <td class="highlight-col"><strong>115.6 μs</strong></td>
-              <td>541.5 μs <span class="badge-bad">4.7x slower</span></td>
-              <td>3,608.8 μs <span class="badge-bad">31.5x slower</span></td>
+              <td class="highlight-col"><strong>164.6 μs</strong></td>
+              <td>826.9 μs <span class="badge-bad">5.1x slower</span></td>
+              <td>7,380.1 μs <span class="badge-bad">44.8x slower</span></td>
+              <td>466.6 μs <span class="badge-bad">2.8x slower</span></td>
+              <td>28,218 μs <span class="badge-bad">172x slower</span></td>
             </tr>
             <tr>
               <td>Batch 1000 (latency)</td>
-              <td class="highlight-col"><strong>9,113 μs</strong></td>
-              <td>16,117 μs <span class="badge-bad">1.77x slower</span></td>
-              <td>16,196 μs <span class="badge-bad">1.78x slower</span></td>
+              <td class="highlight-col"><strong>14,086 μs</strong></td>
+              <td>27,047 μs <span class="badge-bad">1.9x slower</span></td>
+              <td>25,008 μs <span class="badge-bad">1.8x slower</span></td>
+              <td>91,217 μs <span class="badge-bad">6.5x slower</span></td>
+              <td>361,785 μs <span class="badge-bad">25.7x slower</span></td>
             </tr>
             <tr>
               <td>Batch 1000 (allocated)</td>
-              <td class="highlight-col"><strong>31,242 KB</strong></td>
-              <td>33,491 KB</td>
-              <td>6,294 KB †</td>
+              <td class="highlight-col"><strong>31,312 KB</strong></td>
+              <td>32,993 KB</td>
+              <td>6,296 KB †</td>
+              <td>32,548 KB</td>
+              <td>4,512 KB †</td>
             </tr>
           </tbody>
         </table>
@@ -184,38 +270,46 @@
       <div class="table-scroll">
         <table>
           <thead>
-            <tr><th>Operation</th><th class="highlight-col">BLite</th><th>LiteDB 5.0.21</th><th>SQLite+JSON</th></tr>
+            <tr><th>Operation</th><th class="highlight-col">BLite</th><th>LiteDB 5.0.21</th><th>SQLite+JSON</th><th>CouchbaseLite 4.0.3</th><th>DuckDB 1.3.0</th></tr>
           </thead>
           <tbody>
             <tr>
               <td>FindById (latency)</td>
-              <td class="highlight-col"><strong>3.005 μs</strong></td>
-              <td>17.327 μs <span class="badge-bad">5.8x slower</span></td>
-              <td>28.425 μs <span class="badge-bad">9.5x slower</span></td>
+              <td class="highlight-col"><strong>3.980 μs</strong></td>
+              <td>22.257 μs <span class="badge-bad">5.6x slower</span></td>
+              <td>38.249 μs <span class="badge-bad">9.6x slower</span></td>
+              <td>23.374 μs <span class="badge-bad">5.9x slower</span></td>
+              <td>11,296 μs <span class="badge-bad">2,843x slower</span></td>
             </tr>
             <tr>
               <td>FindById (allocated)</td>
-              <td class="highlight-col"><strong>6.46 KB</strong></td>
-              <td>45.65 KB</td>
-              <td>9.33 KB</td>
+              <td class="highlight-col"><strong>7.16 KB</strong></td>
+              <td>47.8 KB</td>
+              <td>9.34 KB</td>
+              <td>9.77 KB</td>
+              <td>12.59 KB</td>
             </tr>
             <tr>
               <td>Scan 1000 docs (latency)</td>
-              <td class="highlight-col"><strong>2,115 μs</strong></td>
-              <td>7,001 μs <span class="badge-bad">3.3x slower</span></td>
-              <td>6,156 μs <span class="badge-bad">2.9x slower</span></td>
+              <td class="highlight-col"><strong>2,502 μs</strong></td>
+              <td>8,455 μs <span class="badge-bad">3.4x slower</span></td>
+              <td>8,046 μs <span class="badge-bad">3.2x slower</span></td>
+              <td>10,463 μs <span class="badge-bad">4.2x slower</span></td>
+              <td>28,986 μs <span class="badge-bad">11.6x slower</span></td>
             </tr>
             <tr>
               <td>Scan 1000 docs (allocated)</td>
-              <td class="highlight-col"><strong>5,090 KB</strong></td>
-              <td>17,295 KB <span class="badge-bad">3.4x more</span></td>
-              <td>7,803 KB</td>
+              <td class="highlight-col"><strong>5,091 KB</strong></td>
+              <td>17,296 KB <span class="badge-bad">3.4x more</span></td>
+              <td>7,804 KB</td>
+              <td>2,221 KB</td>
+              <td>1,956 KB</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <p style="font-size:0.85rem; color: var(--text-muted);">† SQLite reports minimal managed allocations — native C library memory is excluded from BenchmarkDotNet measurement. BLite is 100% managed; all allocations are captured. Full details: <router-link to="/docs/benchmarks">Benchmarks page</router-link>.</p>
+      <p style="font-size:0.85rem; color: var(--text-muted);">† SQLite and DuckDB report minimal managed allocations — native C library memory is excluded from BenchmarkDotNet measurement. BLite is 100% managed; all allocations are captured. Full details: <router-link to="/docs/benchmarks">Benchmarks page</router-link>.</p>
     </section>
 
     <section>
@@ -418,6 +512,22 @@
             <li>You are on .NET Framework and can't upgrade.</li>
           </ul>
         </div>
+        <div class="decision-card">
+          <h3>Choose CouchbaseLite when…</h3>
+          <ul>
+            <li>You build iOS or Android apps requiring offline-first sync.</li>
+            <li>You need replication via Couchbase Sync Gateway.</li>
+            <li>You are already in the Couchbase ecosystem.</li>
+          </ul>
+        </div>
+        <div class="decision-card">
+          <h3>Choose DuckDB when…</h3>
+          <ul>
+            <li>Your workload is analytical (OLAP) rather than transactional (OLTP).</li>
+            <li>You need SQL aggregations over columnar data files (Parquet, CSV).</li>
+            <li>You are not doing per-document point reads or writes.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -491,4 +601,19 @@ td { color: var(--text-secondary); font-size: 0.9rem; }
 .decision-card h3 { margin-top: 0; color: var(--blite-red); font-size: 1.1rem; }
 .decision-card ul { margin-bottom: 0; }
 .decision-card li { font-size: 0.9rem; }
+
+.pipeline { display: flex; flex-direction: column; margin: 24px 0; }
+.pipe-step { background: rgba(15,15,15,0.6); border: 1px solid rgba(231,76,60,0.2); border-radius: 8px; padding: 14px 18px; display: flex; gap: 14px; align-items: flex-start; }
+.pipe-step.pipe-costly { border-color: rgba(239,68,68,0.45); background: rgba(239,68,68,0.08); }
+.pipe-step.pipe-blite { border-color: rgba(34,197,94,0.45); background: rgba(34,197,94,0.08); }
+.pipe-num { font-size: 1.3rem; font-weight: 800; color: var(--blite-red); font-family: var(--font-mono); min-width: 22px; flex-shrink: 0; line-height: 1.4; }
+.pipeline-blite .pipe-num { color: #22c55e; }
+.pipe-body { flex: 1; min-width: 0; }
+.pipe-label { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.pipe-sub { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+.pipe-connector { font-size: 1rem; color: var(--blite-red); padding: 2px 0 2px 18px; line-height: 1; }
+.pipe-connector.pipe-connector-costly { color: #ef4444; }
+.pipeline-blite .pipe-connector { color: #22c55e; }
+.pipe-tag { display: inline-block; padding: 1px 7px; border-radius: 4px; font-size: 0.72rem; font-weight: 600; background: rgba(239,68,68,0.2); color: #ef4444; text-transform: uppercase; letter-spacing: 0.5px; }
+.pipe-tag.pipe-tag-good { background: rgba(34,197,94,0.2); color: #22c55e; }
 </style>

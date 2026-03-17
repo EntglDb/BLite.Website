@@ -1,7 +1,7 @@
 <template>
   <div class="doc-page">
     <h1>⚡ <span class="title-gradient">Benchmarks</span></h1>
-    <p class="lead">BLite performance benchmarks vs <strong>LiteDB 5.0.21</strong> and <strong>SQLite+JSON</strong> (Microsoft.Data.Sqlite + System.Text.Json) using BenchmarkDotNet on .NET 10.</p>
+    <p class="lead">BLite performance benchmarks vs <strong>LiteDB 5.0.21</strong>, <strong>SQLite+JSON</strong> (Microsoft.Data.Sqlite + System.Text.Json), <strong>Couchbase Lite 4.0.3</strong>, and <strong>DuckDB 1.3.0</strong> using BenchmarkDotNet on .NET 10.</p>
 
     <div class="info-box">
       <div class="info-header">📊 Benchmark Environment</div>
@@ -10,9 +10,9 @@
         <li><strong>CPU:</strong> Intel Core i7-13800H — 14 physical cores, 20 logical @ 2.50GHz</li>
         <li><strong>Runtime:</strong> .NET 10.0.4 (X64 RyuJIT x86-64-v3)</li>
         <li><strong>BenchmarkDotNet:</strong> v0.15.8</li>
-        <li><strong>Last Run:</strong> March 12, 2026</li>
+        <li><strong>Last Run:</strong> March 17, 2026</li>
       </ul>
-      <p style="margin-top:12px"><strong>Engines:</strong> BLite (source-generated mappers) · LiteDB 5.0.21 (<code>Connection=direct</code>) · SQLite Microsoft.Data.Sqlite 10.0.4 + Dapper 2.1.66 (JSON blobs)</p>
+      <p style="margin-top:12px"><strong>Engines:</strong> BLite (source-generated mappers) · LiteDB 5.0.21 (<code>Connection=direct</code>) · SQLite Microsoft.Data.Sqlite 10.0.2 + Dapper 2.1.66 (JSON blobs) · Couchbase Lite 4.0.3 (NetDesktop) · DuckDB 1.3.0 (<code>DuckDB.NET.Data.Full</code>)</p>
     </div>
 
     <section>
@@ -38,20 +38,28 @@
       <h2>Summary</h2>
       <div class="highlights">
         <div class="highlight">
-          <div class="highlight-value">4.7x</div>
+          <div class="highlight-value">5.1x</div>
           <div class="highlight-label">vs LiteDB Single Insert</div>
         </div>
         <div class="highlight">
-          <div class="highlight-value">31x</div>
+          <div class="highlight-value">~45x</div>
           <div class="highlight-label">vs SQLite Single Insert</div>
         </div>
         <div class="highlight">
-          <div class="highlight-value">5.8x</div>
+          <div class="highlight-value">5.6x</div>
           <div class="highlight-label">vs LiteDB FindById</div>
         </div>
         <div class="highlight">
-          <div class="highlight-value">3.3x</div>
+          <div class="highlight-value">3.4x</div>
           <div class="highlight-label">vs LiteDB Scan</div>
+        </div>
+        <div class="highlight">
+          <div class="highlight-value">6.5x</div>
+          <div class="highlight-label">vs LiteDB Top-10 OLAP</div>
+        </div>
+        <div class="highlight">
+          <div class="highlight-value">480x</div>
+          <div class="highlight-label">vs DuckDB Top-10 OLAP</div>
         </div>
       </div>
     </section>
@@ -63,9 +71,11 @@
       <table>
         <thead><tr><th>Engine</th><th>Mean</th><th>Allocated</th><th>Ratio</th></tr></thead>
         <tbody>
-          <tr class="winner"><td><strong>BLite</strong></td><td><code>115.6 μs</code></td><td>134.43 KB</td><td><span class="badge-good">baseline</span></td></tr>
-          <tr><td>LiteDB</td><td><code>541.5 μs</code></td><td>56.09 KB</td><td><span class="badge-slow">4.72x slower</span></td></tr>
-          <tr><td>SQLite+JSON</td><td><code>3,608.8 μs</code></td><td>10.02 KB</td><td><span class="badge-slow">31.46x slower</span></td></tr>
+          <tr class="winner"><td><strong>BLite</strong></td><td><code>164.6 μs</code></td><td>215.79 KB</td><td><span class="badge-good">baseline</span></td></tr>
+          <tr><td>LiteDB</td><td><code>826.9 μs</code></td><td>57.4 KB</td><td><span class="badge-slow">5.06x slower</span></td></tr>
+          <tr><td>SQLite+JSON</td><td><code>7,380.1 μs</code></td><td>27.36 KB</td><td><span class="badge-slow">45.15x slower</span></td></tr>
+          <tr><td>CouchbaseLite</td><td><code>466.6 μs</code></td><td>61.57 KB</td><td><span class="badge-slow">2.85x slower</span></td></tr>
+          <tr><td>DuckDB</td><td><code>28,218.2 μs</code></td><td>27.84 KB</td><td><span class="badge-slow">172.64x slower</span></td></tr>
         </tbody>
       </table>
 
@@ -73,9 +83,11 @@
       <table>
         <thead><tr><th>Engine</th><th>Mean</th><th>Allocated</th><th>Gen0</th><th>Ratio</th></tr></thead>
         <tbody>
-          <tr class="winner"><td><strong>BLite</strong></td><td><code>9,113 μs</code></td><td><strong>31,242 KB</strong></td><td>2000</td><td><span class="badge-good">baseline</span></td></tr>
-          <tr><td>LiteDB</td><td><code>16,117 μs</code></td><td>33,491 KB</td><td>2000</td><td><span class="badge-slow">1.77x slower</span></td></tr>
-          <tr><td>SQLite+JSON</td><td><code>16,196 μs</code></td><td>6,294 KB</td><td>0</td><td><span class="badge-slow">1.78x slower</span></td></tr>
+          <tr class="winner"><td><strong>BLite</strong></td><td><code>14,086 μs</code></td><td><strong>31,312 KB</strong></td><td>2000</td><td><span class="badge-good">baseline</span></td></tr>
+          <tr><td>LiteDB</td><td><code>27,047 μs</code></td><td>32,993 KB</td><td>2000</td><td><span class="badge-slow">1.93x slower</span></td></tr>
+          <tr><td>SQLite+JSON</td><td><code>25,008 μs</code></td><td>6,296 KB</td><td>0</td><td><span class="badge-slow">1.78x slower</span></td></tr>
+          <tr><td>CouchbaseLite</td><td><code>91,217 μs</code></td><td>32,548 KB</td><td>2000</td><td><span class="badge-slow">6.51x slower</span></td></tr>
+          <tr><td>DuckDB</td><td><code>361,785 μs</code></td><td>4,512 KB</td><td>0</td><td><span class="badge-slow">25.80x slower</span></td></tr>
         </tbody>
       </table>
 
@@ -97,9 +109,11 @@
       <table>
         <thead><tr><th>Engine</th><th>Mean</th><th>Allocated</th><th>Ratio</th></tr></thead>
         <tbody>
-          <tr class="winner"><td><strong>BLite</strong></td><td><code>3.005 μs</code></td><td>6.46 KB</td><td><span class="badge-good">baseline</span></td></tr>
-          <tr><td>LiteDB</td><td><code>17.327 μs</code></td><td>45.65 KB</td><td><span class="badge-slow">5.77x slower</span></td></tr>
-          <tr><td>SQLite+JSON</td><td><code>28.425 μs</code></td><td>9.33 KB</td><td><span class="badge-slow">9.46x slower</span></td></tr>
+          <tr class="winner"><td><strong>BLite</strong></td><td><code>3.980 μs</code></td><td>7.16 KB</td><td><span class="badge-good">baseline</span></td></tr>
+          <tr><td>LiteDB</td><td><code>22.257 μs</code></td><td>47.8 KB</td><td><span class="badge-slow">5.60x slower</span></td></tr>
+          <tr><td>SQLite+JSON</td><td><code>38.249 μs</code></td><td>9.34 KB</td><td><span class="badge-slow">9.63x slower</span></td></tr>
+          <tr><td>CouchbaseLite</td><td><code>23.374 μs</code></td><td>9.77 KB</td><td><span class="badge-slow">5.88x slower</span></td></tr>
+          <tr><td>DuckDB</td><td><code>11,296.0 μs</code></td><td>12.59 KB</td><td><span class="badge-slow">2,843x slower</span></td></tr>
         </tbody>
       </table>
 
@@ -107,9 +121,69 @@
       <table>
         <thead><tr><th>Engine</th><th>Mean</th><th>Allocated</th><th>Ratio</th></tr></thead>
         <tbody>
-          <tr class="winner"><td><strong>BLite</strong></td><td><code>2,115 μs</code></td><td>5,090 KB</td><td><span class="badge-good">baseline</span></td></tr>
-          <tr><td>LiteDB</td><td><code>7,001 μs</code></td><td>17,295 KB</td><td><span class="badge-slow">3.31x slower</span></td></tr>
-          <tr><td>SQLite+JSON</td><td><code>6,156 μs</code></td><td>7,803 KB</td><td><span class="badge-slow">2.91x slower</span></td></tr>
+          <tr class="winner"><td><strong>BLite</strong></td><td><code>2,502 μs</code></td><td>5,091 KB</td><td><span class="badge-good">baseline</span></td></tr>
+          <tr><td>LiteDB</td><td><code>8,455 μs</code></td><td>17,296 KB</td><td><span class="badge-slow">3.38x slower</span></td></tr>
+          <tr><td>SQLite+JSON</td><td><code>8,046 μs</code></td><td>7,804 KB</td><td><span class="badge-slow">3.22x slower</span></td></tr>
+          <tr><td>CouchbaseLite</td><td><code>10,463 μs</code></td><td>2,221 KB</td><td><span class="badge-slow">4.19x slower</span></td></tr>
+          <tr><td>DuckDB</td><td><code>28,986 μs</code></td><td>1,956 KB</td><td><span class="badge-slow">11.60x slower</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>OLAP Performance</h2>
+      <p>Results from <code>DefaultJob</code>. Dataset: 1,000 <code>CustomerOrder</code> documents.</p>
+
+      <div class="warning-box">
+        <div class="warning-header">⚠️ Note on SQLite and DuckDB aggregation</div>
+        <p>SQLite's <code>SUM/AVG/COUNT</code> runs inside its native C library and outperforms BLite for that specific case. DuckDB shows similar columnar-scan advantages for pure aggregates. Both are heavily penalized for fine-grained document lookups (FindById, ordered Top-N), where BLite's WAL-indexed pages and source-generated BSON deserialization dominate.</p>
+      </div>
+
+      <h3>Aggregate — SUM / AVG / COUNT over all orders</h3>
+      <table>
+        <thead><tr><th>Engine</th><th>Mean</th><th>Allocated</th><th>Ratio</th></tr></thead>
+        <tbody>
+          <tr class="winner"><td><strong>BLite</strong></td><td><code>10,644 μs</code></td><td>7,334 KB</td><td><span class="badge-good">baseline</span></td></tr>
+          <tr><td>LiteDB</td><td><code>247,462 μs</code></td><td>206,174 KB</td><td><span class="badge-slow">23.35x slower</span></td></tr>
+          <tr><td>SQLite+JSON</td><td><code>509 μs</code></td><td>1.45 KB</td><td><span class="badge-good">20.98x faster ✨</span></td></tr>
+          <tr><td>CouchbaseLite</td><td><code>18,192 μs</code></td><td>5.04 KB</td><td><span class="badge-slow">1.72x slower</span></td></tr>
+          <tr><td>DuckDB</td><td><code>11,843 μs</code></td><td>5.09 KB</td><td><span class="badge-slow">1.12x slower</span></td></tr>
+        </tbody>
+      </table>
+
+      <h3>GroupBy Status</h3>
+      <table>
+        <thead><tr><th>Engine</th><th>Mean</th><th>Allocated</th><th>Ratio</th></tr></thead>
+        <tbody>
+          <tr class="winner"><td><strong>BLite</strong></td><td><code>7,176 μs</code></td><td>4,673 KB</td><td><span class="badge-good">baseline</span></td></tr>
+          <tr><td>LiteDB</td><td><code>250,021 μs</code></td><td>206,289 KB</td><td><span class="badge-slow">34.92x slower</span></td></tr>
+          <tr><td>SQLite+JSON</td><td><code>34,680 μs</code></td><td>2.5 KB</td><td><span class="badge-slow">4.84x slower</span></td></tr>
+          <tr><td>CouchbaseLite</td><td><code>41,567 μs</code></td><td>8.45 KB</td><td><span class="badge-slow">5.81x slower</span></td></tr>
+          <tr><td>DuckDB</td><td><code>11,586 μs</code></td><td>7.06 KB</td><td><span class="badge-slow">1.62x slower</span></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Range Scan — <code>Total &gt; threshold</code> (full deserialize, ~1000 docs)</h3>
+      <table>
+        <thead><tr><th>Engine</th><th>Mean</th><th>Allocated</th><th>Ratio</th></tr></thead>
+        <tbody>
+          <tr class="winner"><td><strong>BLite</strong></td><td><code>71,713 μs</code></td><td>40,286 KB</td><td><span class="badge-good">baseline</span></td></tr>
+          <tr><td>LiteDB</td><td><code>164,970 μs</code></td><td>162,097 KB</td><td><span class="badge-slow">2.31x slower</span></td></tr>
+          <tr><td>SQLite+JSON</td><td><code>107,775 μs</code></td><td>61,734 KB</td><td><span class="badge-slow">1.51x slower</span></td></tr>
+          <tr><td>CouchbaseLite</td><td><code>257,702 μs</code></td><td>70,180 KB</td><td><span class="badge-slow">3.60x slower</span></td></tr>
+          <tr><td>DuckDB</td><td><code>108,461 μs</code></td><td>61,738 KB</td><td><span class="badge-slow">1.52x slower</span></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Top-10 by Total (ORDER BY + TAKE, index-assisted in BLite)</h3>
+      <table>
+        <thead><tr><th>Engine</th><th>Mean</th><th>Allocated</th><th>Ratio</th></tr></thead>
+        <tbody>
+          <tr class="winner"><td><strong>BLite</strong></td><td><code>27.98 μs</code></td><td>62.34 KB</td><td><span class="badge-good">baseline</span></td></tr>
+          <tr><td>LiteDB</td><td><code>181.20 μs</code></td><td>221.51 KB</td><td><span class="badge-slow">6.49x slower</span></td></tr>
+          <tr><td>SQLite+JSON</td><td><code>130.55 μs</code></td><td>80.1 KB</td><td><span class="badge-slow">4.68x slower</span></td></tr>
+          <tr><td>CouchbaseLite</td><td><code>396.23 μs</code></td><td>92.62 KB</td><td><span class="badge-slow">14.19x slower</span></td></tr>
+          <tr><td>DuckDB</td><td><code>13,423 μs</code></td><td>83.45 KB</td><td><span class="badge-slow">480.71x slower</span></td></tr>
         </tbody>
       </table>
     </section>

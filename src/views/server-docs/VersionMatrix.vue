@@ -87,7 +87,7 @@
       <ul>
         <li><strong>Major version (0 → 1):</strong> may include breaking changes to gRPC service definitions, REST path structure, or the BLQL filter serialization format.</li>
         <li><strong>Minor version (0.1 → 0.2):</strong> additive changes only — new RPC methods, new REST endpoints, new filter operators. Older clients continue to work.</li>
-        <li><strong>Patch version (0.1.1 → 0.1.4):</strong> bug fixes and security patches. No protocol changes.</li>
+        <li><strong>Patch version (0.2.0 → 0.2.1):</strong> bug fixes and security patches. No protocol changes.</li>
       </ul>
       <div class="warning-box">
         <strong>⚠ Preview period (0.x):</strong> Until the 1.0 release, even minor version bumps may include breaking changes.
@@ -116,16 +116,25 @@ interface ClientRow {
 
 const serverMatrix: ServerRow[] = [
   {
-    server: '0.1.4',
-    engine: '3.6.4',
+    server: '0.2.1',
+    engine: '3.7.0',
     status: 'preview',
     statusLabel: 'Preview',
+    date: '2026-03-17',
+    notes: 'OLAP aggregation pipeline, Top-N index-assisted queries, GroupBy & Range predicates. Additive protocol changes only.',
+  },
+  {
+    server: '0.1.4',
+    engine: '3.7.0',
+    status: 'deprecated',
+    statusLabel: 'Old Preview',
     date: '2026-03-13',
     notes: 'Initial public preview. gRPC, REST, Studio, multi-tenant, BLQL, Transactions, KV Store.',
   },
 ]
 
 const clientMatrix: ClientRow[] = [
+  { server: '0.2.x', dotnet: '0.2.x', npm: '0.2.x', java: '0.2.x' },
   { server: '0.1.x', dotnet: '0.1.x', npm: '0.1.x', java: '0.1.x' },
 ]
 </script>
