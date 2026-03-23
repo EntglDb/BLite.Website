@@ -311,6 +311,7 @@ orders.Insert(doc);
           <tr><td><code>CreateIndex / CreateVectorIndex / CreateSpatialIndex</code></td><td><code>void</code> — accepts top-level fields or dot-notation nested paths (e.g. <code>"shipping.city"</code>)</td></tr>
           <tr><td><code>DropIndex(name)</code></td><td><code>bool</code></td></tr>
           <tr><td><code>ListIndexes()</code></td><td><code>IReadOnlyList&lt;string&gt;</code></td></tr>
+          <tr><td><code>Watch(capturePayload)</code></td><td><code>IObservable&lt;BsonChangeEvent&gt;</code> — hot observable of real-time changes (v3.6.0). Pass <code>capturePayload: true</code> to include the full <code>BsonDocument</code> payload; default is metadata-only (ID + operation type).</td></tr>
         </tbody>
       </table>
     </section>

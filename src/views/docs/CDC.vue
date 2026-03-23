@@ -20,9 +20,10 @@
 <span class="keyword">var</span> users = db.GetCollection&lt;<span class="type">User</span>&gt;();
 users.Watch().Subscribe(change => { ... });
 
-<span class="comment">// 2. Dynamic Mode (BLiteEngine) — v1.11.0</span>
+<span class="comment">// 2. Dynamic Mode (DynamicCollection) — v3.6.0</span>
 <span class="keyword">var</span> dynamicCol = engine.GetOrCreateCollection(<span class="string">"orders"</span>);
-dynamicCol.Watch().Subscribe(change => { ... });</code></pre>
+<span class="comment">// capturePayload: true includes the full BsonDocument; false (default) emits only ID + operation type</span>
+dynamicCol.Watch(capturePayload: <span class="keyword">true</span>).Subscribe(change => { ... });</code></pre>
     </section>
 
     <section>

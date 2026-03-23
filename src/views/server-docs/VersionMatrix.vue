@@ -116,24 +116,33 @@ interface ClientRow {
 
 const serverMatrix: ServerRow[] = [
   {
-    server: '0.2.1',
-    engine: '3.7.0',
+    server: '0.3.3',
+    engine: '3.8.0',
     status: 'preview',
     statusLabel: 'Preview',
+    date: '2026-03-23',
+    notes: 'BLiteSession — per-connection isolated transactions. Multi-file storage layout (PageFileConfig.Server). BLiteMigration: bidirectional single↔multi-file migration.',
+  },
+  {
+    server: '0.2.1',
+    engine: '3.7.0',
+    status: 'deprecated',
+    statusLabel: 'Deprecated',
     date: '2026-03-17',
-    notes: 'OLAP aggregation pipeline, Top-N index-assisted queries, GroupBy & Range predicates. Additive protocol changes only.',
+    notes: 'OLAP aggregation pipeline, Top-N index-assisted queries, GroupBy & Range predicates.',
   },
   {
     server: '0.1.4',
     engine: '3.7.0',
     status: 'deprecated',
-    statusLabel: 'Old Preview',
+    statusLabel: 'Deprecated',
     date: '2026-03-13',
     notes: 'Initial public preview. gRPC, REST, Studio, multi-tenant, BLQL, Transactions, KV Store.',
   },
 ]
 
 const clientMatrix: ClientRow[] = [
+  { server: '0.3.x', dotnet: '0.3.x', npm: '0.3.x', java: '0.3.x' },
   { server: '0.2.x', dotnet: '0.2.x', npm: '0.2.x', java: '0.2.x' },
   { server: '0.1.x', dotnet: '0.1.x', npm: '0.1.x', java: '0.1.x' },
 ]

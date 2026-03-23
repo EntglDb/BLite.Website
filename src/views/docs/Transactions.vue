@@ -339,6 +339,53 @@ txn.Commit();</code></pre>
     </section>
 
     <section>
+      <h2>BLiteSession — Per-Connection Isolation <span style="font-size:0.6em;vertical-align:middle;background:rgba(231,76,60,0.15);color:var(--blite-red);padding:2px 8px;border-radius:12px;font-weight:600">v3.8.0</span></h2>
+      <p>
+        When a single <code>BLiteEngine</code> instance is shared across multiple concurrent clients
+        (e.g. inside BLite.Server), <code>BLiteSession</code> provides <strong>per-connection isolated
+        transaction contexts</strong>. Each session carries its own transaction state so independent callers
+        cannot interfere with each other.
+      </p>
+      <p>Open a session with <code>engine.OpenSession()</code>. Disposing the session automatically rolls back any uncommitted transaction.</p>
+      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> engine = <span class="keyword">new</span> <span class="type">BLiteEngine</span>(<span class="string">"data.db"</span>);
+
+<span class="comment">// One session per connected client / per request</span>
+<span class="keyword">using</span> <span class="keyword">var</span> session = engine.OpenSession();
+
+<span class="comment">// Explicit transaction on this session</span>
+<span class="keyword">using</span> <span class="keyword">var</span> txn = session.BeginTransaction();
+
+<span class="keyword">try</span>
+{
+    <span class="keyword">await</span> session.InsertAsync(<span class="string">"orders"</span>, orderDoc, ct);
+    <span class="keyword">await</span> session.InsertAsync(<span class="string">"invoices"</span>, invoiceDoc, ct);
+    <span class="keyword">await</span> session.CommitAsync(ct);
+}
+<span class="keyword">catch</span>
+{
+    session.Rollback(); <span class="comment">// or disposed automatically</span>
+    <span class="keyword">throw</span>;
+}
+
+<span class="comment">// Convenience CRUD without explicit transaction (auto-commit)</span>
+<span class="type">BsonId</span> id = <span class="keyword">await</span> session.InsertAsync(<span class="string">"users"</span>, userDoc, ct);
+<span class="type">BsonDocument</span>? doc = <span class="keyword">await</span> session.FindByIdAsync(<span class="string">"users"</span>, id, ct);
+
+<span class="comment">// Access collections scoped to this session</span>
+<span class="keyword">var</span> col = session.GetOrCreateCollection(<span class="string">"events"</span>);
+col.Insert(eventDoc);</code></pre>
+      <div class="info-box">
+        <strong>💡 When to use BLiteSession</strong>
+        <ul>
+          <li>✅ <strong>Server mode</strong> — one session per client connection ensures transaction isolation</li>
+          <li>✅ <strong>Shared engine</strong> — multiple concurrent callers on a single <code>BLiteEngine</code></li>
+          <li>✅ <strong>Dispose-safe</strong> — uncommitted transactions are rolled back automatically on disposal</li>
+          <li>⚠️ <strong>Embedded single-process apps</strong> — not required; use <code>DocumentDbContext</code> or <code>BLiteEngine</code> directly</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
       <h2>Best Practices</h2>
       <ul>
         <li>✅ <strong>Use <code>SaveChanges()</code></strong> for simple operations (recommended)</li>
