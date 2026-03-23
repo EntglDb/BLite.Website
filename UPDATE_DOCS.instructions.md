@@ -20,7 +20,10 @@ up to date across all three repositories after a release or feature change.
 1. Read `BLite/CHANGELOG.md` (first entry) to get the latest BLite engine version.
 2. Read `BLite.Server/CHANGELOG.md` (first entry) to get the latest BLite.Server version.
 3. Read `BLite.Website/package.json` → `"version"` field.
-4. Compare the three and note any mismatch.
+4. Run `git -C ../BLite tag --list "studio-v*" --sort=-version:refname` and take
+   the first result as the **latest Studio version** (e.g. `studio-v3.8.0` → `3.8.0`).
+   This tag drives the download URLs in `App.vue` and the badge in `Hero.vue`.
+5. Compare all four values and note any mismatch.
 
 **Where versions appear and must stay in sync:**
 
@@ -32,6 +35,8 @@ up to date across all three repositories after a release or feature change.
 - `BLite.Website/src/views/server-docs/Overview.vue` — server version, engine compatibility.
 - `BLite.Website/src/views/server-docs/VersionMatrix.vue` — full compatibility table.
 - `BLite.Website/src/views/server-docs/ServerInstallation.vue` — Docker tags, download links.
+- `BLite.Website/src/components/Hero.vue` — `badge` text in the hero section (version + release summary).
+- `BLite.Website/src/App.vue` — footer download links title and all 6 download URLs (MSI, Portable, .deb, tar.gz, macOS arm64, macOS x64). The URL pattern is `https://github.com/EntglDb/BLite/releases/download/studio-vX.Y.Z/BLite.Studio-X.Y.Z-<platform>.<ext>`. Use the **Studio tag version** (step 1.4) as `X.Y.Z` — it may differ from the engine version if a Studio release was cut independently.
 
 > **Action:** Update all version references to match the latest released versions.
 
@@ -182,6 +187,9 @@ npm run preview
 ## Checklist summary
 
 - [ ] Version numbers are consistent across all READMEs and the website
+- [ ] Studio tag checked (`git tag --list "studio-v*"`) and download URLs updated accordingly
+- [ ] Hero badge in `Hero.vue` updated with new version and release summary
+- [ ] Footer download links in `App.vue` updated (title + all 6 URLs)
 - [ ] CHANGELOG features are reflected in the documentation
 - [ ] Existing pages are accurate with the current API
 - [ ] New pages are created for significant new features

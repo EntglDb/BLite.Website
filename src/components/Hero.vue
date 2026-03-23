@@ -13,7 +13,7 @@ const goGithub = () => window.open('https://github.com/EntglDb/BLite', '_blank')
     
     <div class="container hero-content">
       <div class="badge animate-fade-in" style="animation-delay: 0.1s">
-        <span class="badge-dot"></span> v3.7.0 Released — BLite.Server v0.2.1, OLAP aggregation suite &amp; Top-N index-assisted queries
+        <span class="badge-dot"></span> v3.8.0 Released — BLite.Server v0.3.3, BLiteSession, multi-file storage &amp; BLiteMigration
       </div>
       
       <h1 class="hero-title animate-fade-in" style="animation-delay: 0.2s">
