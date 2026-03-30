@@ -50,7 +50,14 @@
       <h2>Features</h2>
 
       <h3>Dashboard</h3>
-      <p>The home screen shows a summary of all registered databases, total collection count, and server uptime.</p>
+      <p>
+        The home screen is a live metrics dashboard with eight sections: <strong>System</strong> (CPU, memory),
+        <strong>Process</strong> (.NET heap, thread count), <strong>GC</strong> (generation counters),
+        <strong>Traffic</strong> (requests per second with sparkline chart), <strong>Cache</strong> (hit/miss ratio),
+        <strong>Transactions</strong> (active sessions, latency), <strong>Storage</strong> (database file sizes),
+        and <strong>Maintenance</strong> (WAL compaction, uptime). The dashboard auto-refreshes every 10 seconds
+        and displays historical sparkline charts backed by a 72-point ring buffer (12 hours of history).
+      </p>
 
       <h3>Databases</h3>
       <p>Browse all tenant databases. Create new databases and drop existing ones (requires <code>Admin</code> permission). Each database displays its file size and collection count.</p>

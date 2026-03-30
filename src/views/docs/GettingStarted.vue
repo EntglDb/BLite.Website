@@ -68,25 +68,25 @@
     Email = <span class="string">"alice@example.com"</span>
 };
 
-users.Insert(newUser);
+<span class="keyword">await</span> users.InsertAsync(newUser);
 Console.WriteLine($<span class="string">"Inserted with ID: {newUser.Id}"</span>);</code></pre>
 
       <h3>Query</h3>
       <pre><code><span class="comment">// Find by ID</span>
-<span class="keyword">var</span> user = users.FindById(newUser.Id);
+<span class="keyword">var</span> user = <span class="keyword">await</span> users.FindByIdAsync(newUser.Id, ct);
 
-<span class="comment">// Query with LINQ</span>
-<span class="keyword">var</span> results = users.AsQueryable()
+<span class="comment">// Query with async LINQ</span>
+<span class="type">List</span>&lt;<span class="type">User</span>&gt; results = <span class="keyword">await</span> users.AsQueryable()
     .Where(u => u.Age > <span class="number">25</span>)
     .OrderBy(u => u.Name)
-    .AsEnumerable();</code></pre>
+    .ToListAsync(ct);</code></pre>
 
       <h3>Update</h3>
       <pre><code>user.Age = <span class="number">31</span>;
-users.Update(user);</code></pre>
+<span class="keyword">await</span> users.UpdateAsync(user);</code></pre>
 
       <h3>Delete</h3>
-      <pre><code>users.Delete(user.Id);</code></pre>
+      <pre><code><span class="keyword">await</span> users.DeleteAsync(user.Id);</code></pre>
     </section>
 
     <section>

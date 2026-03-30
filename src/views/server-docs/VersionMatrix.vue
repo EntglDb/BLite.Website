@@ -86,13 +86,9 @@
       <p>The BLite Server wire protocol follows this stability contract:</p>
       <ul>
         <li><strong>Major version (0 → 1):</strong> may include breaking changes to gRPC service definitions, REST path structure, or the BLQL filter serialization format.</li>
-        <li><strong>Minor version (0.1 → 0.2):</strong> additive changes only — new RPC methods, new REST endpoints, new filter operators. Older clients continue to work.</li>
-        <li><strong>Patch version (0.2.0 → 0.2.1):</strong> bug fixes and security patches. No protocol changes.</li>
+        <li><strong>Minor version (1.0 → 1.1):</strong> additive changes only — new RPC methods, new REST endpoints, new filter operators. Older clients continue to work.</li>
+        <li><strong>Patch version (1.0.0 → 1.0.1):</strong> bug fixes and security patches. No protocol changes.</li>
       </ul>
-      <div class="warning-box">
-        <strong>⚠ Preview period (0.x):</strong> Until the 1.0 release, even minor version bumps may include breaking changes.
-        Pin your client and server versions to the same minor release during the preview period.
-      </div>
     </section>
   </div>
 </template>
@@ -115,6 +111,14 @@ interface ClientRow {
 }
 
 const serverMatrix: ServerRow[] = [
+  {
+    server: '1.0.0',
+    engine: '4.0.x',
+    status: 'stable',
+    statusLabel: 'Stable',
+    date: '2026-03-23',
+    notes: 'GA release. Async-only CRUD API (BLite 4.0 breaking change). Server metrics dashboard with sparkline charts, hit/miss cache counters, active transaction snapshots.',
+  },
   {
     server: '0.3.3',
     engine: '3.8.0',
@@ -142,6 +146,7 @@ const serverMatrix: ServerRow[] = [
 ]
 
 const clientMatrix: ClientRow[] = [
+  { server: '1.0.x', dotnet: '1.0.x', npm: '1.0.x', java: '1.0.x' },
   { server: '0.3.x', dotnet: '0.3.x', npm: '0.3.x', java: '0.3.x' },
   { server: '0.2.x', dotnet: '0.2.x', npm: '0.2.x', java: '0.2.x' },
   { server: '0.1.x', dotnet: '0.1.x', npm: '0.1.x', java: '0.1.x' },

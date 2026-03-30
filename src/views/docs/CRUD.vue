@@ -3,11 +3,19 @@
     <h1>✏️ <span class="title-gradient">CRUD Operations</span></h1>
     <p class="lead">Learn how to create, read, update, and delete documents in BLite collections.</p>
 
+    <div class="warning-box">
+      <strong>⚠ v4.0.0 Breaking Change — Async-Only API.</strong>
+      Synchronous CRUD methods (<code>Insert</code>, <code>Update</code>, <code>Delete</code>, <code>FindById</code>,
+      <code>FindAll</code>, <code>Find</code>, <code>InsertBulk</code>, <code>UpdateBulk</code>, <code>DeleteBulk</code>, <code>Count</code>)
+      have been <strong>removed</strong> from <code>DocumentCollection&lt;TId, T&gt;</code> and <code>DynamicCollection</code>.
+      All call sites must use <code>await InsertAsync(…)</code>, <code>await FindByIdAsync(…)</code>, etc.
+    </div>
+
     <section>
       <h2>Insert</h2>
       <p>Add new documents to a collection:</p>
-      
-      <h3>Single Insert</h3>
+
+      <h3>Insert</h3>
       <pre><code><span class="keyword">var</span> user = <span class="keyword">new</span> <span class="type">User</span>
 {
     Name = <span class="string">"Alice"</span>,
@@ -15,22 +23,18 @@
     Email = <span class="string">"alice@example.com"</span>
 };
 
-users.Insert(user);
+<span class="keyword">await</span> users.InsertAsync(user);
 <span class="comment">// ID is automatically generated and assigned</span>
 Console.WriteLine(user.Id);</code></pre>
 
       <h3>Bulk Insert</h3>
       <pre><code><span class="keyword">var</span> batch = <span class="keyword">new</span> <span class="type">List</span>&lt;<span class="type">User</span>&gt;
 {
-    <span class="keyword">new</span> { Name = <span class="string">"Bob"</span>, Age = <span class="number">25</span> },
-    <span class="keyword">new</span> { Name = <span class="string">"Charlie"</span>, Age = <span class="number">35</span> },
-    <span class="keyword">new</span> { Name = <span class="string">"Diana"</span>, Age = <span class="number">28</span> }
+    <span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Bob"</span>, Age = <span class="number">25</span> },
+    <span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Charlie"</span>, Age = <span class="number">35</span> },
+    <span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Diana"</span>, Age = <span class="number">28</span> }
 };
 
-users.InsertMany(batch);</code></pre>
-
-      <h3>Async Insert</h3>
-      <pre><code><span class="keyword">await</span> users.InsertAsync(user);
 <span class="keyword">await</span> users.InsertManyAsync(batch);</code></pre>
     </section>
 
@@ -38,17 +42,7 @@ users.InsertMany(batch);</code></pre>
       <h2>Read</h2>
       
       <h3>Find by ID</h3>
-      <pre><code><span class="keyword">var</span> user = users.FindById(userId);
-<span class="keyword">if</span> (user != <span class="keyword">null</span>)
-{
-    Console.WriteLine(user.Name);
-}</code></pre>
-
-      <h3>Find by ID — Async</h3>
       <pre><code><span class="type">User</span>? user = <span class="keyword">await</span> users.FindByIdAsync(userId, ct);</code></pre>
-
-      <h3>Find All</h3>
-      <pre><code><span class="keyword">var</span> allUsers = users.FindAll();</code></pre>
 
       <h3>Find All — Async Streaming</h3>
       <pre><code><span class="keyword">await foreach</span> (<span class="keyword">var</span> user <span class="keyword">in</span> users.FindAllAsync(ct))
@@ -88,51 +82,42 @@ users.InsertMany(batch);</code></pre>
 
     <section>
       <h2>Update</h2>
-      
-      <h3>Update Single Document</h3>
-      <pre><code><span class="keyword">var</span> user = users.FindById(userId);
+
+      <h3>Update</h3>
+      <pre><code><span class="keyword">var</span> user = <span class="keyword">await</span> users.FindByIdAsync(userId, ct);
 user.Age = <span class="number">31</span>;
 user.Email = <span class="string">"newemail@example.com"</span>;
 
-users.Update(user);</code></pre>
+<span class="keyword">await</span> users.UpdateAsync(user);</code></pre>
 
       <h3>Upsert (Insert or Update)</h3>
       <pre><code><span class="comment">// Insert if not exists, update if exists</span>
-users.Upsert(user);</code></pre>
+<span class="keyword">await</span> users.UpsertAsync(user);</code></pre>
 
       <h3>Partial Update</h3>
-      <pre><code><span class="keyword">var</span> user = users.FindById(userId);
+      <pre><code><span class="keyword">var</span> user = <span class="keyword">await</span> users.FindByIdAsync(userId, ct);
 <span class="keyword">if</span> (user != <span class="keyword">null</span>)
 {
     user.Age += <span class="number">1</span>; <span class="comment">// Increment age</span>
-    users.Update(user);
+    <span class="keyword">await</span> users.UpdateAsync(user);
 }</code></pre>
-
-      <h3>Async Update</h3>
-      <pre><code><span class="keyword">await</span> users.UpdateAsync(user);
-<span class="keyword">await</span> users.UpsertAsync(user);</code></pre>
     </section>
 
     <section>
       <h2>Delete</h2>
-      
-      <h3>Delete by ID</h3>
-      <pre><code><span class="keyword">var</span> success = users.Delete(userId);
-Console.WriteLine(success); <span class="comment">// true if deleted</span></code></pre>
 
-      <h3>Delete by Document</h3>
-      <pre><code><span class="keyword">var</span> user = users.FindById(userId);
-users.Delete(user.Id);</code></pre>
+      <h3>Delete by ID</h3>
+      <pre><code><span class="keyword">await</span> users.DeleteAsync(userId);</code></pre>
 
       <h3>Delete Many</h3>
-      <pre><code><span class="keyword">var</span> toDelete = users.AsQueryable()
-    .Where(u => u.Age < <span class="number">18</span>)
+      <pre><code><span class="type">List</span>&lt;<span class="type">ObjectId</span>&gt; toDelete = <span class="keyword">await</span> users.AsQueryable()
+    .Where(u => u.Age &lt; <span class="number">18</span>)
     .Select(u => u.Id)
-    .AsEnumerable();
+    .ToListAsync(ct);
 
 <span class="keyword">foreach</span> (<span class="keyword">var</span> id <span class="keyword">in</span> toDelete)
 {
-    users.Delete(id);
+    <span class="keyword">await</span> users.DeleteAsync(id);
 }</code></pre>
 
       <h3>Async Delete</h3>
@@ -157,7 +142,7 @@ users.Delete(user.Id);</code></pre>
 
 <span class="keyword">try</span>
 {
-    users.Insert(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">""</span>, Age = <span class="number">200</span> });
+    <span class="keyword">await</span> users.InsertAsync(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">""</span>, Age = <span class="number">200</span> });
 }
 <span class="keyword">catch</span> (<span class="type">ValidationException</span> ex)
 {

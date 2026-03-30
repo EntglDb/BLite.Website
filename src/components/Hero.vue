@@ -13,7 +13,7 @@ const goGithub = () => window.open('https://github.com/EntglDb/BLite', '_blank')
     
     <div class="container hero-content">
       <div class="badge animate-fade-in" style="animation-delay: 0.1s">
-        <span class="badge-dot"></span> v3.8.0 Released — BLite.Server v0.3.3, BLiteSession, multi-file storage &amp; BLiteMigration
+        <span class="badge-dot"></span> v4.0.2 Released — Async-only CRUD API (breaking), BLite.Server v1.0.0 GA, metrics dashboard
       </div>
       
       <h1 class="hero-title animate-fade-in" style="animation-delay: 0.2s">
@@ -39,7 +39,7 @@ const goGithub = () => window.open('https://github.com/EntglDb/BLite', '_blank')
 
 <span class="code-keyword">var</span> db = <span class="code-keyword">new</span> <span class="code-type">DocumentDb</span>(<span class="code-string">"mydb.blite"</span>);
 <span class="code-keyword">var</span> users = db.GetCollection&lt;<span class="code-type">User</span>&gt;();
-users.Insert(<span class="code-keyword">new</span> <span class="code-type">User</span> { Name = <span class="code-string">"Alice"</span> });</code></pre>
+<span class="code-keyword">await</span> users.InsertAsync(<span class="code-keyword">new</span> <span class="code-type">User</span> { Name = <span class="code-string">"Alice"</span> });</code></pre>
       </div>
 
       <div class="hero-stats animate-fade-in" style="animation-delay: 0.6s">

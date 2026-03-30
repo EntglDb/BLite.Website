@@ -1,20 +1,11 @@
 <template>
   <div class="doc-page">
-    <div class="page-header">
-      <span class="preview-chip">⚠ Preview — v0.3.3</span>
-      <h1>🖥️ <span class="title-gradient">BLite.Server</span></h1>
-    </div>
+    <h1>🖥️ <span class="title-gradient">BLite.Server</span></h1>
     <p class="lead">
       BLite.Server turns the embedded BLite engine into a network-accessible database with
       gRPC, a REST API, user authentication, multi-tenancy, and an integrated Blazor Web Studio —
       all shipping as a single <code>.exe</code> or Docker image.
     </p>
-
-    <div class="warning-box">
-      <strong>⚠ Preview Software.</strong> BLite.Server is currently in public preview.
-      The wire protocol, REST paths and configuration keys are stable for testing, but may
-      change before the 1.0 general availability release. Use in production at your own risk.
-    </div>
 
     <section>
       <h2>What is BLite.Server?</h2>
