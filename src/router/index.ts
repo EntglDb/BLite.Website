@@ -25,6 +25,7 @@ import Comparisons from '../views/docs/Comparisons.vue'
 import BLQL from '../views/docs/BLQL.vue'
 import TimeSeries from '../views/docs/TimeSeries.vue'
 import KvStore from '../views/docs/KvStore.vue'
+import WasmSupport from '../views/docs/WasmSupport.vue'
 
 export const DEFAULT_TITLE = 'BLite – Embedded NoSQL Database for .NET'
 export const DEFAULT_DESC = 'BLite is the high-performance embedded NoSQL database for .NET. Zero-allocation BSON document store with ACID transactions, CDC streams, and spatial indexing — no server, no cloud. Install via NuGet.'
@@ -162,6 +163,14 @@ export const routes: RouteRecordRaw[] = [
                 meta: {
                     title: 'Embedded Key-Value Store in BLite – IBLiteKvStore, TTL & Batches',
                     description: 'BLite 1.13 ships a persistent key-value store co-located in the same database file. Zero extra processes — raw byte values, optional TTL, atomic batches, prefix scan via IBLiteKvStore.'
+                }
+            },
+            {
+                path: 'wasm',
+                component: WasmSupport,
+                meta: {
+                    title: 'BLite in Blazor WebAssembly – OPFS & IndexedDB Storage Backends',
+                    description: 'Run BLite directly in the browser with Blazor WASM. BLite.Wasm provides OPFS and IndexedDB storage backends with automatic selection, a pluggable IPageStorage abstraction, and AddBLiteWasm() DI integration.'
                 }
             }
         ]

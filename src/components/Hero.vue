@@ -13,7 +13,7 @@ const goGithub = () => window.open('https://github.com/EntglDb/BLite', '_blank')
     
     <div class="container hero-content">
       <div class="badge animate-fade-in" style="animation-delay: 0.1s">
-        <span class="badge-dot"></span> v4.0.2 Released — Async-only CRUD API (breaking), BLite.Server v1.0.0 GA, metrics dashboard
+        <span class="badge-dot"></span> v4.4.0 Released — Blazor WASM support (OPFS + IndexedDB backends), AOT-safe query pipeline, caller-owned transactions
       </div>
       
       <h1 class="hero-title animate-fade-in" style="animation-delay: 0.2s">

@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><!-- Primary meta --><title>BLite in Blazor WebAssembly – OPFS &amp; IndexedDB Storage Backends</title><meta name="description" content="Run BLite directly in the browser with Blazor WASM. BLite.Wasm provides OPFS and IndexedDB storage backends with automatic selection, a pluggable IPageStorage abstraction, and AddBLiteWasm() DI integration."><meta name="keywords" content="embedded NoSQL database for .NET, embedded NoSQL .NET, NoSQL database C#, embedded document database .NET, BSON document store, embedded database .NET, zero allocation .NET database, ACID transactions .NET, LiteDB alternative, local-first database .NET, .NET 10 database, netstandard2.1 database, .NET Standard database, Unity embedded database, Xamarin database, NoSQL NuGet package, embedded database NuGet, document store C#, BLite"><meta name="author" content="BLite Project"><meta name="robots" content="index, follow"><meta name="theme-color" content="#e74c3c"><link rel="canonical" href="https://blitedb.com/docs/wasm"><!-- Favicon --><link rel="icon" type="image/svg+xml" href="/icon.svg"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:site_name" content="BLite"><meta property="og:url" content="https://blitedb.com/docs/wasm"><meta property="og:title" content="BLite in Blazor WebAssembly – OPFS &amp; IndexedDB Storage Backends"><meta property="og:description" content="Run BLite directly in the browser with Blazor WASM. BLite.Wasm provides OPFS and IndexedDB storage backends with automatic selection, a pluggable IPageStorage abstraction, and AddBLiteWasm() DI integration."><meta property="og:image" content="https://blitedb.com/og-image.png"><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="BLite in Blazor WebAssembly – OPFS &amp; IndexedDB Storage Backends"><meta name="twitter:description" content="Run BLite directly in the browser with Blazor WASM. BLite.Wasm provides OPFS and IndexedDB storage backends with automatic selection, a pluggable IPageStorage abstraction, and AddBLiteWasm() DI integration."><meta name="twitter:image" content="https://blitedb.com/og-image.png"><!-- JSON-LD Structured Data --><script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "BLite",
+    "alternateName": "BLite Embedded NoSQL Database",
+    "url": "https://blitedb.com",
+    "description": "BLite is the high-performance embedded NoSQL database for .NET. Zero-allocation BSON document store with ACID transactions, Change Data Capture streams, R-Tree spatial indexing, and compile-time source generators. No cloud, no server — install via NuGet.",
+    "applicationCategory": "DeveloperApplication",
+    "applicationSubCategory": "Embedded NoSQL Database",
+    "operatingSystem": "Windows, Linux, macOS",
+    "programmingLanguage": "C#",
+    "softwareVersion": "3.7.0",
+    "license": "https://opensource.org/licenses/MIT",
+    "codeRepository": "https://github.com/EntglDb/BLite",
+    "downloadUrl": "https://www.nuget.org/packages/BLite",
+    "featureList": [
+      "Embedded NoSQL document store for .NET",
+      "Zero-allocation BSON serialization",
+      "ACID transactions with Write-Ahead Logging",
+      "Change Data Capture (CDC) with 1000+ subscribers",
+      "R-Tree spatial and vector indexing",
+      "Compile-time source generators — no reflection",
+      "LINQ IQueryable provider",
+      "Schema-less DynamicCollection API",
+      "BLQL query language",
+      "netstandard2.1 compatible — Unity, Xamarin, MAUI, .NET 5+",
+      "Local-first, no cloud required"
+    ],
+    "keywords": "embedded NoSQL database for .NET, embedded database .NET, BSON document store, NoSQL C#, ACID .NET, zero allocation, LiteDB alternative",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }</script><!-- FAQ Structured Data --><script type="application/ld+json">{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is BLite?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "BLite is a high-performance embedded NoSQL database for .NET. It stores BSON documents locally inside your application with zero allocations, ACID transactions, and no external server or cloud dependency."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I install BLite in a .NET project?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Run 'dotnet add package BLite' in your .NET project. BLite targets .NET 10 and .NET Standard 2.1, and is available on NuGet."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is BLite a good alternative to LiteDB for .NET?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. BLite offers significantly higher throughput and zero heap allocations compared to LiteDB, plus modern features like Change Data Capture, R-Tree spatial indexing, and compile-time source generators."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does BLite require a cloud service or external server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. BLite is a fully embedded database that runs entirely inside your .NET process. There is no external server, no cloud service, and no network dependency."
+        }
+      }
+    ]
+  }</script><script type="module" async="" crossorigin="" src="/assets/app-BRxSCVlu.js"></script><link rel="stylesheet" crossorigin="" href="/assets/app-D1R2ZnlC.css"></head><body><div id="app" data-server-rendered="true"><div class="app-layout" data-v-35eb30e6=""><header class="main-header glass-panel" data-v-35eb30e6=""><div class="container header-content" data-v-35eb30e6=""><a href="/" class="logo-link" data-v-35eb30e6=""><img src="/icon.svg" alt="BLite" class="logo-img" data-v-35eb30e6=""><div class="logo-text" data-v-35eb30e6="">BLite<span class="dot" data-v-35eb30e6="">.</span></div></a><nav data-v-35eb30e6=""><a href="/" class="" data-v-35eb30e6="">Home</a><a href="/docs" class="router-link-active" data-v-35eb30e6="">Docs</a><a href="/server" class="" data-v-35eb30e6="">Server</a><a href="/studio" class="" data-v-35eb30e6="">Studio</a><a href="/comparisons" class="" data-v-35eb30e6="">Comparisons</a><a href="https://github.com/EntglDb/BLite" target="_blank" class="github-link" data-v-35eb30e6="">GitHub ↗</a></nav></div></header><main data-v-35eb30e6=""><div class="docs-layout" data-v-35eb30e6="" data-v-d2519ca0=""><aside class="docs-sidebar" data-v-d2519ca0=""><div class="sidebar-header" data-v-d2519ca0=""><h2 data-v-d2519ca0="">Documentation</h2></div><nav class="sidebar-nav" data-v-d2519ca0=""><!--[--><a href="/docs/getting-started" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🚀</span><span class="nav-label" data-v-d2519ca0="">Getting Started</span></a><a href="/docs/installation" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">📦</span><span class="nav-label" data-v-d2519ca0="">Installation</span></a><a href="/docs/transactions" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🔄</span><span class="nav-label" data-v-d2519ca0="">Transactions &amp; Async</span></a><a href="/docs/crud" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">✏️</span><span class="nav-label" data-v-d2519ca0="">CRUD Operations</span></a><a href="/docs/querying" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🔍</span><span class="nav-label" data-v-d2519ca0="">Querying</span></a><a href="/docs/generators" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🤖</span><span class="nav-label" data-v-d2519ca0="">Source Generators</span></a><a href="/docs/cdc" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">📡</span><span class="nav-label" data-v-d2519ca0="">Change Data Capture</span></a><a href="/docs/spatial" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🌍</span><span class="nav-label" data-v-d2519ca0="">Spatial Indexing</span></a><a href="/docs/architecture" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🏗️</span><span class="nav-label" data-v-d2519ca0="">Architecture</span></a><a href="/docs/converters" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🆔</span><span class="nav-label" data-v-d2519ca0="">Custom ID Converters</span></a><a href="/docs/benchmarks" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">⚡</span><span class="nav-label" data-v-d2519ca0="">Benchmarks</span></a><a href="/docs/dynamic-api" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🔌</span><span class="nav-label" data-v-d2519ca0="">Schema-less API</span></a><a href="/docs/blql" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🔎</span><span class="nav-label" data-v-d2519ca0="">BLQL</span></a><a href="/docs/timeseries" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">📈</span><span class="nav-label" data-v-d2519ca0="">TimeSeries</span></a><a href="/docs/kv-store" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🗹️</span><span class="nav-label" data-v-d2519ca0="">Key-Value Store</span></a><a aria-current="page" href="/docs/wasm" class="router-link-active router-link-exact-active active nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🌐</span><span class="nav-label" data-v-d2519ca0="">Blazor WASM</span></a><!--]--></nav></aside><main class="docs-content" data-v-d2519ca0=""><div class="container" data-v-d2519ca0=""><div class="doc-page" data-v-d2519ca0="" data-v-fafb84ea=""><h1 data-v-fafb84ea="">🌐 <span class="title-gradient" data-v-fafb84ea="">Blazor WebAssembly</span></h1><p class="lead" data-v-fafb84ea="">Run BLite directly in the browser. The <code data-v-fafb84ea="">BLite.Wasm</code> package provides OPFS and IndexedDB storage backends so you can embed a full ACID-safe document database in any Blazor WASM application — no server required.</p><section data-v-fafb84ea=""><h2 data-v-fafb84ea="">Installation</h2><pre data-v-fafb84ea=""><code data-v-fafb84ea="">dotnet add package BLite.Wasm</code></pre><p data-v-fafb84ea=""><code data-v-fafb84ea="">BLite.Wasm</code> targets <code data-v-fafb84ea="">net10.0-browser</code> and depends on <code data-v-fafb84ea="">BLite</code>. It adds two storage backends built on browser APIs and a DI extension for Blazor WASM projects.</p></section><section data-v-fafb84ea=""><h2 data-v-fafb84ea="">Quick Start — Blazor WASM</h2><p data-v-fafb84ea="">Register BLite in <code data-v-fafb84ea="">Program.cs</code> and inject it into any component:</p><h3 data-v-fafb84ea="">Program.cs</h3><pre data-v-fafb84ea=""><code data-v-fafb84ea=""><span class="keyword" data-v-fafb84ea="">using</span> <span class="type" data-v-fafb84ea="">BLite.Wasm</span>;
+
+<span class="keyword" data-v-fafb84ea="">var</span> builder = <span class="type" data-v-fafb84ea="">WebAssemblyHostBuilder</span>.CreateDefault(args);
+
+<span class="comment" data-v-fafb84ea="">// Registers BLite with automatic backend selection (OPFS → IndexedDB fallback)</span>
+builder.Services.AddBLiteWasm(<span class="string" data-v-fafb84ea="">"mydb"</span>);</code></pre><h3 data-v-fafb84ea="">Counter.razor</h3><pre data-v-fafb84ea=""><code data-v-fafb84ea="">@inject <span class="type" data-v-fafb84ea="">BLiteEngine</span> Db
+
+@code {
+    <span class="keyword" data-v-fafb84ea="">private async</span> <span class="type" data-v-fafb84ea="">Task</span> SaveAsync()
+    {
+        <span class="keyword" data-v-fafb84ea="">var</span> col = Db.GetOrCreateCollection(<span class="string" data-v-fafb84ea="">"events"</span>);
+        col.Insert(<span class="keyword" data-v-fafb84ea="">new</span> <span class="type" data-v-fafb84ea="">BsonDocument</span> { [<span class="string" data-v-fafb84ea="">"ts"</span>] = <span class="type" data-v-fafb84ea="">DateTime</span>.UtcNow });
+    }
+}</code></pre></section><section data-v-fafb84ea=""><h2 data-v-fafb84ea="">Storage Backends</h2><p data-v-fafb84ea=""><code data-v-fafb84ea="">BLite.Wasm</code> ships two storage backends. <code data-v-fafb84ea="">BLiteWasm.CreateAsync()</code> automatically selects OPFS when available and falls back to IndexedDB:</p><table class="info-table" data-v-fafb84ea=""><thead data-v-fafb84ea=""><tr data-v-fafb84ea=""><th data-v-fafb84ea="">Backend</th><th data-v-fafb84ea="">API</th><th data-v-fafb84ea="">Performance</th><th data-v-fafb84ea="">Compatibility</th></tr></thead><tbody data-v-fafb84ea=""><tr data-v-fafb84ea=""><td data-v-fafb84ea=""><strong data-v-fafb84ea="">OPFS</strong></td><td data-v-fafb84ea=""><code data-v-fafb84ea="">FileSystemSyncAccessHandle</code></td><td data-v-fafb84ea="">High — synchronous I/O from Worker threads</td><td data-v-fafb84ea="">Chrome 102+, Firefox 111+, Safari 15.2+</td></tr><tr data-v-fafb84ea=""><td data-v-fafb84ea=""><strong data-v-fafb84ea="">IndexedDB</strong></td><td data-v-fafb84ea="">Async IDB transactions</td><td data-v-fafb84ea="">Moderate — async JS interop per page</td><td data-v-fafb84ea="">All modern browsers</td></tr></tbody></table><pre data-v-fafb84ea=""><code data-v-fafb84ea=""><span class="comment" data-v-fafb84ea="">// Automatic selection (recommended)</span>
+<span class="keyword" data-v-fafb84ea="">var</span> engine = <span class="keyword" data-v-fafb84ea="">await</span> <span class="type" data-v-fafb84ea="">BLiteWasm</span>.CreateAsync(<span class="string" data-v-fafb84ea="">"mydb"</span>);
+
+<span class="comment" data-v-fafb84ea="">// Force a specific backend</span>
+<span class="keyword" data-v-fafb84ea="">var</span> engine = <span class="keyword" data-v-fafb84ea="">await</span> <span class="type" data-v-fafb84ea="">BLiteWasm</span>.CreateAsync(<span class="string" data-v-fafb84ea="">"mydb"</span>, <span class="type" data-v-fafb84ea="">WasmStorageBackend</span>.IndexedDb);
+<span class="keyword" data-v-fafb84ea="">var</span> engine = <span class="keyword" data-v-fafb84ea="">await</span> <span class="type" data-v-fafb84ea="">BLiteWasm</span>.CreateAsync(<span class="string" data-v-fafb84ea="">"mydb"</span>, <span class="type" data-v-fafb84ea="">WasmStorageBackend</span>.Opfs);</code></pre></section><section data-v-fafb84ea=""><h2 data-v-fafb84ea="">IPageStorage Abstraction</h2><p data-v-fafb84ea="">Starting in BLite 4.3, the storage engine is decoupled from the file system via the <code data-v-fafb84ea="">IPageStorage</code> and <code data-v-fafb84ea="">IWriteAheadLog</code> interfaces. All existing <code data-v-fafb84ea="">PageFile</code> and <code data-v-fafb84ea="">WriteAheadLog</code> behaviour is unchanged; WASM backends simply plug in as alternative implementations.</p><pre data-v-fafb84ea=""><code data-v-fafb84ea=""><span class="comment" data-v-fafb84ea="">// Core interface — browser backends implement this</span>
+<span class="keyword" data-v-fafb84ea="">public interface</span> <span class="type" data-v-fafb84ea="">IPageStorage</span>
+{
+    <span class="keyword" data-v-fafb84ea="">int</span> PageSize { <span class="keyword" data-v-fafb84ea="">get</span>; }
+    <span class="keyword" data-v-fafb84ea="">uint</span> NextPageId { <span class="keyword" data-v-fafb84ea="">get</span>; }
+    <span class="keyword" data-v-fafb84ea="">void</span> Open();
+    <span class="keyword" data-v-fafb84ea="">void</span> ReadPage(<span class="keyword" data-v-fafb84ea="">uint</span> pageId, <span class="type" data-v-fafb84ea="">Span</span>&lt;<span class="keyword" data-v-fafb84ea="">byte</span>&gt; destination);
+    <span class="type" data-v-fafb84ea="">ValueTask</span> ReadPageAsync(<span class="keyword" data-v-fafb84ea="">uint</span> pageId, <span class="type" data-v-fafb84ea="">Memory</span>&lt;<span class="keyword" data-v-fafb84ea="">byte</span>&gt; destination, <span class="type" data-v-fafb84ea="">CancellationToken</span> ct);
+    <span class="keyword" data-v-fafb84ea="">void</span> WritePage(<span class="keyword" data-v-fafb84ea="">uint</span> pageId, <span class="type" data-v-fafb84ea="">ReadOnlySpan</span>&lt;<span class="keyword" data-v-fafb84ea="">byte</span>&gt; source);
+    <span class="keyword" data-v-fafb84ea="">uint</span> AllocatePage();
+    <span class="keyword" data-v-fafb84ea="">void</span> FreePage(<span class="keyword" data-v-fafb84ea="">uint</span> pageId);
+    <span class="keyword" data-v-fafb84ea="">void</span> Flush();
+    <span class="type" data-v-fafb84ea="">Task</span> FlushAsync(<span class="type" data-v-fafb84ea="">CancellationToken</span> ct);
+}</code></pre><h3 data-v-fafb84ea="">In-Memory Storage</h3><p data-v-fafb84ea=""><code data-v-fafb84ea="">MemoryPageStorage</code> and <code data-v-fafb84ea="">MemoryWriteAheadLog</code> are also available in the base <code data-v-fafb84ea="">BLite</code> package. They require no file system — useful for unit tests, ephemeral caches, and server-side preview scenarios.</p><pre data-v-fafb84ea=""><code data-v-fafb84ea=""><span class="comment" data-v-fafb84ea="">// Create a fully in-memory engine — no file system required</span>
+<span class="keyword" data-v-fafb84ea="">var</span> engine = <span class="type" data-v-fafb84ea="">BLiteEngine</span>.CreateInMemory();
+
+<span class="comment" data-v-fafb84ea="">// With custom page size</span>
+<span class="keyword" data-v-fafb84ea="">var</span> engine = <span class="type" data-v-fafb84ea="">BLiteEngine</span>.CreateInMemory(pageSize: <span class="number" data-v-fafb84ea="">8192</span>);
+
+<span class="comment" data-v-fafb84ea="">// Custom storage via StorageEngine constructor</span>
+<span class="keyword" data-v-fafb84ea="">var</span> storage = <span class="keyword" data-v-fafb84ea="">new</span> <span class="type" data-v-fafb84ea="">MemoryPageStorage</span>(pageSize: <span class="number" data-v-fafb84ea="">4096</span>);
+<span class="keyword" data-v-fafb84ea="">var</span> wal = <span class="keyword" data-v-fafb84ea="">new</span> <span class="type" data-v-fafb84ea="">MemoryWriteAheadLog</span>();
+<span class="keyword" data-v-fafb84ea="">var</span> engine = <span class="keyword" data-v-fafb84ea="">new</span> <span class="type" data-v-fafb84ea="">BLiteEngine</span>(<span class="keyword" data-v-fafb84ea="">new</span> <span class="type" data-v-fafb84ea="">StorageEngine</span>(storage, wal));</code></pre></section><section data-v-fafb84ea=""><h2 data-v-fafb84ea="">WASM Storage Classes</h2><h3 data-v-fafb84ea="">OpfsPageStorage</h3><p data-v-fafb84ea="">Uses <code data-v-fafb84ea="">FileSystemSyncAccessHandle</code> via JS interop. Pages are stored as sequential regions in a single OPFS file. Must be called from a Worker thread (not the main browser thread). Delivers the best throughput of the two browser backends.</p><h3 data-v-fafb84ea="">IndexedDbPageStorage</h3><p data-v-fafb84ea="">Uses async IndexedDB transactions via <code data-v-fafb84ea="">[JSImport]</code>. Each page is stored as a keyed blob in an IDB object store. Compatible with all modern browsers including those without OPFS. Data is exchanged as base64 strings to satisfy <code data-v-fafb84ea="">[JSImport]</code> async constraints.</p><h3 data-v-fafb84ea="">OpfsWriteAheadLog</h3><p data-v-fafb84ea="">Appends WAL records to a dedicated OPFS <code data-v-fafb84ea="">.wal</code> file. Binary format is identical to the file-based <code data-v-fafb84ea="">WriteAheadLog</code> — full crash recovery is supported.</p><h3 data-v-fafb84ea="">IndexedDbWriteAheadLog</h3><p data-v-fafb84ea="">Stores WAL records as serialised byte arrays in an IDB object store. <code data-v-fafb84ea="">TruncateAsync()</code> clears all entries in a single IDB transaction.</p></section><section data-v-fafb84ea=""><h2 data-v-fafb84ea="">DocumentDbContext in WASM</h2><p data-v-fafb84ea="">The typed <code data-v-fafb84ea="">DocumentDbContext</code> API works in Blazor WASM via a new pluggable constructor that accepts a <code data-v-fafb84ea="">StorageEngine</code> directly:</p><pre data-v-fafb84ea=""><code data-v-fafb84ea=""><span class="keyword" data-v-fafb84ea="">public class</span> <span class="type" data-v-fafb84ea="">AppDb</span> : <span class="type" data-v-fafb84ea="">DocumentDbContext</span>
+{
+    <span class="keyword" data-v-fafb84ea="">public</span> <span class="type" data-v-fafb84ea="">AppDb</span>(<span class="type" data-v-fafb84ea="">StorageEngine</span> storage) : <span class="keyword" data-v-fafb84ea="">base</span>(storage) { }
+
+    <span class="keyword" data-v-fafb84ea="">public</span> <span class="type" data-v-fafb84ea="">DocumentCollection</span>&lt;<span class="type" data-v-fafb84ea="">Todo</span>&gt; Todos =&gt; GetCollection&lt;<span class="type" data-v-fafb84ea="">Todo</span>&gt;();
+}
+
+<span class="comment" data-v-fafb84ea="">// Blazor WASM Program.cs</span>
+builder.Services.AddSingleton(<span class="keyword" data-v-fafb84ea="">async</span> sp =&gt;
+{
+    <span class="keyword" data-v-fafb84ea="">var</span> engine = <span class="keyword" data-v-fafb84ea="">await</span> <span class="type" data-v-fafb84ea="">BLiteWasm</span>.CreateAsync(<span class="string" data-v-fafb84ea="">"appdb"</span>);
+    <span class="keyword" data-v-fafb84ea="">return new</span> <span class="type" data-v-fafb84ea="">AppDb</span>(engine.StorageEngine);
+});</code></pre></section><section data-v-fafb84ea=""><h2 data-v-fafb84ea="">Blazor WASM Counter Demo</h2><p data-v-fafb84ea="">A complete sample is available in the repository at <code data-v-fafb84ea="">samples/BLite.BlazorWasm</code>. It demonstrates a counter that persists across page reloads using the OPFS backend with automatic IndexedDB fallback.</p><pre data-v-fafb84ea=""><code data-v-fafb84ea=""><span class="comment" data-v-fafb84ea="">// Clone the BLite repo and run the sample</span>
+git clone https://github.com/EntglDb/BLite
+cd BLite/samples/BLite.BlazorWasm
+dotnet run</code></pre></section><section data-v-fafb84ea=""><h2 data-v-fafb84ea="">Browser Compatibility</h2><table class="info-table" data-v-fafb84ea=""><thead data-v-fafb84ea=""><tr data-v-fafb84ea=""><th data-v-fafb84ea="">Feature</th><th data-v-fafb84ea="">Chrome</th><th data-v-fafb84ea="">Firefox</th><th data-v-fafb84ea="">Safari</th><th data-v-fafb84ea="">Edge</th></tr></thead><tbody data-v-fafb84ea=""><tr data-v-fafb84ea=""><td data-v-fafb84ea="">OPFS (<code data-v-fafb84ea="">FileSystemSyncAccessHandle</code>)</td><td data-v-fafb84ea="">102+</td><td data-v-fafb84ea="">111+</td><td data-v-fafb84ea="">15.2+</td><td data-v-fafb84ea="">102+</td></tr><tr data-v-fafb84ea=""><td data-v-fafb84ea="">IndexedDB fallback</td><td data-v-fafb84ea="">✅ All</td><td data-v-fafb84ea="">✅ All</td><td data-v-fafb84ea="">✅ All</td><td data-v-fafb84ea="">✅ All</td></tr><tr data-v-fafb84ea=""><td data-v-fafb84ea="">In-memory (<code data-v-fafb84ea="">BLiteEngine.CreateInMemory()</code>)</td><td data-v-fafb84ea="">✅ All</td><td data-v-fafb84ea="">✅ All</td><td data-v-fafb84ea="">✅ All</td><td data-v-fafb84ea="">✅ All</td></tr></tbody></table><div class="info-box" data-v-fafb84ea=""><strong data-v-fafb84ea="">💡 Tip:</strong> <code data-v-fafb84ea="">AddBLiteWasm()</code> automatically detects OPFS availability at runtime and falls back to IndexedDB without any configuration change. You only need to force a backend if you have specific requirements.</div></section></div></div></main></div></main><footer class="main-footer" data-v-35eb30e6=""><div class="container footer-inner" data-v-35eb30e6=""><div class="footer-col" data-v-35eb30e6=""><p data-v-35eb30e6="">© 2026 BLite Project. Open Source (MIT).</p><p class="tagline" data-v-35eb30e6="">"Sky is Blite, no Clouds today."</p></div><div class="footer-col footer-downloads" data-v-35eb30e6=""><p class="footer-dl-title" data-v-35eb30e6="">⬇ Download BLite Studio v4.4.0</p><div class="footer-dl-links" data-v-35eb30e6=""><a href="https://github.com/EntglDb/BLite/releases/download/studio-v4.4.0/BLite.Studio-4.4.0-win-x64.msi" data-v-35eb30e6="">🪟 Windows MSI</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v4.4.0/BLite.Studio-4.4.0-win-x64-portable.zip" data-v-35eb30e6="">🪟 Windows Portable</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v4.4.0/blite-studio_4.4.0_amd64.deb" data-v-35eb30e6="">🐧 Linux .deb</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v4.4.0/BLite.Studio-4.4.0-linux-x64.tar.gz" data-v-35eb30e6="">🐧 Linux tar.gz</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v4.4.0/BLite.Studio-4.4.0-osx-arm64.dmg" data-v-35eb30e6="">🍎 macOS Apple Silicon</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v4.4.0/BLite.Studio-4.4.0-osx-x64.dmg" data-v-35eb30e6="">🍎 macOS Intel</a></div></div></div></footer></div></div></body></html>

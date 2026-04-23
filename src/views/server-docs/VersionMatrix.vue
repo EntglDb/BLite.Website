@@ -112,10 +112,18 @@ interface ClientRow {
 
 const serverMatrix: ServerRow[] = [
   {
-    server: '1.0.0',
-    engine: '4.0.x',
+    server: '1.0.1',
+    engine: '4.4.0',
     status: 'stable',
     statusLabel: 'Stable',
+    date: '2026-04-23',
+    notes: 'Current stable release. Pairs with BLite 4.4.0: Blazor WASM support (OPFS + IndexedDB backends), AOT-safe query pipeline, caller-owned transactions (ITransaction), built-in metrics subsystem, ValueTask migration, generated filter classes, persistent free-space index.',
+  },
+  {
+    server: '1.0.0',
+    engine: '4.0.x',
+    status: 'deprecated',
+    statusLabel: 'Deprecated',
     date: '2026-03-23',
     notes: 'GA release. Async-only CRUD API (BLite 4.0 breaking change). Server metrics dashboard with sparkline charts, hit/miss cache counters, active transaction snapshots.',
   },
@@ -146,6 +154,7 @@ const serverMatrix: ServerRow[] = [
 ]
 
 const clientMatrix: ClientRow[] = [
+  { server: '1.0.1', dotnet: '1.0.x', npm: '1.0.x', java: '1.0.x' },
   { server: '1.0.x', dotnet: '1.0.x', npm: '1.0.x', java: '1.0.x' },
   { server: '0.3.x', dotnet: '0.3.x', npm: '0.3.x', java: '0.3.x' },
   { server: '0.2.x', dotnet: '0.2.x', npm: '0.2.x', java: '0.2.x' },
