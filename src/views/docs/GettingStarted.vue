@@ -16,9 +16,33 @@
     </section>
 
     <section>
+      <h2>Project Layout</h2>
+      <p>Always define your <code>DbContext</code> and entity classes in their own <code>.cs</code> files with an explicit namespace. Placing them inside <code>Program.cs</code> using top-level statements (without a <code>namespace</code> declaration) causes the source generator to fail.</p>
+      <pre><code>MyApp/
+├── Program.cs          <span class="comment">// entry point — top-level statements are fine here</span>
+├── AppDbContext.cs     <span class="comment">// DbContext definition (must have a namespace)</span>
+└── Models/
+    └── User.cs         <span class="comment">// entity model (must have a namespace)</span></code></pre>
+      <div class="warning-box">
+        <div class="warning-header">⚠️ Top-Level Statements Limitation</div>
+        <p>
+          The source generator derives the generated file namespace from your class's namespace.
+          If your <code>DbContext</code> or entity types are declared in <code>Program.cs</code> inside a
+          top-level program (i.e. without an explicit <code>namespace</code> block), the generator cannot
+          build a valid file name and will emit a <code>CS8785</code> error. Collections will not be
+          initialised, and accessing them causes a <code>NullReferenceException</code> at runtime.
+        </p>
+        <p>The fix is simple: move your <code>DbContext</code> and models to separate files with a namespace.</p>
+      </div>
+    </section>
+
+    <section>
       <h2>Create Your First Database</h2>
-      <p>Define a model using standard .NET attributes:</p>
-      <pre><code><span class="keyword">using</span> System.ComponentModel.DataAnnotations;
+      <p>Define a model in its own file with a namespace:</p>
+      <pre><code><span class="comment">// Models/User.cs</span>
+<span class="keyword">namespace</span> MyApp.Models;
+
+<span class="keyword">using</span> System.ComponentModel.DataAnnotations;
 <span class="keyword">using</span> System.ComponentModel.DataAnnotations.Schema;
 
 [<span class="type">Table</span>(<span class="string">"users"</span>)]
@@ -35,25 +59,56 @@
     
     <span class="keyword">public string</span> Email { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="string">""</span>;
 }</code></pre>
+
+      <div class="info-box">
+        <div class="info-header">🔑 Supported Key Types</div>
+        <p>The <code>[Key]</code> property must be one of these types. Unsigned integers (<code>uint</code>, <code>ushort</code>, <code>ulong</code>) are <strong>not supported</strong> as primary key types and will cause source generation to fail.</p>
+        <table class="key-table">
+          <thead><tr><th>Type</th><th>Auto-generated on insert?</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td><code>ObjectId</code></td><td>✅ Yes</td><td>Default recommendation</td></tr>
+            <tr><td><code>string</code></td><td>✅ Yes (CUID)</td><td>Since v3.4.0</td></tr>
+            <tr><td><code>Guid</code></td><td>✅ Yes</td><td>Since v3.4.0</td></tr>
+            <tr><td><code>int</code></td><td>❌ No — set manually</td><td></td></tr>
+            <tr><td><code>long</code></td><td>❌ No — set manually</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
     </section>
 
     <section>
       <h2>Initialize the Database</h2>
-      <pre><code><span class="keyword">using</span> BLite.Core;
+      <p>Define the <code>DbContext</code> in its own file with a namespace. The class name must end in <code>Context</code> and be declared <code>partial</code> so the source generator can add the <code>InitializeCollections()</code> method.</p>
+      <pre><code><span class="comment">// AppDbContext.cs</span>
+<span class="keyword">namespace</span> MyApp;
 
-<span class="comment">// Create database context (uses Source Generator for InitializeCollections)</span>
-<span class="keyword">public partial class</span> <span class="type">MyDbContext</span> : <span class="type">DocumentDbContext</span>
+<span class="keyword">using</span> BLite.Core;
+<span class="keyword">using</span> MyApp.Models;
+
+<span class="keyword">public sealed partial class</span> <span class="type">AppDbContext</span> : <span class="type">DocumentDbContext</span>
 {
     <span class="keyword">public</span> <span class="type">DocumentCollection</span>&lt;<span class="type">ObjectId</span>, <span class="type">User</span>&gt; Users { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">null</span>!;
 
-    <span class="keyword">public</span> MyDbContext(<span class="keyword">string</span> path) : <span class="keyword">base</span>(path)
+    <span class="keyword">public</span> AppDbContext(<span class="keyword">string</span> path) : <span class="keyword">base</span>(path)
     {
         InitializeCollections();
     }
-}
+}</code></pre>
 
-<span class="comment">// Use the context</span>
-<span class="keyword">using var</span> db = <span class="keyword">new</span> <span class="type">MyDbContext</span>(<span class="string">"myapp.blite"</span>);
+      <div class="info-box">
+        <div class="info-header">📌 Source Generator Requirements</div>
+        <ul>
+          <li><strong>Name must end in <code>Context</code></strong> — the generator scans for classes whose name ends in <code>Context</code> (e.g. <code>AppDbContext</code>, <code>StoreContext</code>). Names like <code>AppDatabase</code> or <code>MyDb</code> are not discovered.</li>
+          <li><strong>Must be <code>partial</code></strong> — the generator adds the <code>InitializeCollections()</code> implementation as a partial class extension.</li>
+          <li><strong>Must have a namespace</strong> — classes in the global namespace (top-level statements without an explicit <code>namespace</code>) cause a <code>CS8785</code> build error. See the <em>Project Layout</em> section above.</li>
+          <li><strong>Must inherit <code>DocumentDbContext</code></strong> — directly or through another context that also inherits it.</li>
+        </ul>
+      </div>
+
+      <pre><code><span class="comment">// Program.cs — consuming the context</span>
+<span class="keyword">using</span> MyApp;
+
+<span class="keyword">using var</span> db = <span class="keyword">new</span> <span class="type">AppDbContext</span>(<span class="string">"myapp.blite"</span>);
 <span class="keyword">var</span> users = db.Users;</code></pre>
     </section>
 
@@ -154,6 +209,13 @@ builder.Services.AddBLiteDistributedCache(<span class="string">"cache.db"</span>
           <div>
             <h4>Querying</h4>
             <p>Master the powerful LINQ-based query engine</p>
+          </div>
+        </router-link>
+        <router-link to="/docs/generators" class="next-card">
+          <span class="next-icon">🤖</span>
+          <div>
+            <h4>Source Generators</h4>
+            <p>Explore supported types, attributes, and advanced mapper patterns</p>
           </div>
         </router-link>
       </div>
@@ -296,5 +358,67 @@ code {
   color: var(--blite-red);
   margin-bottom: 12px;
   font-size: 1.1rem;
+}
+
+.warning-box {
+  background: rgba(234, 179, 8, 0.05);
+  border: 1px solid rgba(234, 179, 8, 0.3);
+  border-left: 4px solid #ca8a04;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 24px 0;
+}
+
+.warning-header {
+  font-weight: 600;
+  color: #ca8a04;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.warning-box p {
+  margin-bottom: 8px;
+}
+
+.warning-box p:last-child {
+  margin-bottom: 0;
+}
+
+.key-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.key-table th {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(231, 76, 60, 0.2);
+  color: var(--text-primary);
+  font-family: var(--font-sans, inherit);
+  font-size: 0.9rem;
+}
+
+.key-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  vertical-align: top;
+}
+
+.key-table tr:last-child td {
+  border-bottom: none;
+}
+
+.info-box ul {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+}
+
+.info-box li {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
 }
 </style>
