@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 
 const route = useRoute()
+const sidebarOpen = ref(false)
+
+watch(() => route.path, () => { sidebarOpen.value = false })
 
 const docSections = [
   { path: '/docs/getting-started', label: 'Getting Started', icon: '🚀' },
@@ -30,7 +34,9 @@ const isActive = (path: string) => route.path === path
 
 <template>
   <div class="docs-layout">
-    <aside class="docs-sidebar">
+    <div v-if="sidebarOpen" class="sidebar-overlay" @click="sidebarOpen = false"></div>
+
+    <aside class="docs-sidebar" :class="{ open: sidebarOpen }">
       <div class="sidebar-header">
         <h2>Documentation</h2>
       </div>
@@ -49,6 +55,9 @@ const isActive = (path: string) => route.path === path
     </aside>
 
     <main class="docs-content">
+      <button class="sidebar-toggle" @click="sidebarOpen = !sidebarOpen" aria-label="Toggle navigation">
+        ☰ Navigation
+      </button>
       <div class="container">
         <RouterView />
       </div>
@@ -125,6 +134,31 @@ const isActive = (path: string) => route.path === path
   flex: 1;
   padding: 48px 0;
   max-width: 900px;
+  min-width: 0;
+}
+
+.sidebar-toggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  margin: 0 24px 24px;
+  padding: 10px 18px;
+  background: rgba(231, 76, 60, 0.08);
+  border: 1px solid rgba(231, 76, 60, 0.25);
+  border-radius: 8px;
+  color: var(--blite-red);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 49;
 }
 
 @media (max-width: 1024px) {
@@ -133,10 +167,25 @@ const isActive = (path: string) => route.path === path
     left: -280px;
     z-index: 50;
     transition: left 0.3s ease;
+    top: var(--header-height);
+    height: calc(100vh - var(--header-height));
   }
-  
+
   .docs-sidebar.open {
     left: 0;
+  }
+
+  .sidebar-toggle {
+    display: inline-flex;
+  }
+
+  .sidebar-overlay {
+    display: block;
+  }
+
+  .docs-content {
+    padding: 24px 0;
+    max-width: 100%;
   }
 }
 </style>

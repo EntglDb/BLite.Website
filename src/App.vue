@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import { DEFAULT_TITLE, DEFAULT_DESC } from './router'
 
 const route = useRoute()
 const BASE_URL = 'https://blitedb.com'
+const mobileMenuOpen = ref(false)
+
+watch(() => route.path, () => { mobileMenuOpen.value = false })
 
 // useHead is reactive: vite-ssg bakes the correct title/description into the
 // static HTML for each route at build time; on the client it stays reactive.
@@ -38,7 +42,7 @@ useHead(() => {
           <img src="/icon.svg" alt="BLite" class="logo-img" />
           <div class="logo-text">BLite<span class="dot">.</span></div>
         </router-link>
-        <nav>
+        <nav class="desktop-nav">
           <router-link to="/">Home</router-link>
           <router-link to="/docs">Docs</router-link>
           <router-link to="/server">Server</router-link>
@@ -46,8 +50,23 @@ useHead(() => {
           <router-link to="/comparisons">Comparisons</router-link>
           <a href="https://github.com/EntglDb/BLite" target="_blank" class="github-link">GitHub ↗</a>
         </nav>
+        <button class="hamburger" :class="{ open: mobileMenuOpen }" @click="mobileMenuOpen = !mobileMenuOpen" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </header>
+
+    <div class="mobile-nav" :class="{ open: mobileMenuOpen }">
+      <nav>
+        <router-link to="/">Home</router-link>
+        <router-link to="/docs">Docs</router-link>
+        <router-link to="/server">Server</router-link>
+        <router-link to="/studio">Studio</router-link>
+        <router-link to="/comparisons">Comparisons</router-link>
+        <a href="https://github.com/EntglDb/BLite" target="_blank" class="github-link">GitHub ↗</a>
+      </nav>
+    </div>
+    <div v-if="mobileMenuOpen" class="mobile-nav-overlay" @click="mobileMenuOpen = false"></div>
 
     <main>
       <RouterView v-slot="{ Component }">
@@ -154,6 +173,75 @@ nav a:hover, nav a.router-link-active {
   font-weight: 600 !important;
 }
 
+/* ── Hamburger ──────────────────────────────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: all 0.25s ease;
+  transform-origin: center;
+}
+
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── Mobile nav drawer ──────────────────────────────── */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  width: 100%;
+  background: rgba(15, 15, 15, 0.97);
+  border-bottom: 1px solid rgba(231, 76, 60, 0.15);
+  z-index: 99;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  backdrop-filter: blur(12px);
+}
+
+.mobile-nav.open {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mobile-nav nav {
+  flex-direction: column;
+  gap: 0;
+  padding: 8px 0 16px;
+}
+
+.mobile-nav nav a {
+  display: block;
+  padding: 14px 24px;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  top: var(--header-height);
+  z-index: 98;
+  background: transparent;
+}
+
 main {
   padding-top: var(--header-height);
   flex: 1;
@@ -205,6 +293,23 @@ main {
 
 .footer-dl-links a:hover {
   color: var(--blite-red);
+}
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  .desktop-nav { display: none; }
+  .hamburger { display: flex; }
+  .mobile-nav { display: block; }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer-dl-links {
+    flex-direction: column;
+    gap: 8px;
+  }
 }
 
 .fade-enter-active,

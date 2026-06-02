@@ -286,7 +286,7 @@ const features = [
 
 .download-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 32px;
   max-width: 820px;
   margin: 0 auto;
@@ -372,5 +372,34 @@ const features = [
 @media (max-width: 768px) {
   .hero-title { font-size: 2.6rem; }
   .callout-inner { flex-direction: column; text-align: center; }
+
+  .studio-hero {
+    padding: 100px 0 60px;
+  }
+
+  .studio-features,
+  .studio-download {
+    padding: 60px 0;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .section-title {
+    font-size: 1.9rem;
+  }
+
+  .download-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

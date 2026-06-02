@@ -307,12 +307,53 @@ const goGithub = () => window.open('https://github.com/EntglDb/BLite', '_blank')
 }
 
 @media (max-width: 768px) {
-  .hero-title {
-    font-size: 2.5rem;
+  .hero {
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
+
+  .badge {
+    font-size: 0.78rem;
+    padding: 5px 12px;
+    text-align: center;
+    white-space: normal;
+    text-align: center;
+    max-width: 90vw;
+  }
+
+  .hero-title {
+    font-size: 2.4rem;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .code-preview {
+    max-width: 100%;
+  }
+
   .hero-stats {
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .stat-sep {
+    display: none;
+  }
+
+  .stat {
+    min-width: 80px;
+    align-items: center;
   }
 }
 </style>
