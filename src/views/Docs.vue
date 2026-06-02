@@ -19,7 +19,10 @@ const docSections = [
   { path: '/docs/blql', label: 'BLQL', icon: '🔎' },
   { path: '/docs/timeseries', label: 'TimeSeries', icon: '📈' },
   { path: '/docs/kv-store', label: 'Key-Value Store', icon: '🗹️' },
-  { path: '/docs/wasm', label: 'Blazor WASM', icon: '🌐' }
+  { path: '/docs/wasm', label: 'Blazor WASM', icon: '🌐' },
+  { path: '/docs/encryption', label: 'Encryption at Rest', icon: '🔐' },
+  { path: '/docs/audit-trail', label: 'Audit Trail', icon: '📊' },
+  { path: '/docs/gdpr', label: 'GDPR', icon: '🛡️' }
 ]
 
 const isActive = (path: string) => route.path === path

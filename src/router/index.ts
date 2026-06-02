@@ -26,6 +26,9 @@ import BLQL from '../views/docs/BLQL.vue'
 import TimeSeries from '../views/docs/TimeSeries.vue'
 import KvStore from '../views/docs/KvStore.vue'
 import WasmSupport from '../views/docs/WasmSupport.vue'
+import Encryption from '../views/docs/Encryption.vue'
+import AuditTrail from '../views/docs/AuditTrail.vue'
+import GDPR from '../views/docs/GDPR.vue'
 
 export const DEFAULT_TITLE = 'BLite – Embedded NoSQL Database for .NET'
 export const DEFAULT_DESC = 'BLite is the high-performance embedded NoSQL database for .NET. Zero-allocation BSON document store with ACID transactions, CDC streams, and spatial indexing — no server, no cloud. Install via NuGet.'
@@ -171,6 +174,30 @@ export const routes: RouteRecordRaw[] = [
                 meta: {
                     title: 'BLite in Blazor WebAssembly – OPFS & IndexedDB Storage Backends',
                     description: 'Run BLite directly in the browser with Blazor WASM. BLite.Wasm provides OPFS and IndexedDB storage backends with automatic selection, a pluggable IPageStorage abstraction, and AddBLiteWasm() DI integration.'
+                }
+            },
+            {
+                path: 'encryption',
+                component: Encryption,
+                meta: {
+                    title: 'Encryption at Rest in BLite – AES-256-GCM Per-Page Encryption',
+                    description: 'BLite 5.0.0 adds AES-256-GCM authenticated encryption at rest. Every database page is encrypted before being written to disk. Transparent to application code, hardware-accelerated, pluggable via IBLiteCryptoProvider.'
+                }
+            },
+            {
+                path: 'audit-trail',
+                component: AuditTrail,
+                meta: {
+                    title: 'Audit Trail in BLite – IBLiteAuditSink, Metrics & OpenTelemetry',
+                    description: 'BLite 5.0.0 ships a pluggable write-audit subsystem. Attach any IBLiteAuditSink to record every insert, update and delete with caller context. OTel-compatible ActivitySource spans and BLiteMetrics counters included.'
+                }
+            },
+            {
+                path: 'gdpr',
+                component: GDPR,
+                meta: {
+                    title: 'GDPR Compliance in BLite – Art. 30 Inspection, Subject Export & Retention',
+                    description: 'BLite 5.0.0 includes a complete GDPR toolkit: [PersonalData] field tagging, Art. 30 database inspection, Art. 15/20 subject data export, configurable retention policies, secure erase, and GdprMode.Strict enforcement.'
                 }
             }
         ]

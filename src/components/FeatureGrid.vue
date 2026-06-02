@@ -64,6 +64,21 @@ const features = [
     icon: '🌐',
     title: 'netstandard2.1',
     description: 'Works everywhere .NET runs — Unity, Xamarin, MAUI, .NET 5, 6, 7, 8, 9 and 10. One package, one binary protocol, all platforms.'
+  },
+  {
+    icon: '🔐',
+    title: 'Encryption at Rest',
+    description: 'AES-256-GCM per-page encryption built into the engine. Every byte written to disk is authenticated and encrypted — transparent to application code, hardware-accelerated via AES-NI.'
+  },
+  {
+    icon: '📊',
+    title: 'Audit Trail',
+    description: 'Pluggable IBLiteAuditSink for every write operation. Lock-free BLiteMetrics counters, OpenTelemetry ActivitySource spans, and IAuditContextProvider for per-request caller identity.'
+  },
+  {
+    icon: '🛡️',
+    title: 'GDPR Compliance',
+    description: 'First-class GDPR toolkit: [PersonalData] field tagging, Art. 30 inspection reports, Art. 15/20 subject data export, generalized retention policies, secure erase, and GdprMode.Strict enforcement.'
   }
 ]
 </script>

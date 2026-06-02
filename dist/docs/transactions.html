@@ -69,257 +69,257 @@
         }
       }
     ]
-  }</script><script type="module" async="" crossorigin="" src="/assets/app-iHQ7xzst.js"></script><link rel="stylesheet" crossorigin="" href="/assets/app-DDU10H7H.css"></head><body><div id="app" data-server-rendered="true"><div class="app-layout" data-v-35eb30e6=""><header class="main-header glass-panel" data-v-35eb30e6=""><div class="container header-content" data-v-35eb30e6=""><a href="/" class="logo-link" data-v-35eb30e6=""><img src="/icon.svg" alt="BLite" class="logo-img" data-v-35eb30e6=""><div class="logo-text" data-v-35eb30e6="">BLite<span class="dot" data-v-35eb30e6="">.</span></div></a><nav data-v-35eb30e6=""><a href="/" class="" data-v-35eb30e6="">Home</a><a href="/docs" class="router-link-active" data-v-35eb30e6="">Docs</a><a href="/server" class="" data-v-35eb30e6="">Server</a><a href="/studio" class="" data-v-35eb30e6="">Studio</a><a href="/comparisons" class="" data-v-35eb30e6="">Comparisons</a><a href="https://github.com/EntglDb/BLite" target="_blank" class="github-link" data-v-35eb30e6="">GitHub ↗</a></nav></div></header><main data-v-35eb30e6=""><div class="docs-layout" data-v-35eb30e6="" data-v-d2519ca0=""><aside class="docs-sidebar" data-v-d2519ca0=""><div class="sidebar-header" data-v-d2519ca0=""><h2 data-v-d2519ca0="">Documentation</h2></div><nav class="sidebar-nav" data-v-d2519ca0=""><!--[--><a href="/docs/getting-started" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🚀</span><span class="nav-label" data-v-d2519ca0="">Getting Started</span></a><a href="/docs/installation" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">📦</span><span class="nav-label" data-v-d2519ca0="">Installation</span></a><a aria-current="page" href="/docs/transactions" class="router-link-active router-link-exact-active active nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🔄</span><span class="nav-label" data-v-d2519ca0="">Transactions &amp; Async</span></a><a href="/docs/crud" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">✏️</span><span class="nav-label" data-v-d2519ca0="">CRUD Operations</span></a><a href="/docs/querying" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🔍</span><span class="nav-label" data-v-d2519ca0="">Querying</span></a><a href="/docs/generators" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🤖</span><span class="nav-label" data-v-d2519ca0="">Source Generators</span></a><a href="/docs/cdc" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">📡</span><span class="nav-label" data-v-d2519ca0="">Change Data Capture</span></a><a href="/docs/spatial" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🌍</span><span class="nav-label" data-v-d2519ca0="">Spatial Indexing</span></a><a href="/docs/architecture" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🏗️</span><span class="nav-label" data-v-d2519ca0="">Architecture</span></a><a href="/docs/converters" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🆔</span><span class="nav-label" data-v-d2519ca0="">Custom ID Converters</span></a><a href="/docs/benchmarks" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">⚡</span><span class="nav-label" data-v-d2519ca0="">Benchmarks</span></a><a href="/docs/dynamic-api" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🔌</span><span class="nav-label" data-v-d2519ca0="">Schema-less API</span></a><a href="/docs/blql" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🔎</span><span class="nav-label" data-v-d2519ca0="">BLQL</span></a><a href="/docs/timeseries" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">📈</span><span class="nav-label" data-v-d2519ca0="">TimeSeries</span></a><a href="/docs/kv-store" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🗹️</span><span class="nav-label" data-v-d2519ca0="">Key-Value Store</span></a><a href="/docs/wasm" class="nav-item" data-v-d2519ca0=""><span class="nav-icon" data-v-d2519ca0="">🌐</span><span class="nav-label" data-v-d2519ca0="">Blazor WASM</span></a><!--]--></nav></aside><main class="docs-content" data-v-d2519ca0=""><div class="container" data-v-d2519ca0=""><div class="doc-page" data-v-d2519ca0="" data-v-bae9e294=""><h1 data-v-bae9e294="">🔄 Transactions</h1><p class="lead" data-v-bae9e294="">BLite provides full ACID transaction support with Write-Ahead Logging (WAL) for durability and crash recovery. Thread-safe with built-in protection against race conditions.</p><section data-v-bae9e294=""><h2 data-v-bae9e294="">Implicit Transactions (Recommended)</h2><p data-v-bae9e294="">Use <code data-v-bae9e294="">SaveChanges()</code> or <code data-v-bae9e294="">SaveChangesAsync()</code> for automatic transaction management - similar to Entity Framework Core:</p><h3 data-v-bae9e294="">Synchronous Example</h3><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> db = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">MyDbContext</span>(<span class="string" data-v-bae9e294="">"mydb.blite"</span>);
+  }</script><script type="module" async="" crossorigin="" src="/assets/app-C2NdcLP1.js"></script><link rel="stylesheet" crossorigin="" href="/assets/app-Bb05gidY.css"></head><body><div id="app" data-server-rendered="true"><div class="app-layout" data-v-6d0f73f5=""><header class="main-header glass-panel" data-v-6d0f73f5=""><div class="container header-content" data-v-6d0f73f5=""><a href="/" class="logo-link" data-v-6d0f73f5=""><img src="/icon.svg" alt="BLite" class="logo-img" data-v-6d0f73f5=""><div class="logo-text" data-v-6d0f73f5="">BLite<span class="dot" data-v-6d0f73f5="">.</span></div></a><nav data-v-6d0f73f5=""><a href="/" class="" data-v-6d0f73f5="">Home</a><a href="/docs" class="router-link-active" data-v-6d0f73f5="">Docs</a><a href="/server" class="" data-v-6d0f73f5="">Server</a><a href="/studio" class="" data-v-6d0f73f5="">Studio</a><a href="/comparisons" class="" data-v-6d0f73f5="">Comparisons</a><a href="https://github.com/EntglDb/BLite" target="_blank" class="github-link" data-v-6d0f73f5="">GitHub ↗</a></nav></div></header><main data-v-6d0f73f5=""><div class="docs-layout" data-v-6d0f73f5="" data-v-129b18a3=""><aside class="docs-sidebar" data-v-129b18a3=""><div class="sidebar-header" data-v-129b18a3=""><h2 data-v-129b18a3="">Documentation</h2></div><nav class="sidebar-nav" data-v-129b18a3=""><!--[--><a href="/docs/getting-started" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">🚀</span><span class="nav-label" data-v-129b18a3="">Getting Started</span></a><a href="/docs/installation" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">📦</span><span class="nav-label" data-v-129b18a3="">Installation</span></a><a aria-current="page" href="/docs/transactions" class="router-link-active router-link-exact-active active nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">🔄</span><span class="nav-label" data-v-129b18a3="">Transactions &amp; Async</span></a><a href="/docs/crud" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">✏️</span><span class="nav-label" data-v-129b18a3="">CRUD Operations</span></a><a href="/docs/querying" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">🔍</span><span class="nav-label" data-v-129b18a3="">Querying</span></a><a href="/docs/generators" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">🤖</span><span class="nav-label" data-v-129b18a3="">Source Generators</span></a><a href="/docs/cdc" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">📡</span><span class="nav-label" data-v-129b18a3="">Change Data Capture</span></a><a href="/docs/spatial" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">🌍</span><span class="nav-label" data-v-129b18a3="">Spatial Indexing</span></a><a href="/docs/architecture" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">🏗️</span><span class="nav-label" data-v-129b18a3="">Architecture</span></a><a href="/docs/converters" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">🆔</span><span class="nav-label" data-v-129b18a3="">Custom ID Converters</span></a><a href="/docs/benchmarks" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">⚡</span><span class="nav-label" data-v-129b18a3="">Benchmarks</span></a><a href="/docs/dynamic-api" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">🔌</span><span class="nav-label" data-v-129b18a3="">Schema-less API</span></a><a href="/docs/blql" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">🔎</span><span class="nav-label" data-v-129b18a3="">BLQL</span></a><a href="/docs/timeseries" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">📈</span><span class="nav-label" data-v-129b18a3="">TimeSeries</span></a><a href="/docs/kv-store" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">🗹️</span><span class="nav-label" data-v-129b18a3="">Key-Value Store</span></a><a href="/docs/wasm" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">🌐</span><span class="nav-label" data-v-129b18a3="">Blazor WASM</span></a><a href="/docs/encryption" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">🔐</span><span class="nav-label" data-v-129b18a3="">Encryption at Rest</span></a><a href="/docs/audit-trail" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">📊</span><span class="nav-label" data-v-129b18a3="">Audit Trail</span></a><a href="/docs/gdpr" class="nav-item" data-v-129b18a3=""><span class="nav-icon" data-v-129b18a3="">🛡️</span><span class="nav-label" data-v-129b18a3="">GDPR</span></a><!--]--></nav></aside><main class="docs-content" data-v-129b18a3=""><div class="container" data-v-129b18a3=""><div class="doc-page" data-v-129b18a3="" data-v-53c9b281=""><h1 data-v-53c9b281="">🔄 Transactions</h1><p class="lead" data-v-53c9b281="">BLite provides full ACID transaction support with Write-Ahead Logging (WAL) for durability and crash recovery. Thread-safe with built-in protection against race conditions.</p><section data-v-53c9b281=""><h2 data-v-53c9b281="">Implicit Transactions (Recommended)</h2><p data-v-53c9b281="">Use <code data-v-53c9b281="">SaveChanges()</code> or <code data-v-53c9b281="">SaveChangesAsync()</code> for automatic transaction management - similar to Entity Framework Core:</p><h3 data-v-53c9b281="">Synchronous Example</h3><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> db = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">MyDbContext</span>(<span class="string" data-v-53c9b281="">"mydb.blite"</span>);
 
-<span class="comment" data-v-bae9e294="">// Begin implicit transaction automatically</span>
-<span class="keyword" data-v-bae9e294="">var</span> alice = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">User</span> { Name = <span class="string" data-v-bae9e294="">"Alice"</span>, Age = <span class="number" data-v-bae9e294="">30</span> };
-<span class="keyword" data-v-bae9e294="">var</span> bob = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">User</span> { Name = <span class="string" data-v-bae9e294="">"Bob"</span>, Age = <span class="number" data-v-bae9e294="">25</span> };
+<span class="comment" data-v-53c9b281="">// Begin implicit transaction automatically</span>
+<span class="keyword" data-v-53c9b281="">var</span> alice = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">User</span> { Name = <span class="string" data-v-53c9b281="">"Alice"</span>, Age = <span class="number" data-v-53c9b281="">30</span> };
+<span class="keyword" data-v-53c9b281="">var</span> bob = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">User</span> { Name = <span class="string" data-v-53c9b281="">"Bob"</span>, Age = <span class="number" data-v-53c9b281="">25</span> };
 
 db.Users.Insert(alice);
 db.Users.Insert(bob);
 
-<span class="comment" data-v-bae9e294="">// Commit all changes atomically</span>
-db.SaveChanges();</code></pre><h3 data-v-bae9e294="">Async Example</h3><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> db = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">MyDbContext</span>(<span class="string" data-v-bae9e294="">"mydb.blite"</span>);
+<span class="comment" data-v-53c9b281="">// Commit all changes atomically</span>
+db.SaveChanges();</code></pre><h3 data-v-53c9b281="">Async Example</h3><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> db = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">MyDbContext</span>(<span class="string" data-v-53c9b281="">"mydb.blite"</span>);
 
-<span class="comment" data-v-bae9e294="">// Insert multiple documents</span>
-db.Users.Insert(<span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">User</span> { Name = <span class="string" data-v-bae9e294="">"Charlie"</span>, Age = <span class="number" data-v-bae9e294="">35</span> });
-db.Users.Insert(<span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">User</span> { Name = <span class="string" data-v-bae9e294="">"Diana"</span>, Age = <span class="number" data-v-bae9e294="">28</span> });
+<span class="comment" data-v-53c9b281="">// Insert multiple documents</span>
+db.Users.Insert(<span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">User</span> { Name = <span class="string" data-v-53c9b281="">"Charlie"</span>, Age = <span class="number" data-v-53c9b281="">35</span> });
+db.Users.Insert(<span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">User</span> { Name = <span class="string" data-v-53c9b281="">"Diana"</span>, Age = <span class="number" data-v-53c9b281="">28</span> });
 
-<span class="comment" data-v-bae9e294="">// Commit asynchronously</span>
-<span class="keyword" data-v-bae9e294="">await</span> db.SaveChangesAsync();</code></pre><h3 data-v-bae9e294="">Update &amp; Delete Example</h3><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> db = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">MyDbContext</span>(<span class="string" data-v-bae9e294="">"mydb.blite"</span>);
+<span class="comment" data-v-53c9b281="">// Commit asynchronously</span>
+<span class="keyword" data-v-53c9b281="">await</span> db.SaveChangesAsync();</code></pre><h3 data-v-53c9b281="">Update &amp; Delete Example</h3><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> db = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">MyDbContext</span>(<span class="string" data-v-53c9b281="">"mydb.blite"</span>);
 
-<span class="comment" data-v-bae9e294="">// Load and modify</span>
-<span class="keyword" data-v-bae9e294="">var</span> user = db.Users.FindById(userId);
-user.Age = <span class="number" data-v-bae9e294="">31</span>;
+<span class="comment" data-v-53c9b281="">// Load and modify</span>
+<span class="keyword" data-v-53c9b281="">var</span> user = db.Users.FindById(userId);
+user.Age = <span class="number" data-v-53c9b281="">31</span>;
 db.Users.Update(user);
 
-<span class="comment" data-v-bae9e294="">// Delete another</span>
+<span class="comment" data-v-53c9b281="">// Delete another</span>
 db.Users.Delete(oldUserId);
 
-<span class="comment" data-v-bae9e294="">// Both operations committed together</span>
-db.SaveChanges();</code></pre><h3 data-v-bae9e294="">Bulk Operations</h3><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> db = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">MyDbContext</span>(<span class="string" data-v-bae9e294="">"mydb.blite"</span>);
+<span class="comment" data-v-53c9b281="">// Both operations committed together</span>
+db.SaveChanges();</code></pre><h3 data-v-53c9b281="">Bulk Operations</h3><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> db = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">MyDbContext</span>(<span class="string" data-v-53c9b281="">"mydb.blite"</span>);
 
-<span class="keyword" data-v-bae9e294="">var</span> newUsers = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">List</span>&lt;<span class="type" data-v-bae9e294="">User</span>&gt;
+<span class="keyword" data-v-53c9b281="">var</span> newUsers = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">List</span>&lt;<span class="type" data-v-53c9b281="">User</span>&gt;
 {
-    <span class="keyword" data-v-bae9e294="">new</span> { Name = <span class="string" data-v-bae9e294="">"User1"</span>, Age = <span class="number" data-v-bae9e294="">20</span> },
-    <span class="keyword" data-v-bae9e294="">new</span> { Name = <span class="string" data-v-bae9e294="">"User2"</span>, Age = <span class="number" data-v-bae9e294="">21</span> },
-    <span class="keyword" data-v-bae9e294="">new</span> { Name = <span class="string" data-v-bae9e294="">"User3"</span>, Age = <span class="number" data-v-bae9e294="">22</span> }
+    <span class="keyword" data-v-53c9b281="">new</span> { Name = <span class="string" data-v-53c9b281="">"User1"</span>, Age = <span class="number" data-v-53c9b281="">20</span> },
+    <span class="keyword" data-v-53c9b281="">new</span> { Name = <span class="string" data-v-53c9b281="">"User2"</span>, Age = <span class="number" data-v-53c9b281="">21</span> },
+    <span class="keyword" data-v-53c9b281="">new</span> { Name = <span class="string" data-v-53c9b281="">"User3"</span>, Age = <span class="number" data-v-53c9b281="">22</span> }
 };
 
 db.Users.InsertMany(newUsers);
-<span class="keyword" data-v-bae9e294="">await</span> db.SaveChangesAsync();</code></pre><div class="info-box" data-v-bae9e294=""><strong data-v-bae9e294="">💡 Why Use Implicit Transactions?</strong><ul data-v-bae9e294=""><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Simpler code</strong> - No manual transaction management</li><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Familiar pattern</strong> - Same as Entity Framework Core</li><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Automatic begin</strong> - Transaction starts on first operation</li><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Automatic cleanup</strong> - Auto-rollback on exceptions</li><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Thread-safe</strong> - Built-in concurrency protection</li></ul></div></section><section data-v-bae9e294=""><h2 data-v-bae9e294="">Explicit Transactions</h2><p data-v-bae9e294="">For fine-grained control, use explicit transactions:</p><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">using</span> BLite.Core;
+<span class="keyword" data-v-53c9b281="">await</span> db.SaveChangesAsync();</code></pre><div class="info-box" data-v-53c9b281=""><strong data-v-53c9b281="">💡 Why Use Implicit Transactions?</strong><ul data-v-53c9b281=""><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Simpler code</strong> - No manual transaction management</li><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Familiar pattern</strong> - Same as Entity Framework Core</li><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Automatic begin</strong> - Transaction starts on first operation</li><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Automatic cleanup</strong> - Auto-rollback on exceptions</li><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Thread-safe</strong> - Built-in concurrency protection</li></ul></div></section><section data-v-53c9b281=""><h2 data-v-53c9b281="">Explicit Transactions</h2><p data-v-53c9b281="">For fine-grained control, use explicit transactions:</p><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">using</span> BLite.Core;
 
-<span class="keyword" data-v-bae9e294="">var</span> db = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">DocumentDb</span>(<span class="string" data-v-bae9e294="">"mydb.blite"</span>);
-<span class="keyword" data-v-bae9e294="">var</span> users = db.GetCollection&lt;<span class="type" data-v-bae9e294="">User</span>&gt;();
+<span class="keyword" data-v-53c9b281="">var</span> db = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">DocumentDb</span>(<span class="string" data-v-53c9b281="">"mydb.blite"</span>);
+<span class="keyword" data-v-53c9b281="">var</span> users = db.GetCollection&lt;<span class="type" data-v-53c9b281="">User</span>&gt;();
 
-<span class="comment" data-v-bae9e294="">// Begin a transaction</span>
-<span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> txn = db.BeginTransaction();
+<span class="comment" data-v-53c9b281="">// Begin a transaction</span>
+<span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> txn = db.BeginTransaction();
 
-<span class="keyword" data-v-bae9e294="">try</span>
+<span class="keyword" data-v-53c9b281="">try</span>
 {
-    users.Insert(<span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">User</span> { Name = <span class="string" data-v-bae9e294="">"Alice"</span>, Age = <span class="number" data-v-bae9e294="">30</span> });
-    users.Insert(<span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">User</span> { Name = <span class="string" data-v-bae9e294="">"Bob"</span>, Age = <span class="number" data-v-bae9e294="">25</span> });
+    users.Insert(<span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">User</span> { Name = <span class="string" data-v-53c9b281="">"Alice"</span>, Age = <span class="number" data-v-53c9b281="">30</span> });
+    users.Insert(<span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">User</span> { Name = <span class="string" data-v-53c9b281="">"Bob"</span>, Age = <span class="number" data-v-53c9b281="">25</span> });
     
-    <span class="comment" data-v-bae9e294="">// Commit all changes</span>
+    <span class="comment" data-v-53c9b281="">// Commit all changes</span>
     txn.Commit();
 }
-<span class="keyword" data-v-bae9e294="">catch</span>
+<span class="keyword" data-v-53c9b281="">catch</span>
 {
-    <span class="comment" data-v-bae9e294="">// Automatically rolled back on dispose if not committed</span>
-    <span class="keyword" data-v-bae9e294="">throw</span>;
-}</code></pre></section><section data-v-bae9e294=""><h2 data-v-bae9e294="">Explicit Transactions</h2><p data-v-bae9e294="">For fine-grained control, use explicit transactions:</p><h3 data-v-bae9e294="">Basic Explicit Transaction</h3><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> db = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">MyDbContext</span>(<span class="string" data-v-bae9e294="">"mydb.blite"</span>);
+    <span class="comment" data-v-53c9b281="">// Automatically rolled back on dispose if not committed</span>
+    <span class="keyword" data-v-53c9b281="">throw</span>;
+}</code></pre></section><section data-v-53c9b281=""><h2 data-v-53c9b281="">Explicit Transactions</h2><p data-v-53c9b281="">For fine-grained control, use explicit transactions:</p><h3 data-v-53c9b281="">Basic Explicit Transaction</h3><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> db = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">MyDbContext</span>(<span class="string" data-v-53c9b281="">"mydb.blite"</span>);
 
-<span class="comment" data-v-bae9e294="">// Begin explicit transaction</span>
-<span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> txn = db.BeginTransaction();
+<span class="comment" data-v-53c9b281="">// Begin explicit transaction</span>
+<span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> txn = db.BeginTransaction();
 
-<span class="keyword" data-v-bae9e294="">try</span>
+<span class="keyword" data-v-53c9b281="">try</span>
 {
-    db.Users.Insert(<span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">User</span> { Name = <span class="string" data-v-bae9e294="">"Alice"</span>, Age = <span class="number" data-v-bae9e294="">30</span> });
-    db.Users.Insert(<span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">User</span> { Name = <span class="string" data-v-bae9e294="">"Bob"</span>, Age = <span class="number" data-v-bae9e294="">25</span> });
+    db.Users.Insert(<span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">User</span> { Name = <span class="string" data-v-53c9b281="">"Alice"</span>, Age = <span class="number" data-v-53c9b281="">30</span> });
+    db.Users.Insert(<span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">User</span> { Name = <span class="string" data-v-53c9b281="">"Bob"</span>, Age = <span class="number" data-v-53c9b281="">25</span> });
     
-    <span class="comment" data-v-bae9e294="">// Explicit commit</span>
+    <span class="comment" data-v-53c9b281="">// Explicit commit</span>
     txn.Commit();
 }
-<span class="keyword" data-v-bae9e294="">catch</span>
+<span class="keyword" data-v-53c9b281="">catch</span>
 {
-    <span class="comment" data-v-bae9e294="">// Automatically rolled back on dispose if not committed</span>
-    <span class="keyword" data-v-bae9e294="">throw</span>;
-}</code></pre><h3 data-v-bae9e294="">When to Use Explicit Transactions</h3><ul data-v-bae9e294=""><li data-v-bae9e294="">✅ Complex multi-step operations with conditional logic</li><li data-v-bae9e294="">✅ When you need to control exactly when commit happens</li><li data-v-bae9e294="">✅ Operations spanning multiple collections with dependencies</li><li data-v-bae9e294="">✅ When you need to rollback based on business logic</li></ul></section><section data-v-bae9e294=""><h2 data-v-bae9e294="">Async Operations</h2><p data-v-bae9e294="">BLite supports async/await patterns for non-blocking I/O:</p><h3 data-v-bae9e294="">Async Implicit Transaction</h3><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> db = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">MyDbContext</span>(<span class="string" data-v-bae9e294="">"mydb.blite"</span>);
+    <span class="comment" data-v-53c9b281="">// Automatically rolled back on dispose if not committed</span>
+    <span class="keyword" data-v-53c9b281="">throw</span>;
+}</code></pre><h3 data-v-53c9b281="">When to Use Explicit Transactions</h3><ul data-v-53c9b281=""><li data-v-53c9b281="">✅ Complex multi-step operations with conditional logic</li><li data-v-53c9b281="">✅ When you need to control exactly when commit happens</li><li data-v-53c9b281="">✅ Operations spanning multiple collections with dependencies</li><li data-v-53c9b281="">✅ When you need to rollback based on business logic</li></ul></section><section data-v-53c9b281=""><h2 data-v-53c9b281="">Async Operations</h2><p data-v-53c9b281="">BLite supports async/await patterns for non-blocking I/O:</p><h3 data-v-53c9b281="">Async Implicit Transaction</h3><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> db = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">MyDbContext</span>(<span class="string" data-v-53c9b281="">"mydb.blite"</span>);
 
-db.Users.Insert(<span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">User</span> { Name = <span class="string" data-v-bae9e294="">"Alice"</span> });
-db.Users.Insert(<span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">User</span> { Name = <span class="string" data-v-bae9e294="">"Bob"</span> });
+db.Users.Insert(<span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">User</span> { Name = <span class="string" data-v-53c9b281="">"Alice"</span> });
+db.Users.Insert(<span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">User</span> { Name = <span class="string" data-v-53c9b281="">"Bob"</span> });
 
-<span class="keyword" data-v-bae9e294="">await</span> db.SaveChangesAsync();</code></pre><h3 data-v-bae9e294="">Async Explicit Transaction</h3><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">await using</span> <span class="keyword" data-v-bae9e294="">var</span> txn = <span class="keyword" data-v-bae9e294="">await</span> db.BeginTransactionAsync();
+<span class="keyword" data-v-53c9b281="">await</span> db.SaveChangesAsync();</code></pre><h3 data-v-53c9b281="">Async Explicit Transaction</h3><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">await using</span> <span class="keyword" data-v-53c9b281="">var</span> txn = <span class="keyword" data-v-53c9b281="">await</span> db.BeginTransactionAsync();
 
-<span class="keyword" data-v-bae9e294="">try</span>
+<span class="keyword" data-v-53c9b281="">try</span>
 {
-    <span class="keyword" data-v-bae9e294="">await</span> db.Users.InsertAsync(<span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">User</span> { Name = <span class="string" data-v-bae9e294="">"Charlie"</span> });
-    <span class="keyword" data-v-bae9e294="">await</span> db.Users.UpdateAsync(existingUser);
+    <span class="keyword" data-v-53c9b281="">await</span> db.Users.InsertAsync(<span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">User</span> { Name = <span class="string" data-v-53c9b281="">"Charlie"</span> });
+    <span class="keyword" data-v-53c9b281="">await</span> db.Users.UpdateAsync(existingUser);
     
-    <span class="keyword" data-v-bae9e294="">await</span> txn.CommitAsync();
+    <span class="keyword" data-v-53c9b281="">await</span> txn.CommitAsync();
 }
-<span class="keyword" data-v-bae9e294="">catch</span>
+<span class="keyword" data-v-53c9b281="">catch</span>
 {
-    <span class="keyword" data-v-bae9e294="">await</span> txn.RollbackAsync();
-    <span class="keyword" data-v-bae9e294="">throw</span>;
-}</code></pre><h3 data-v-bae9e294="">Bulk Async Operations with SaveChangesAsync</h3><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> db = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">MyDbContext</span>(<span class="string" data-v-bae9e294="">"mydb.blite"</span>);
+    <span class="keyword" data-v-53c9b281="">await</span> txn.RollbackAsync();
+    <span class="keyword" data-v-53c9b281="">throw</span>;
+}</code></pre><h3 data-v-53c9b281="">Bulk Async Operations with SaveChangesAsync</h3><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> db = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">MyDbContext</span>(<span class="string" data-v-53c9b281="">"mydb.blite"</span>);
 
-<span class="keyword" data-v-bae9e294="">var</span> newUsers = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">List</span>&lt;<span class="type" data-v-bae9e294="">User</span>&gt;
+<span class="keyword" data-v-53c9b281="">var</span> newUsers = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">List</span>&lt;<span class="type" data-v-53c9b281="">User</span>&gt;
 {
-    <span class="keyword" data-v-bae9e294="">new</span> { Name = <span class="string" data-v-bae9e294="">"User1"</span>, Age = <span class="number" data-v-bae9e294="">20</span> },
-    <span class="keyword" data-v-bae9e294="">new</span> { Name = <span class="string" data-v-bae9e294="">"User2"</span>, Age = <span class="number" data-v-bae9e294="">21</span> },
-    <span class="keyword" data-v-bae9e294="">new</span> { Name = <span class="string" data-v-bae9e294="">"User3"</span>, Age = <span class="number" data-v-bae9e294="">22</span> }
+    <span class="keyword" data-v-53c9b281="">new</span> { Name = <span class="string" data-v-53c9b281="">"User1"</span>, Age = <span class="number" data-v-53c9b281="">20</span> },
+    <span class="keyword" data-v-53c9b281="">new</span> { Name = <span class="string" data-v-53c9b281="">"User2"</span>, Age = <span class="number" data-v-53c9b281="">21</span> },
+    <span class="keyword" data-v-53c9b281="">new</span> { Name = <span class="string" data-v-53c9b281="">"User3"</span>, Age = <span class="number" data-v-53c9b281="">22</span> }
 };
 
-<span class="keyword" data-v-bae9e294="">await</span> db.Users.InsertManyAsync(newUsers);
-<span class="keyword" data-v-bae9e294="">await</span> db.SaveChangesAsync();</code></pre></section><section data-v-bae9e294=""><h2 data-v-bae9e294="">Comparing Implicit vs Explicit</h2><h3 data-v-bae9e294="">💡 Implicit Transactions (SaveChanges)</h3><div class="comparison-box success" data-v-bae9e294=""><strong data-v-bae9e294="">Best for:</strong><ul data-v-bae9e294=""><li data-v-bae9e294="">Simple CRUD operations</li><li data-v-bae9e294="">Batch inserts/updates/deletes</li><li data-v-bae9e294="">When you want EF Core-like experience</li><li data-v-bae9e294="">Rapid development</li></ul><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> db = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">MyDbContext</span>(<span class="string" data-v-bae9e294="">"mydb.blite"</span>);
+<span class="keyword" data-v-53c9b281="">await</span> db.Users.InsertManyAsync(newUsers);
+<span class="keyword" data-v-53c9b281="">await</span> db.SaveChangesAsync();</code></pre></section><section data-v-53c9b281=""><h2 data-v-53c9b281="">Comparing Implicit vs Explicit</h2><h3 data-v-53c9b281="">💡 Implicit Transactions (SaveChanges)</h3><div class="comparison-box success" data-v-53c9b281=""><strong data-v-53c9b281="">Best for:</strong><ul data-v-53c9b281=""><li data-v-53c9b281="">Simple CRUD operations</li><li data-v-53c9b281="">Batch inserts/updates/deletes</li><li data-v-53c9b281="">When you want EF Core-like experience</li><li data-v-53c9b281="">Rapid development</li></ul><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> db = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">MyDbContext</span>(<span class="string" data-v-53c9b281="">"mydb.blite"</span>);
 db.Users.Insert(user1);
 db.Users.Insert(user2);
-db.SaveChanges(); <span class="comment" data-v-bae9e294="">// Simple!</span></code></pre></div><h3 data-v-bae9e294="">🔧 Explicit Transactions (BeginTransaction)</h3><div class="comparison-box warning" data-v-bae9e294=""><strong data-v-bae9e294="">Best for:</strong><ul data-v-bae9e294=""><li data-v-bae9e294="">Complex business logic with conditionals</li><li data-v-bae9e294="">Manual rollback control</li><li data-v-bae9e294="">Cross-collection atomic operations</li><li data-v-bae9e294="">Fine-grained error handling</li></ul><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> txn = db.BeginTransaction();
-<span class="keyword" data-v-bae9e294="">try</span> {
+db.SaveChanges(); <span class="comment" data-v-53c9b281="">// Simple!</span></code></pre></div><h3 data-v-53c9b281="">🔧 Explicit Transactions (BeginTransaction)</h3><div class="comparison-box warning" data-v-53c9b281=""><strong data-v-53c9b281="">Best for:</strong><ul data-v-53c9b281=""><li data-v-53c9b281="">Complex business logic with conditionals</li><li data-v-53c9b281="">Manual rollback control</li><li data-v-53c9b281="">Cross-collection atomic operations</li><li data-v-53c9b281="">Fine-grained error handling</li></ul><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> txn = db.BeginTransaction();
+<span class="keyword" data-v-53c9b281="">try</span> {
     db.Users.Insert(user);
-    <span class="keyword" data-v-bae9e294="">if</span> (condition) txn.Commit();
-    <span class="keyword" data-v-bae9e294="">else</span> txn.Rollback();
-} <span class="keyword" data-v-bae9e294="">catch</span> { txn.Rollback(); }</code></pre></div></section><section data-v-bae9e294=""><h2 data-v-bae9e294="">Error Handling with Implicit Transactions</h2><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> db = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">MyDbContext</span>(<span class="string" data-v-bae9e294="">"mydb.blite"</span>);
+    <span class="keyword" data-v-53c9b281="">if</span> (condition) txn.Commit();
+    <span class="keyword" data-v-53c9b281="">else</span> txn.Rollback();
+} <span class="keyword" data-v-53c9b281="">catch</span> { txn.Rollback(); }</code></pre></div></section><section data-v-53c9b281=""><h2 data-v-53c9b281="">Error Handling with Implicit Transactions</h2><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> db = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">MyDbContext</span>(<span class="string" data-v-53c9b281="">"mydb.blite"</span>);
 
-<span class="keyword" data-v-bae9e294="">try</span>
+<span class="keyword" data-v-53c9b281="">try</span>
 {
-    db.Users.Insert(<span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">User</span> { Name = <span class="string" data-v-bae9e294="">"Alice"</span> });
-    db.Users.Insert(<span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">User</span> { Name = <span class="string" data-v-bae9e294="">"Bob"</span> });
+    db.Users.Insert(<span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">User</span> { Name = <span class="string" data-v-53c9b281="">"Alice"</span> });
+    db.Users.Insert(<span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">User</span> { Name = <span class="string" data-v-53c9b281="">"Bob"</span> });
     
     db.SaveChanges();
 }
-<span class="keyword" data-v-bae9e294="">catch</span> (<span class="type" data-v-bae9e294="">ValidationException</span> ex)
+<span class="keyword" data-v-53c9b281="">catch</span> (<span class="type" data-v-53c9b281="">ValidationException</span> ex)
 {
-    <span class="comment" data-v-bae9e294="">// Transaction auto-rolled back</span>
-    Console.WriteLine($<span class="string" data-v-bae9e294="">"Validation failed: {ex.Message}"</span>);
+    <span class="comment" data-v-53c9b281="">// Transaction auto-rolled back</span>
+    Console.WriteLine($<span class="string" data-v-53c9b281="">"Validation failed: {ex.Message}"</span>);
 }
-<span class="keyword" data-v-bae9e294="">catch</span> (<span class="type" data-v-bae9e294="">IOException</span> ex)
+<span class="keyword" data-v-53c9b281="">catch</span> (<span class="type" data-v-53c9b281="">IOException</span> ex)
 {
-    <span class="comment" data-v-bae9e294="">// WAL write failure</span>
-    Console.WriteLine($<span class="string" data-v-bae9e294="">"I/O error: {ex.Message}"</span>);
-}</code></pre></section><section data-v-bae9e294=""><h2 data-v-bae9e294="">Batch Operations with Explicit Transactions</h2><p data-v-bae9e294="">Perform multiple operations atomically:</p><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">await using</span> <span class="keyword" data-v-bae9e294="">var</span> txn = <span class="keyword" data-v-bae9e294="">await</span> db.BeginTransactionAsync();
+    <span class="comment" data-v-53c9b281="">// WAL write failure</span>
+    Console.WriteLine($<span class="string" data-v-53c9b281="">"I/O error: {ex.Message}"</span>);
+}</code></pre></section><section data-v-53c9b281=""><h2 data-v-53c9b281="">Batch Operations with Explicit Transactions</h2><p data-v-53c9b281="">Perform multiple operations atomically:</p><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">await using</span> <span class="keyword" data-v-53c9b281="">var</span> txn = <span class="keyword" data-v-53c9b281="">await</span> db.BeginTransactionAsync();
 
-<span class="comment" data-v-bae9e294="">// Delete old users</span>
-<span class="keyword" data-v-bae9e294="">var</span> oldUsers = db.Users.AsQueryable()
-    .Where(u =&gt; u.Age &gt; <span class="number" data-v-bae9e294="">60</span>)
+<span class="comment" data-v-53c9b281="">// Delete old users</span>
+<span class="keyword" data-v-53c9b281="">var</span> oldUsers = db.Users.AsQueryable()
+    .Where(u =&gt; u.Age &gt; <span class="number" data-v-53c9b281="">60</span>)
     .AsEnumerable();
     
-<span class="keyword" data-v-bae9e294="">foreach</span> (<span class="keyword" data-v-bae9e294="">var</span> user <span class="keyword" data-v-bae9e294="">in</span> oldUsers)
+<span class="keyword" data-v-53c9b281="">foreach</span> (<span class="keyword" data-v-53c9b281="">var</span> user <span class="keyword" data-v-53c9b281="">in</span> oldUsers)
 {
-    <span class="keyword" data-v-bae9e294="">await</span> db.Users.DeleteAsync(user.Id);
+    <span class="keyword" data-v-53c9b281="">await</span> db.Users.DeleteAsync(user.Id);
 }
 
-<span class="comment" data-v-bae9e294="">// Insert new batch</span>
-<span class="keyword" data-v-bae9e294="">await</span> db.Users.InsertManyAsync(newBatch);
+<span class="comment" data-v-53c9b281="">// Insert new batch</span>
+<span class="keyword" data-v-53c9b281="">await</span> db.Users.InsertManyAsync(newBatch);
 
-<span class="keyword" data-v-bae9e294="">await</span> txn.CommitAsync();</code></pre></section><section data-v-bae9e294=""><h2 data-v-bae9e294="">Thread-Safety &amp; Concurrency</h2><p data-v-bae9e294="">BLite transactions are protected against race conditions using <strong data-v-bae9e294="">SemaphoreSlim</strong> to ensure thread-safe access to the current transaction state:</p><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="comment" data-v-bae9e294="">// Safe to call from multiple threads</span>
-<span class="keyword" data-v-bae9e294="">var</span> tasks = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">List</span>&lt;<span class="type" data-v-bae9e294="">Task</span>&gt;();
+<span class="keyword" data-v-53c9b281="">await</span> txn.CommitAsync();</code></pre></section><section data-v-53c9b281=""><h2 data-v-53c9b281="">Thread-Safety &amp; Concurrency</h2><p data-v-53c9b281="">BLite transactions are protected against race conditions using <strong data-v-53c9b281="">SemaphoreSlim</strong> to ensure thread-safe access to the current transaction state:</p><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="comment" data-v-53c9b281="">// Safe to call from multiple threads</span>
+<span class="keyword" data-v-53c9b281="">var</span> tasks = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">List</span>&lt;<span class="type" data-v-53c9b281="">Task</span>&gt;();
 
-<span class="keyword" data-v-bae9e294="">for</span> (<span class="keyword" data-v-bae9e294="">int</span> i = <span class="number" data-v-bae9e294="">0</span>; i &lt; <span class="number" data-v-bae9e294="">10</span>; i++)
+<span class="keyword" data-v-53c9b281="">for</span> (<span class="keyword" data-v-53c9b281="">int</span> i = <span class="number" data-v-53c9b281="">0</span>; i &lt; <span class="number" data-v-53c9b281="">10</span>; i++)
 {
-    tasks.Add(<span class="type" data-v-bae9e294="">Task</span>.Run(<span class="keyword" data-v-bae9e294="">async</span> () =&gt;
+    tasks.Add(<span class="type" data-v-53c9b281="">Task</span>.Run(<span class="keyword" data-v-53c9b281="">async</span> () =&gt;
     {
-        <span class="keyword" data-v-bae9e294="">await using</span> <span class="keyword" data-v-bae9e294="">var</span> txn = <span class="keyword" data-v-bae9e294="">await</span> db.BeginTransactionAsync();
-        <span class="keyword" data-v-bae9e294="">await</span> db.Users.InsertAsync(<span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">User</span> { Name = $<span class="string" data-v-bae9e294="">"User{i}"</span> });
-        <span class="keyword" data-v-bae9e294="">await</span> txn.CommitAsync();
+        <span class="keyword" data-v-53c9b281="">await using</span> <span class="keyword" data-v-53c9b281="">var</span> txn = <span class="keyword" data-v-53c9b281="">await</span> db.BeginTransactionAsync();
+        <span class="keyword" data-v-53c9b281="">await</span> db.Users.InsertAsync(<span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">User</span> { Name = $<span class="string" data-v-53c9b281="">"User{i}"</span> });
+        <span class="keyword" data-v-53c9b281="">await</span> txn.CommitAsync();
     }));
 }
 
-<span class="keyword" data-v-bae9e294="">await</span> <span class="type" data-v-bae9e294="">Task</span>.WhenAll(tasks);</code></pre><h3 data-v-bae9e294="">CancellationToken Support</h3><h3 data-v-bae9e294="">CancellationToken Support</h3><p data-v-bae9e294="">All async operations properly handle cancellation:</p><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">var</span> cts = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">CancellationTokenSource</span>(<span class="type" data-v-bae9e294="">TimeSpan</span>.FromSeconds(<span class="number" data-v-bae9e294="">5</span>));
+<span class="keyword" data-v-53c9b281="">await</span> <span class="type" data-v-53c9b281="">Task</span>.WhenAll(tasks);</code></pre><h3 data-v-53c9b281="">CancellationToken Support</h3><h3 data-v-53c9b281="">CancellationToken Support</h3><p data-v-53c9b281="">All async operations properly handle cancellation:</p><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">var</span> cts = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">CancellationTokenSource</span>(<span class="type" data-v-53c9b281="">TimeSpan</span>.FromSeconds(<span class="number" data-v-53c9b281="">5</span>));
 
-<span class="keyword" data-v-bae9e294="">try</span>
+<span class="keyword" data-v-53c9b281="">try</span>
 {
-    <span class="keyword" data-v-bae9e294="">await using</span> <span class="keyword" data-v-bae9e294="">var</span> txn = <span class="keyword" data-v-bae9e294="">await</span> db.BeginTransactionAsync(cts.Token);
+    <span class="keyword" data-v-53c9b281="">await using</span> <span class="keyword" data-v-53c9b281="">var</span> txn = <span class="keyword" data-v-53c9b281="">await</span> db.BeginTransactionAsync(cts.Token);
     
-    <span class="keyword" data-v-bae9e294="">await</span> db.Users.InsertManyAsync(largeDataset, cts.Token);
-    <span class="keyword" data-v-bae9e294="">await</span> txn.CommitAsync(cts.Token);
+    <span class="keyword" data-v-53c9b281="">await</span> db.Users.InsertManyAsync(largeDataset, cts.Token);
+    <span class="keyword" data-v-53c9b281="">await</span> txn.CommitAsync(cts.Token);
 }
-<span class="keyword" data-v-bae9e294="">catch</span> (<span class="type" data-v-bae9e294="">OperationCanceledException</span>)
+<span class="keyword" data-v-53c9b281="">catch</span> (<span class="type" data-v-53c9b281="">OperationCanceledException</span>)
 {
-    <span class="comment" data-v-bae9e294="">// Transaction automatically rolled back</span>
-    Console.WriteLine(<span class="string" data-v-bae9e294="">"Operation cancelled"</span>);
-}</code></pre></section><section data-v-bae9e294=""><h2 data-v-bae9e294="">Transaction Isolation</h2><p data-v-bae9e294="">BLite uses <strong data-v-bae9e294="">Snapshot Isolation</strong> to prevent dirty reads and ensure consistency:</p><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="comment" data-v-bae9e294="">// Transaction 1 sees a consistent snapshot</span>
-<span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> txn1 = db.BeginTransaction();
-<span class="keyword" data-v-bae9e294="">var</span> user = users.FindById(userId); <span class="comment" data-v-bae9e294="">// Snapshot at txn1 start</span>
+    <span class="comment" data-v-53c9b281="">// Transaction automatically rolled back</span>
+    Console.WriteLine(<span class="string" data-v-53c9b281="">"Operation cancelled"</span>);
+}</code></pre></section><section data-v-53c9b281=""><h2 data-v-53c9b281="">Transaction Isolation</h2><p data-v-53c9b281="">BLite uses <strong data-v-53c9b281="">Snapshot Isolation</strong> to prevent dirty reads and ensure consistency:</p><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="comment" data-v-53c9b281="">// Transaction 1 sees a consistent snapshot</span>
+<span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> txn1 = db.BeginTransaction();
+<span class="keyword" data-v-53c9b281="">var</span> user = users.FindById(userId); <span class="comment" data-v-53c9b281="">// Snapshot at txn1 start</span>
 
-<span class="comment" data-v-bae9e294="">// Transaction 2 modifies the same document</span>
-<span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> txn2 = db.BeginTransaction();
-user.Age = <span class="number" data-v-bae9e294="">31</span>;
+<span class="comment" data-v-53c9b281="">// Transaction 2 modifies the same document</span>
+<span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> txn2 = db.BeginTransaction();
+user.Age = <span class="number" data-v-53c9b281="">31</span>;
 users.Update(user);
 txn2.Commit();
 
-<span class="comment" data-v-bae9e294="">// txn1 still sees Age = 30 (snapshot isolation)</span>
-Console.WriteLine(user.Age); <span class="comment" data-v-bae9e294="">// 30</span></code></pre></section><section data-v-bae9e294=""><h2 data-v-bae9e294="">Explicit Rollback</h2><p data-v-bae9e294="">You can manually rollback a transaction if needed:</p><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> txn = db.BeginTransaction();
+<span class="comment" data-v-53c9b281="">// txn1 still sees Age = 30 (snapshot isolation)</span>
+Console.WriteLine(user.Age); <span class="comment" data-v-53c9b281="">// 30</span></code></pre></section><section data-v-53c9b281=""><h2 data-v-53c9b281="">Explicit Rollback</h2><p data-v-53c9b281="">You can manually rollback a transaction if needed:</p><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> txn = db.BeginTransaction();
 
-db.Users.Insert(<span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">User</span> { Name = <span class="string" data-v-bae9e294="">"Test"</span> });
+db.Users.Insert(<span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">User</span> { Name = <span class="string" data-v-53c9b281="">"Test"</span> });
 
-<span class="keyword" data-v-bae9e294="">if</span> (someCondition)
+<span class="keyword" data-v-53c9b281="">if</span> (someCondition)
 {
-    txn.Rollback(); <span class="comment" data-v-bae9e294="">// Discard changes</span>
-    <span class="keyword" data-v-bae9e294="">return</span>;
+    txn.Rollback(); <span class="comment" data-v-53c9b281="">// Discard changes</span>
+    <span class="keyword" data-v-53c9b281="">return</span>;
 }
 
-txn.Commit();</code></pre></section><section data-v-bae9e294=""><h2 data-v-bae9e294="">Read-Only Operations</h2><p data-v-bae9e294="">Queries don't require transactions and never block writes:</p><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> db = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">MyDbContext</span>(<span class="string" data-v-bae9e294="">"mydb.blite"</span>);
+txn.Commit();</code></pre></section><section data-v-53c9b281=""><h2 data-v-53c9b281="">Read-Only Operations</h2><p data-v-53c9b281="">Queries don't require transactions and never block writes:</p><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> db = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">MyDbContext</span>(<span class="string" data-v-53c9b281="">"mydb.blite"</span>);
 
-<span class="comment" data-v-bae9e294="">// No transaction needed for queries</span>
-<span class="keyword" data-v-bae9e294="">var</span> users = db.Users.AsQueryable()
-    .Where(u =&gt; u.Age &gt; <span class="number" data-v-bae9e294="">25</span>)
+<span class="comment" data-v-53c9b281="">// No transaction needed for queries</span>
+<span class="keyword" data-v-53c9b281="">var</span> users = db.Users.AsQueryable()
+    .Where(u =&gt; u.Age &gt; <span class="number" data-v-53c9b281="">25</span>)
     .OrderBy(u =&gt; u.Name)
     .AsEnumerable();
 
-<span class="comment" data-v-bae9e294="">// Complex aggregations also don't need transactions</span>
-<span class="keyword" data-v-bae9e294="">var</span> stats = db.Users.AsQueryable()
+<span class="comment" data-v-53c9b281="">// Complex aggregations also don't need transactions</span>
+<span class="keyword" data-v-53c9b281="">var</span> stats = db.Users.AsQueryable()
     .GroupBy(u =&gt; u.Age)
-    .Select(g =&gt; <span class="keyword" data-v-bae9e294="">new</span> { Age = g.Key, Count = g.Count() })
-    .AsEnumerable();</code></pre></section><section data-v-bae9e294=""><h2 data-v-bae9e294="">BLiteSession — Per-Connection Isolation <span style="font-size:.6em;vertical-align:middle;background:rgba(231,76,60,.15);color:var(--blite-red);padding:2px 8px;border-radius:12px;font-weight:600" data-v-bae9e294="">v3.8.0</span></h2><p data-v-bae9e294="">When a single <code data-v-bae9e294="">BLiteEngine</code> instance is shared across multiple concurrent clients (e.g. inside BLite.Server), <code data-v-bae9e294="">BLiteSession</code> provides <strong data-v-bae9e294="">per-connection isolated transaction contexts</strong>. Each session carries its own transaction state so independent callers cannot interfere with each other.</p><p data-v-bae9e294="">Open a session with <code data-v-bae9e294="">engine.OpenSession()</code>. Disposing the session automatically rolls back any uncommitted transaction.</p><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> engine = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">BLiteEngine</span>(<span class="string" data-v-bae9e294="">"data.db"</span>);
+    .Select(g =&gt; <span class="keyword" data-v-53c9b281="">new</span> { Age = g.Key, Count = g.Count() })
+    .AsEnumerable();</code></pre></section><section data-v-53c9b281=""><h2 data-v-53c9b281="">BLiteSession — Per-Connection Isolation <span style="font-size:.6em;vertical-align:middle;background:rgba(231,76,60,.15);color:var(--blite-red);padding:2px 8px;border-radius:12px;font-weight:600" data-v-53c9b281="">v3.8.0</span></h2><p data-v-53c9b281="">When a single <code data-v-53c9b281="">BLiteEngine</code> instance is shared across multiple concurrent clients (e.g. inside BLite.Server), <code data-v-53c9b281="">BLiteSession</code> provides <strong data-v-53c9b281="">per-connection isolated transaction contexts</strong>. Each session carries its own transaction state so independent callers cannot interfere with each other.</p><p data-v-53c9b281="">Open a session with <code data-v-53c9b281="">engine.OpenSession()</code>. Disposing the session automatically rolls back any uncommitted transaction.</p><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> engine = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">BLiteEngine</span>(<span class="string" data-v-53c9b281="">"data.db"</span>);
 
-<span class="comment" data-v-bae9e294="">// One session per connected client / per request</span>
-<span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> session = engine.OpenSession();
+<span class="comment" data-v-53c9b281="">// One session per connected client / per request</span>
+<span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> session = engine.OpenSession();
 
-<span class="comment" data-v-bae9e294="">// Explicit transaction on this session</span>
-<span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> txn = session.BeginTransaction();
+<span class="comment" data-v-53c9b281="">// Explicit transaction on this session</span>
+<span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> txn = session.BeginTransaction();
 
-<span class="keyword" data-v-bae9e294="">try</span>
+<span class="keyword" data-v-53c9b281="">try</span>
 {
-    <span class="keyword" data-v-bae9e294="">await</span> session.InsertAsync(<span class="string" data-v-bae9e294="">"orders"</span>, orderDoc, ct);
-    <span class="keyword" data-v-bae9e294="">await</span> session.InsertAsync(<span class="string" data-v-bae9e294="">"invoices"</span>, invoiceDoc, ct);
-    <span class="keyword" data-v-bae9e294="">await</span> session.CommitAsync(ct);
+    <span class="keyword" data-v-53c9b281="">await</span> session.InsertAsync(<span class="string" data-v-53c9b281="">"orders"</span>, orderDoc, ct);
+    <span class="keyword" data-v-53c9b281="">await</span> session.InsertAsync(<span class="string" data-v-53c9b281="">"invoices"</span>, invoiceDoc, ct);
+    <span class="keyword" data-v-53c9b281="">await</span> session.CommitAsync(ct);
 }
-<span class="keyword" data-v-bae9e294="">catch</span>
+<span class="keyword" data-v-53c9b281="">catch</span>
 {
-    session.Rollback(); <span class="comment" data-v-bae9e294="">// or disposed automatically</span>
-    <span class="keyword" data-v-bae9e294="">throw</span>;
+    session.Rollback(); <span class="comment" data-v-53c9b281="">// or disposed automatically</span>
+    <span class="keyword" data-v-53c9b281="">throw</span>;
 }
 
-<span class="comment" data-v-bae9e294="">// Convenience CRUD without explicit transaction (auto-commit)</span>
-<span class="type" data-v-bae9e294="">BsonId</span> id = <span class="keyword" data-v-bae9e294="">await</span> session.InsertAsync(<span class="string" data-v-bae9e294="">"users"</span>, userDoc, ct);
-<span class="type" data-v-bae9e294="">BsonDocument</span>? doc = <span class="keyword" data-v-bae9e294="">await</span> session.FindByIdAsync(<span class="string" data-v-bae9e294="">"users"</span>, id, ct);
+<span class="comment" data-v-53c9b281="">// Convenience CRUD without explicit transaction (auto-commit)</span>
+<span class="type" data-v-53c9b281="">BsonId</span> id = <span class="keyword" data-v-53c9b281="">await</span> session.InsertAsync(<span class="string" data-v-53c9b281="">"users"</span>, userDoc, ct);
+<span class="type" data-v-53c9b281="">BsonDocument</span>? doc = <span class="keyword" data-v-53c9b281="">await</span> session.FindByIdAsync(<span class="string" data-v-53c9b281="">"users"</span>, id, ct);
 
-<span class="comment" data-v-bae9e294="">// Access collections scoped to this session</span>
-<span class="keyword" data-v-bae9e294="">var</span> col = session.GetOrCreateCollection(<span class="string" data-v-bae9e294="">"events"</span>);
-col.Insert(eventDoc);</code></pre><div class="info-box" data-v-bae9e294=""><strong data-v-bae9e294="">💡 When to use BLiteSession</strong><ul data-v-bae9e294=""><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Server mode</strong> — one session per client connection ensures transaction isolation</li><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Shared engine</strong> — multiple concurrent callers on a single <code data-v-bae9e294="">BLiteEngine</code></li><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Dispose-safe</strong> — uncommitted transactions are rolled back automatically on disposal</li><li data-v-bae9e294="">⚠️ <strong data-v-bae9e294="">Embedded single-process apps</strong> — not required; use <code data-v-bae9e294="">DocumentDbContext</code> or <code data-v-bae9e294="">BLiteEngine</code> directly</li></ul></div></section><section data-v-bae9e294=""><h2 data-v-bae9e294="">Best Practices</h2><ul data-v-bae9e294=""><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Use <code data-v-bae9e294="">SaveChanges()</code></strong> for simple operations (recommended)</li><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Use explicit transactions</strong> for complex logic with conditionals</li><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Always use <code data-v-bae9e294="">using</code></strong> statements to ensure proper disposal</li><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Keep transactions short</strong> to minimize lock contention</li><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Use async methods</strong> for I/O-bound operations to improve scalability</li><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Handle exceptions</strong> gracefully - transactions auto-rollback on error</li><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Pass CancellationToken</strong> for long-running operations to enable timeouts and cancellation</li><li data-v-bae9e294="">✅ <strong data-v-bae9e294="">Thread-safe by design</strong> - BLite handles concurrent transactions automatically</li><li data-v-bae9e294="">⚠️ <strong data-v-bae9e294="">Avoid long-running transactions</strong> that hold resources</li><li data-v-bae9e294="">⚠️ <strong data-v-bae9e294="">Don't nest transactions</strong> - BLite uses a single transaction model</li></ul></section><section data-v-bae9e294=""><h2 data-v-bae9e294="">Hot Backup (v1.8.0)</h2><p data-v-bae9e294="">Create a <strong data-v-bae9e294="">consistent, online backup</strong> of the database without stopping or pausing the engine. Concurrent reads and writes remain safe during the copy.</p><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="comment" data-v-bae9e294="">// Typed API (DocumentDbContext)</span>
-<span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> db = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">MyDbContext</span>(<span class="string" data-v-bae9e294="">"mydb.blite"</span>);
-<span class="keyword" data-v-bae9e294="">await</span> db.BackupAsync(<span class="string" data-v-bae9e294="">"backups/mydb-2026-02-24.blite"</span>);
+<span class="comment" data-v-53c9b281="">// Access collections scoped to this session</span>
+<span class="keyword" data-v-53c9b281="">var</span> col = session.GetOrCreateCollection(<span class="string" data-v-53c9b281="">"events"</span>);
+col.Insert(eventDoc);</code></pre><div class="info-box" data-v-53c9b281=""><strong data-v-53c9b281="">💡 When to use BLiteSession</strong><ul data-v-53c9b281=""><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Server mode</strong> — one session per client connection ensures transaction isolation</li><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Shared engine</strong> — multiple concurrent callers on a single <code data-v-53c9b281="">BLiteEngine</code></li><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Dispose-safe</strong> — uncommitted transactions are rolled back automatically on disposal</li><li data-v-53c9b281="">⚠️ <strong data-v-53c9b281="">Embedded single-process apps</strong> — not required; use <code data-v-53c9b281="">DocumentDbContext</code> or <code data-v-53c9b281="">BLiteEngine</code> directly</li></ul></div></section><section data-v-53c9b281=""><h2 data-v-53c9b281="">Best Practices</h2><ul data-v-53c9b281=""><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Use <code data-v-53c9b281="">SaveChanges()</code></strong> for simple operations (recommended)</li><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Use explicit transactions</strong> for complex logic with conditionals</li><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Always use <code data-v-53c9b281="">using</code></strong> statements to ensure proper disposal</li><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Keep transactions short</strong> to minimize lock contention</li><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Use async methods</strong> for I/O-bound operations to improve scalability</li><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Handle exceptions</strong> gracefully - transactions auto-rollback on error</li><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Pass CancellationToken</strong> for long-running operations to enable timeouts and cancellation</li><li data-v-53c9b281="">✅ <strong data-v-53c9b281="">Thread-safe by design</strong> - BLite handles concurrent transactions automatically</li><li data-v-53c9b281="">⚠️ <strong data-v-53c9b281="">Avoid long-running transactions</strong> that hold resources</li><li data-v-53c9b281="">⚠️ <strong data-v-53c9b281="">Don't nest transactions</strong> - BLite uses a single transaction model</li></ul></section><section data-v-53c9b281=""><h2 data-v-53c9b281="">Hot Backup (v1.8.0)</h2><p data-v-53c9b281="">Create a <strong data-v-53c9b281="">consistent, online backup</strong> of the database without stopping or pausing the engine. Concurrent reads and writes remain safe during the copy.</p><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="comment" data-v-53c9b281="">// Typed API (DocumentDbContext)</span>
+<span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> db = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">MyDbContext</span>(<span class="string" data-v-53c9b281="">"mydb.blite"</span>);
+<span class="keyword" data-v-53c9b281="">await</span> db.BackupAsync(<span class="string" data-v-53c9b281="">"backups/mydb-2026-02-24.blite"</span>);
 
-<span class="comment" data-v-bae9e294="">// Schema-less API (BLiteEngine)</span>
-<span class="keyword" data-v-bae9e294="">using</span> <span class="keyword" data-v-bae9e294="">var</span> engine = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">BLiteEngine</span>(<span class="string" data-v-bae9e294="">"mydb.blite"</span>);
-<span class="keyword" data-v-bae9e294="">await</span> engine.BackupAsync(<span class="string" data-v-bae9e294="">"backups/mydb-2026-02-24.blite"</span>);</code></pre><p data-v-bae9e294="">The backup file is a <strong data-v-bae9e294="">standalone, fully consistent database</strong> that can be opened directly with a new engine instance.</p><div class="info-box" data-v-bae9e294=""><strong data-v-bae9e294="">How it works:</strong><ul data-v-bae9e294=""><li data-v-bae9e294="">Acquires the commit lock (no new commits during copy)</li><li data-v-bae9e294="">Checkpoints WAL into the PageFile</li><li data-v-bae9e294="">Copies the PageFile to the destination path</li><li data-v-bae9e294="">Releases the lock — writes resume immediately</li><li data-v-bae9e294="">WAL is <strong data-v-bae9e294="">not</strong> copied — the destination is already consistent</li></ul></div><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="comment" data-v-bae9e294="">// With CancellationToken support</span>
-<span class="keyword" data-v-bae9e294="">var</span> cts = <span class="keyword" data-v-bae9e294="">new</span> <span class="type" data-v-bae9e294="">CancellationTokenSource</span>(<span class="type" data-v-bae9e294="">TimeSpan</span>.FromSeconds(<span class="number" data-v-bae9e294="">30</span>));
-<span class="keyword" data-v-bae9e294="">await</span> db.BackupAsync(<span class="string" data-v-bae9e294="">"backup.blite"</span>, cts.Token);</code></pre></section><section data-v-bae9e294=""><h2 data-v-bae9e294="">Error Handling with Explicit Transactions</h2><pre data-v-bae9e294=""><code data-v-bae9e294=""><span class="keyword" data-v-bae9e294="">try</span>
+<span class="comment" data-v-53c9b281="">// Schema-less API (BLiteEngine)</span>
+<span class="keyword" data-v-53c9b281="">using</span> <span class="keyword" data-v-53c9b281="">var</span> engine = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">BLiteEngine</span>(<span class="string" data-v-53c9b281="">"mydb.blite"</span>);
+<span class="keyword" data-v-53c9b281="">await</span> engine.BackupAsync(<span class="string" data-v-53c9b281="">"backups/mydb-2026-02-24.blite"</span>);</code></pre><p data-v-53c9b281="">The backup file is a <strong data-v-53c9b281="">standalone, fully consistent database</strong> that can be opened directly with a new engine instance.</p><div class="info-box" data-v-53c9b281=""><strong data-v-53c9b281="">How it works:</strong><ul data-v-53c9b281=""><li data-v-53c9b281="">Acquires the commit lock (no new commits during copy)</li><li data-v-53c9b281="">Checkpoints WAL into the PageFile</li><li data-v-53c9b281="">Copies the PageFile to the destination path</li><li data-v-53c9b281="">Releases the lock — writes resume immediately</li><li data-v-53c9b281="">WAL is <strong data-v-53c9b281="">not</strong> copied — the destination is already consistent</li></ul></div><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="comment" data-v-53c9b281="">// With CancellationToken support</span>
+<span class="keyword" data-v-53c9b281="">var</span> cts = <span class="keyword" data-v-53c9b281="">new</span> <span class="type" data-v-53c9b281="">CancellationTokenSource</span>(<span class="type" data-v-53c9b281="">TimeSpan</span>.FromSeconds(<span class="number" data-v-53c9b281="">30</span>));
+<span class="keyword" data-v-53c9b281="">await</span> db.BackupAsync(<span class="string" data-v-53c9b281="">"backup.blite"</span>, cts.Token);</code></pre></section><section data-v-53c9b281=""><h2 data-v-53c9b281="">Error Handling with Explicit Transactions</h2><pre data-v-53c9b281=""><code data-v-53c9b281=""><span class="keyword" data-v-53c9b281="">try</span>
 {
-    <span class="keyword" data-v-bae9e294="">await using</span> <span class="keyword" data-v-bae9e294="">var</span> txn = <span class="keyword" data-v-bae9e294="">await</span> db.BeginTransactionAsync();
+    <span class="keyword" data-v-53c9b281="">await using</span> <span class="keyword" data-v-53c9b281="">var</span> txn = <span class="keyword" data-v-53c9b281="">await</span> db.BeginTransactionAsync();
     
-    <span class="keyword" data-v-bae9e294="">await</span> db.Users.InsertAsync(newUser);
-    <span class="keyword" data-v-bae9e294="">await</span> txn.CommitAsync();
+    <span class="keyword" data-v-53c9b281="">await</span> db.Users.InsertAsync(newUser);
+    <span class="keyword" data-v-53c9b281="">await</span> txn.CommitAsync();
 }
-<span class="keyword" data-v-bae9e294="">catch</span> (<span class="type" data-v-bae9e294="">TransactionConflictException</span> ex)
+<span class="keyword" data-v-53c9b281="">catch</span> (<span class="type" data-v-53c9b281="">TransactionConflictException</span> ex)
 {
-    <span class="comment" data-v-bae9e294="">// Handle write conflicts (e.g., retry logic)</span>
-    Console.WriteLine(<span class="string" data-v-bae9e294="">"Conflict detected, retrying..."</span>);
+    <span class="comment" data-v-53c9b281="">// Handle write conflicts (e.g., retry logic)</span>
+    Console.WriteLine(<span class="string" data-v-53c9b281="">"Conflict detected, retrying..."</span>);
 }
-<span class="keyword" data-v-bae9e294="">catch</span> (<span class="type" data-v-bae9e294="">ValidationException</span> ex)
+<span class="keyword" data-v-53c9b281="">catch</span> (<span class="type" data-v-53c9b281="">ValidationException</span> ex)
 {
-    <span class="comment" data-v-bae9e294="">// Handle validation errors from attributes</span>
-    Console.WriteLine($<span class="string" data-v-bae9e294="">"Validation failed: {ex.Message}"</span>);
-}</code></pre></section></div></div></main></div></main><footer class="main-footer" data-v-35eb30e6=""><div class="container footer-inner" data-v-35eb30e6=""><div class="footer-col" data-v-35eb30e6=""><p data-v-35eb30e6="">© 2026 BLite Project. Open Source (MIT).</p><p class="tagline" data-v-35eb30e6="">"Sky is Blite, no Clouds today."</p></div><div class="footer-col footer-downloads" data-v-35eb30e6=""><p class="footer-dl-title" data-v-35eb30e6="">⬇ Download BLite Studio v4.4.0</p><div class="footer-dl-links" data-v-35eb30e6=""><a href="https://github.com/EntglDb/BLite/releases/download/studio-v4.4.0/BLite.Studio-4.4.0-win-x64.msi" data-v-35eb30e6="">🪟 Windows MSI</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v4.4.0/BLite.Studio-4.4.0-win-x64-portable.zip" data-v-35eb30e6="">🪟 Windows Portable</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v4.4.0/blite-studio_4.4.0_amd64.deb" data-v-35eb30e6="">🐧 Linux .deb</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v4.4.0/BLite.Studio-4.4.0-linux-x64.tar.gz" data-v-35eb30e6="">🐧 Linux tar.gz</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v4.4.0/BLite.Studio-4.4.0-osx-arm64.dmg" data-v-35eb30e6="">🍎 macOS Apple Silicon</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v4.4.0/BLite.Studio-4.4.0-osx-x64.dmg" data-v-35eb30e6="">🍎 macOS Intel</a></div></div></div></footer></div></div></body></html>
+    <span class="comment" data-v-53c9b281="">// Handle validation errors from attributes</span>
+    Console.WriteLine($<span class="string" data-v-53c9b281="">"Validation failed: {ex.Message}"</span>);
+}</code></pre></section></div></div></main></div></main><footer class="main-footer" data-v-6d0f73f5=""><div class="container footer-inner" data-v-6d0f73f5=""><div class="footer-col" data-v-6d0f73f5=""><p data-v-6d0f73f5="">© 2026 BLite Project. Open Source (MIT).</p><p class="tagline" data-v-6d0f73f5="">"Sky is Blite, no Clouds today."</p></div><div class="footer-col footer-downloads" data-v-6d0f73f5=""><p class="footer-dl-title" data-v-6d0f73f5="">⬇ Download BLite Studio v5.0.0</p><div class="footer-dl-links" data-v-6d0f73f5=""><a href="https://github.com/EntglDb/BLite/releases/download/studio-v5.0.0/BLite.Studio-5.0.0-win-x64.msi" data-v-6d0f73f5="">🧻 Windows MSI</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v5.0.0/BLite.Studio-5.0.0-win-x64-portable.zip" data-v-6d0f73f5="">🧻 Windows Portable</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v5.0.0/blite-studio_5.0.0_amd64.deb" data-v-6d0f73f5="">🐧 Linux .deb</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v5.0.0/BLite.Studio-5.0.0-linux-x64.tar.gz" data-v-6d0f73f5="">🐧 Linux tar.gz</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v5.0.0/BLite.Studio-5.0.0-osx-arm64.dmg" data-v-6d0f73f5="">🍎 macOS Apple Silicon</a><a href="https://github.com/EntglDb/BLite/releases/download/studio-v5.0.0/BLite.Studio-5.0.0-osx-x64.dmg" data-v-6d0f73f5="">🍎 macOS Intel</a></div></div></div></footer></div></div></body></html>

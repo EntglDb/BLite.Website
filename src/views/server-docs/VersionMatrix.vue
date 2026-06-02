@@ -112,6 +112,14 @@ interface ClientRow {
 
 const serverMatrix: ServerRow[] = [
   {
+    server: '2.0.0',
+    engine: '5.0.0',
+    status: 'stable',
+    statusLabel: 'Stable',
+    date: '2026-06-02',
+    notes: 'Current stable release. BLite 5.0.0: AES-256-GCM encryption at rest, Audit Trail (IBLiteAuditSink, BLiteMetrics, OTel), full GDPR toolkit ([PersonalData], subject export, GdprMode.Strict), generalized retention policies, secure erase, VacuumAsync, multi-process WAL. New REST endpoints: /gdpr/inspect, /gdpr/export-subject, /metrics, /vacuum. New Studio GDPR page.'
+  },
+  {
     server: '1.0.1',
     engine: '4.4.0',
     status: 'stable',
@@ -154,6 +162,7 @@ const serverMatrix: ServerRow[] = [
 ]
 
 const clientMatrix: ClientRow[] = [
+  { server: '2.0.0', dotnet: '2.0.x', npm: '2.0.x', java: '2.0.x' },
   { server: '1.0.1', dotnet: '1.0.x', npm: '1.0.x', java: '1.0.x' },
   { server: '1.0.x', dotnet: '1.0.x', npm: '1.0.x', java: '1.0.x' },
   { server: '0.3.x', dotnet: '0.3.x', npm: '0.3.x', java: '0.3.x' },

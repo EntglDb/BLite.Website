@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const VERSION = '3.7.0'
+const VERSION = '5.0.0'
 const BASE = `https://github.com/EntglDb/BLite/releases/download/studio-v${VERSION}`
 
 const downloads = [
@@ -36,6 +36,9 @@ const features = [
   { icon: '📋', title: 'Connection History', description: 'Quickly reopen recent databases with saved access settings.' },
   { icon: '🔒', title: 'Read-Only Mode', description: 'Open databases in safe read-only mode to prevent accidental writes.' },
   { icon: '🌐', title: 'Cross-Platform', description: 'Native builds for Windows, Linux and macOS (Intel & Apple Silicon).' },
+  { icon: '🔐', title: 'Encryption at Rest', description: 'Visual indicator for AES-256-GCM encrypted databases. Passphrase prompt on open — no plaintext key ever stored.' },
+  { icon: '🛡️', title: 'GDPR Inspector', description: 'Art. 30 inspection report, per-collection personal-data field listing, retention policy summary, and one-click subject data export.' },
+  { icon: '📊', title: 'Audit Metrics', description: 'Live insert/query/commit counters, average latencies, and OpenTelemetry span summary — all visible without leaving the app.' },
 ]
 </script>
 

@@ -16,13 +16,55 @@
       </p>
       <ul>
         <li><strong>gRPC endpoint</strong> — high-throughput, binary protocol on port <code>2626</code></li>
-        <li><strong>REST API</strong> — JSON over HTTP on port <code>2627</code> with OpenAPI / Swagger UI</li>
+        <li><strong>REST API</strong> — JSON over HTTP on port <code>2627</code> with OpenAPI / Scalar UI</li>
         <li><strong>Blazor Web Studio</strong> — browser-based management UI on port <code>2628</code></li>
         <li><strong>Multi-tenancy</strong> — isolated databases per user or namespace</li>
         <li><strong>API-key auth</strong> — fine-grained per-collection permissions</li>
         <li><strong>BLQL</strong> — full MQL-style query language available over both gRPC and REST</li>
         <li><strong>Transactions</strong> — cross-collection ACID transactions over the network</li>
       </ul>
+    </section>
+
+    <section>
+      <h2>What's New in BLite.Server 2.0.0</h2>
+      <p>BLite.Server 2.0.0 is built on <strong>BLite 5.0.0</strong> and exposes all new engine capabilities over REST and the Studio UI:</p>
+      <table class="info-table">
+        <thead>
+          <tr><th>Feature</th><th>Engine</th><th>Server exposure</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>🔐 AES-256-GCM Encryption</strong></td>
+            <td>CryptoOptions on engine builder</td>
+            <td>Reported in GDPR inspection; transparent to clients</td>
+          </tr>
+          <tr>
+            <td><strong>📊 Audit Trail</strong></td>
+            <td>IBLiteAuditSink, BLiteMetrics</td>
+            <td><code>GET /{dbId}/metrics</code> REST endpoint; engine-level counters</td>
+          </tr>
+          <tr>
+            <td><strong>🛡️ GDPR Primitives</strong></td>
+            <td>GdprEngineExtensions, [PersonalData]</td>
+            <td><code>/gdpr/inspect</code>, <code>/gdpr/export-subject</code> REST + Studio GDPR page</td>
+          </tr>
+          <tr>
+            <td><strong>♻️ Generalized Retention</strong></td>
+            <td>HasRetentionPolicy on any collection</td>
+            <td>Reported per-collection in GDPR inspection</td>
+          </tr>
+          <tr>
+            <td><strong>🗑️ Vacuum</strong></td>
+            <td>engine.VacuumAsync()</td>
+            <td><code>POST /{dbId}/vacuum</code> REST + Studio GDPR page</td>
+          </tr>
+          <tr>
+            <td><strong>🔀 Multi-Process WAL</strong></td>
+            <td>PageFileConfig.EnableMultiProcessAccess</td>
+            <td>Configured at engine startup</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
 
     <section>
@@ -140,6 +182,11 @@
         <router-link to="/server/clients" class="link-card">
           <span class="lc-icon">📡</span>
           <span class="lc-text">Client SDKs</span>
+          <span class="lc-arrow">→</span>
+        </router-link>
+        <router-link to="/server/version-matrix" class="link-card">
+          <span class="lc-icon">🔗</span>
+          <span class="lc-text">Version Matrix</span>
           <span class="lc-arrow">→</span>
         </router-link>
       </div>
