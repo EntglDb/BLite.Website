@@ -86,21 +86,20 @@ col.HasRetentionPolicy(<span class="keyword">new</span> <span class="type">Reten
 
     <section>
       <h2>Secure Erase</h2>
-      <p>When <code>HasSecureErase</code> is configured on a collection, BLite zero-overwrites the page regions previously occupied by a deleted document before reclaiming them. This prevents data recovery from the raw file:</p>
-      <pre><code>col.HasSecureErase();</code></pre>
+      <p>When secure erase is active, BLite zero-overwrites the page regions previously occupied by a deleted document before reclaiming them. This prevents data recovery from the raw file.</p>
       <div class="doc-callout doc-callout-info">
-        Secure erase adds one extra write per deleted document. Enable it only for collections that store personal or sensitive data.
+        <strong>Note:</strong> <code>SecureEraseOnDelete</code> as an engine-level or per-collection toggle is not yet available. In <code>GdprMode.Strict</code> BLite logs a diagnostic warning to signal this gap. Vacuum operations do support a <code>SecureErase</code> flag via <code>VacuumOptions</code> to overwrite freed pages during compaction.
       </div>
     </section>
 
     <section>
       <h2>GdprMode.Strict</h2>
       <p>In strict mode the engine rejects schema-less (dynamic) writes to any collection that has a registered typed schema containing <code>[PersonalData]</code> fields. This prevents accidental untagged writes:</p>
-      <pre><code><span class="keyword">var</span> options = <span class="keyword">new</span> <span class="type">BLiteEngineOptions</span>
+      <pre><code><span class="keyword">var</span> kvOptions = <span class="keyword">new</span> <span class="type">BLiteKvOptions</span>
 {
-    DatabasePath = <span class="string">"mydb.blite"</span>,
-    GdprMode     = <span class="type">GdprMode</span>.Strict
-};</code></pre>
+    DefaultGdprMode = <span class="type">GdprMode</span>.Strict
+};
+<span class="keyword">using var</span> engine = <span class="keyword">new</span> <span class="type">BLiteEngine</span>(<span class="string">"mydb.blite"</span>, kvOptions);</code></pre>
     </section>
 
     <section>

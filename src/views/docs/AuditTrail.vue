@@ -17,29 +17,32 @@
       <h2>Enabling the Audit Sink</h2>
       <pre><code><span class="keyword">using</span> <span class="type">BLite.Core.Audit</span>;
 
-<span class="keyword">var</span> options = <span class="keyword">new</span> <span class="type">BLiteEngineOptions</span>
-{
-    DatabasePath = <span class="string">"mydb.blite"</span>,
-    AuditSink    = <span class="keyword">new</span> <span class="type">ConsoleBLiteAuditSink</span>()   <span class="comment">// built-in for dev</span>
-};
+<span class="keyword">using var</span> engine = <span class="keyword">new</span> <span class="type">BLiteEngine</span>(<span class="string">"mydb.blite"</span>);
 
-<span class="keyword">await using var</span> engine = <span class="keyword">new</span> <span class="type">BLiteEngine</span>(options);</code></pre>
+engine.ConfigureAudit(<span class="keyword">new</span> <span class="type">BLiteAuditOptions</span>
+{
+    Sink           = <span class="keyword">new</span> <span class="type">MyAuditSink</span>(),    <span class="comment">// your IBLiteAuditSink implementation</span>
+    EnableMetrics  = <span class="keyword">true</span>,
+    SlowOperationThreshold = <span class="type">TimeSpan</span>.FromMilliseconds(<span class="number">100</span>)
+});</code></pre>
     </section>
 
     <section>
       <h2>Custom Audit Sink</h2>
       <p>Implement <code>IBLiteAuditSink</code> to forward events to any backend:</p>
-      <pre><code><span class="keyword">public class</span> <span class="type">PostgresAuditSink</span> : <span class="type">IBLiteAuditSink</span>
+      <pre><code><span class="comment">// IBLiteAuditSink methods are synchronous — queue async work internally if needed</span>
+<span class="keyword">public class</span> <span class="type">PostgresAuditSink</span> : <span class="type">IBLiteAuditSink</span>
 {
-    <span class="keyword">public async</span> <span class="type">ValueTask</span> OnWriteAsync(<span class="type">BLiteAuditEntry</span> entry, <span class="type">CancellationToken</span> ct)
+    <span class="keyword">public void</span> OnInsert(<span class="type">InsertAuditEvent</span> e)
     {
-        <span class="comment">// entry.Collection, entry.OperationType, entry.DocumentId,</span>
-        <span class="comment">// entry.CallerContext, entry.Timestamp</span>
-        <span class="keyword">await</span> _db.ExecuteAsync(
-            <span class="string">"INSERT INTO audit_log (collection, op, doc_id, caller, ts) VALUES (@col, @op, @id, @ctx, @ts)"</span>,
-            <span class="keyword">new</span> { col = entry.Collection, op = entry.OperationType.ToString(),
-                  id  = entry.DocumentId.ToString(), ctx = entry.CallerContext,
-                  ts  = entry.Timestamp }, cancellationToken: ct);
+        <span class="comment">// e.CollectionName, e.DocumentSizeBytes, e.Elapsed, e.UserId, e.TransactionId</span>
+        _channel.Writer.TryWrite((<span class="string">"insert"</span>, e.CollectionName, e.UserId, <span class="type">DateTime</span>.UtcNow));
+    }
+
+    <span class="keyword">public void</span> OnCommit(<span class="type">CommitAuditEvent</span> e)
+    {
+        <span class="comment">// e.CollectionName, e.PagesWritten, e.WalSizeBytes, e.Elapsed, e.UserId</span>
+        _channel.Writer.TryWrite((<span class="string">"commit"</span>, e.CollectionName, e.UserId, <span class="type">DateTime</span>.UtcNow));
     }
 }</code></pre>
     </section>

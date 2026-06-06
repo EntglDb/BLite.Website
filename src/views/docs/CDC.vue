@@ -16,8 +16,8 @@
 
     <section>
       <h2>Basic Usage</h2>
-      <pre><code><span class="comment">// 1. Typed Mode (DbContext)</span>
-<span class="keyword">var</span> users = db.GetCollection&lt;<span class="type">User</span>&gt;();
+      <pre><code><span class="comment">// 1. Typed Mode (DbContext) — db is your DocumentDbContext subclass</span>
+<span class="keyword">var</span> users = db.Users;  <span class="comment">// DocumentCollection&lt;ObjectId, User&gt; property</span>
 users.Watch().Subscribe(change => { ... });
 
 <span class="comment">// 2. Dynamic Mode (DynamicCollection) — v3.6.0</span>
@@ -99,8 +99,9 @@ subscription.Dispose();</code></pre>
 
     <section>
       <h2>Full Example</h2>
-      <pre><code><span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">DocumentDb</span>(<span class="string">"mydb.blite"</span>);
-<span class="keyword">var</span> users = db.GetCollection&lt;<span class="type">User</span>&gt;();
+      <pre><code><span class="comment">// AppDbContext extends DocumentDbContext and exposes typed collections</span>
+<span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">AppDbContext</span>(<span class="string">"mydb.blite"</span>);
+<span class="keyword">var</span> users = db.Users;  <span class="comment">// DocumentCollection&lt;ObjectId, User&gt;</span>
 
 <span class="comment">// Real-time cache updater</span>
 <span class="keyword">var</span> cacheSubscription = users.Watch()

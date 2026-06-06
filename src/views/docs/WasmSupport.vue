@@ -150,7 +150,7 @@ builder.Services.AddBLiteWasm(<span class="string">"mydb"</span>);</code></pre>
 {
     <span class="keyword">public</span> <span class="type">AppDb</span>(<span class="type">StorageEngine</span> storage) : <span class="keyword">base</span>(storage) { }
 
-    <span class="keyword">public</span> <span class="type">DocumentCollection</span>&lt;<span class="type">Todo</span>&gt; Todos =&gt; GetCollection&lt;<span class="type">Todo</span>&gt;();
+    <span class="keyword">public</span> <span class="type">DocumentCollection</span>&lt;<span class="type">ObjectId</span>, <span class="type">Todo</span>&gt; Todos { <span class="keyword">get</span>; <span class="keyword">set</span>; } = <span class="keyword">null</span>!;
 }
 
 <span class="comment">// Blazor WASM Program.cs</span>

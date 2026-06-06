@@ -35,7 +35,7 @@ Console.WriteLine(user.Id);</code></pre>
     <span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Diana"</span>, Age = <span class="number">28</span> }
 };
 
-<span class="keyword">await</span> users.InsertManyAsync(batch);</code></pre>
+<span class="keyword">await</span> users.InsertBulkAsync(batch);</code></pre>
     </section>
 
     <section>

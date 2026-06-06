@@ -1,153 +1,80 @@
 <template>
   <div class="doc-page">
     <h1>🔄 Transactions</h1>
-    <p class="lead">BLite provides full ACID transaction support with Write-Ahead Logging (WAL) for durability and crash recovery. Thread-safe with built-in protection against race conditions.</p>
+    <p class="lead">BLite provides full ACID transaction support with Write-Ahead Logging (WAL) for durability and crash recovery. All write operations are async-only since v4.0.0.</p>
 
     <section>
-      <h2>Implicit Transactions (Recommended)</h2>
-      <p>Use <code>SaveChanges()</code> or <code>SaveChangesAsync()</code> for automatic transaction management - similar to Entity Framework Core:</p>
-      
-      <h3>Synchronous Example</h3>
-      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">MyDbContext</span>(<span class="string">"mydb.blite"</span>);
+      <h2>Auto-commit (Default Behavior)</h2>
+      <p>
+        By default every write operation (<code>InsertAsync</code>, <code>UpdateAsync</code>, <code>DeleteAsync</code>)
+        is individually auto-committed when no explicit transaction is passed.
+        This is the simplest model and is sufficient for most use cases.
+      </p>
 
-<span class="comment">// Begin implicit transaction automatically</span>
-<span class="keyword">var</span> alice = <span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Alice"</span>, Age = <span class="number">30</span> };
-<span class="keyword">var</span> bob = <span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Bob"</span>, Age = <span class="number">25</span> };
+      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">AppDbContext</span>(<span class="string">"mydb.blite"</span>);
 
-db.Users.Insert(alice);
-db.Users.Insert(bob);
+<span class="comment">// Each operation commits immediately — no transaction needed</span>
+<span class="keyword">await</span> db.Users.InsertAsync(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Alice"</span>, Age = <span class="number">30</span> });
+<span class="keyword">await</span> db.Users.InsertAsync(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Bob"</span>, Age = <span class="number">25</span> });</code></pre>
 
-<span class="comment">// Commit all changes atomically</span>
-db.SaveChanges();</code></pre>
-
-      <h3>Async Example</h3>
-      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">MyDbContext</span>(<span class="string">"mydb.blite"</span>);
-
-<span class="comment">// Insert multiple documents</span>
-db.Users.Insert(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Charlie"</span>, Age = <span class="number">35</span> });
-db.Users.Insert(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Diana"</span>, Age = <span class="number">28</span> });
-
-<span class="comment">// Commit asynchronously</span>
-<span class="keyword">await</span> db.SaveChangesAsync();</code></pre>
-
-      <h3>Update & Delete Example</h3>
-      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">MyDbContext</span>(<span class="string">"mydb.blite"</span>);
-
-<span class="comment">// Load and modify</span>
-<span class="keyword">var</span> user = db.Users.FindById(userId);
-user.Age = <span class="number">31</span>;
-db.Users.Update(user);
-
-<span class="comment">// Delete another</span>
-db.Users.Delete(oldUserId);
-
-<span class="comment">// Both operations committed together</span>
-db.SaveChanges();</code></pre>
-
-      <h3>Bulk Operations</h3>
-      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">MyDbContext</span>(<span class="string">"mydb.blite"</span>);
-
-<span class="keyword">var</span> newUsers = <span class="keyword">new</span> <span class="type">List</span>&lt;<span class="type">User</span>&gt;
+      <h3>Bulk Insert</h3>
+      <pre><code><span class="keyword">var</span> newUsers = <span class="keyword">new</span> <span class="type">List</span>&lt;<span class="type">User</span>&gt;
 {
-    <span class="keyword">new</span> { Name = <span class="string">"User1"</span>, Age = <span class="number">20</span> },
-    <span class="keyword">new</span> { Name = <span class="string">"User2"</span>, Age = <span class="number">21</span> },
-    <span class="keyword">new</span> { Name = <span class="string">"User3"</span>, Age = <span class="number">22</span> }
+    <span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"User1"</span>, Age = <span class="number">20</span> },
+    <span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"User2"</span>, Age = <span class="number">21</span> },
+    <span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"User3"</span>, Age = <span class="number">22</span> }
 };
 
-db.Users.InsertMany(newUsers);
-<span class="keyword">await</span> db.SaveChangesAsync();</code></pre>
+<span class="comment">// InsertBulkAsync auto-commits all documents in one WAL write</span>
+<span class="keyword">await</span> db.Users.InsertBulkAsync(newUsers);</code></pre>
 
       <div class="info-box">
-        <strong>💡 Why Use Implicit Transactions?</strong>
-        <ul>
-          <li>✅ <strong>Simpler code</strong> - No manual transaction management</li>
-          <li>✅ <strong>Familiar pattern</strong> - Same as Entity Framework Core</li>
-          <li>✅ <strong>Automatic begin</strong> - Transaction starts on first operation</li>
-          <li>✅ <strong>Automatic cleanup</strong> - Auto-rollback on exceptions</li>
-          <li>✅ <strong>Thread-safe</strong> - Built-in concurrency protection</li>
-        </ul>
+        <strong>💡 About <code>SaveChangesAsync()</code></strong>
+        <p style="margin:8px 0 0">
+          <code>SaveChangesAsync()</code> called without a transaction argument is a <strong>no-op</strong> — it exists
+          only for API compatibility. For atomic multi-operation batches use an
+          explicit transaction (see below) and call <code>SaveChangesAsync(txn)</code> or
+          <code>txn.CommitAsync()</code>.
+        </p>
       </div>
     </section>
 
     <section>
       <h2>Explicit Transactions</h2>
-      <p>For fine-grained control, use explicit transactions:</p>
-      <pre><code><span class="keyword">using</span> BLite.Core;
+      <p>
+        For atomic multi-operation batches, pass an <code>ITransaction</code> to each write method.
+        The changes are held in WAL memory and only flushed on commit.
+        Disposing without committing automatically rolls back.
+      </p>
 
-<span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">DocumentDb</span>(<span class="string">"mydb.blite"</span>);
-<span class="keyword">var</span> users = db.GetCollection&lt;<span class="type">User</span>&gt;();
-
-<span class="comment">// Begin a transaction</span>
-<span class="keyword">using</span> <span class="keyword">var</span> txn = db.BeginTransaction();
-
-<span class="keyword">try</span>
-{
-    users.Insert(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Alice"</span>, Age = <span class="number">30</span> });
-    users.Insert(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Bob"</span>, Age = <span class="number">25</span> });
-    
-    <span class="comment">// Commit all changes</span>
-    txn.Commit();
-}
-<span class="keyword">catch</span>
-{
-    <span class="comment">// Automatically rolled back on dispose if not committed</span>
-    <span class="keyword">throw</span>;
-}</code></pre>
-    </section>
-
-    <section>
-      <h2>Explicit Transactions</h2>
-      <p>For fine-grained control, use explicit transactions:</p>
-      
       <h3>Basic Explicit Transaction</h3>
-      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">MyDbContext</span>(<span class="string">"mydb.blite"</span>);
+      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">AppDbContext</span>(<span class="string">"mydb.blite"</span>);
 
-<span class="comment">// Begin explicit transaction</span>
+<span class="comment">// Begin a transaction — ITransaction implements IDisposable</span>
 <span class="keyword">using</span> <span class="keyword">var</span> txn = db.BeginTransaction();
 
 <span class="keyword">try</span>
 {
-    db.Users.Insert(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Alice"</span>, Age = <span class="number">30</span> });
-    db.Users.Insert(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Bob"</span>, Age = <span class="number">25</span> });
-    
-    <span class="comment">// Explicit commit</span>
-    txn.Commit();
+    <span class="comment">// Pass txn to every write that must be atomic</span>
+    <span class="keyword">await</span> db.Users.InsertAsync(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Alice"</span>, Age = <span class="number">30</span> }, txn);
+    <span class="keyword">await</span> db.Users.InsertAsync(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Bob"</span>, Age = <span class="number">25</span> }, txn);
+
+    <span class="keyword">await</span> txn.CommitAsync(); <span class="comment">// or: await db.SaveChangesAsync(txn)</span>
 }
 <span class="keyword">catch</span>
 {
-    <span class="comment">// Automatically rolled back on dispose if not committed</span>
+    <span class="comment">// Automatically rolled back on dispose if CommitAsync was not called</span>
     <span class="keyword">throw</span>;
 }</code></pre>
 
-      <h3>When to Use Explicit Transactions</h3>
-      <ul>
-        <li>✅ Complex multi-step operations with conditional logic</li>
-        <li>✅ When you need to control exactly when commit happens</li>
-        <li>✅ Operations spanning multiple collections with dependencies</li>
-        <li>✅ When you need to rollback based on business logic</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Async Operations</h2>
-      <p>BLite supports async/await patterns for non-blocking I/O:</p>
-      
-      <h3>Async Implicit Transaction</h3>
-      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">MyDbContext</span>(<span class="string">"mydb.blite"</span>);
-
-db.Users.Insert(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Alice"</span> });
-db.Users.Insert(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Bob"</span> });
-
-<span class="keyword">await</span> db.SaveChangesAsync();</code></pre>
-
-      <h3>Async Explicit Transaction</h3>
-      <pre><code><span class="keyword">await using</span> <span class="keyword">var</span> txn = <span class="keyword">await</span> db.BeginTransactionAsync();
+      <h3>Async BeginTransactionAsync</h3>
+      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> txn = <span class="keyword">await</span> db.BeginTransactionAsync();
 
 <span class="keyword">try</span>
 {
-    <span class="keyword">await</span> db.Users.InsertAsync(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Charlie"</span> });
-    <span class="keyword">await</span> db.Users.UpdateAsync(existingUser);
-    
+    <span class="keyword">await</span> db.Users.InsertAsync(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Charlie"</span> }, txn);
+    <span class="keyword">await</span> db.Users.UpdateAsync(existingUser, txn);
+
     <span class="keyword">await</span> txn.CommitAsync();
 }
 <span class="keyword">catch</span>
@@ -156,186 +83,153 @@ db.Users.Insert(<span class="keyword">new</span> <span class="type">User</span> 
     <span class="keyword">throw</span>;
 }</code></pre>
 
-      <h3>Bulk Async Operations with SaveChangesAsync</h3>
-      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">MyDbContext</span>(<span class="string">"mydb.blite"</span>);
-
-<span class="keyword">var</span> newUsers = <span class="keyword">new</span> <span class="type">List</span>&lt;<span class="type">User</span>&gt;
-{
-    <span class="keyword">new</span> { Name = <span class="string">"User1"</span>, Age = <span class="number">20</span> },
-    <span class="keyword">new</span> { Name = <span class="string">"User2"</span>, Age = <span class="number">21</span> },
-    <span class="keyword">new</span> { Name = <span class="string">"User3"</span>, Age = <span class="number">22</span> }
-};
-
-<span class="keyword">await</span> db.Users.InsertManyAsync(newUsers);
-<span class="keyword">await</span> db.SaveChangesAsync();</code></pre>
+      <h3>When to Use Explicit Transactions</h3>
+      <ul>
+        <li>✅ Two or more writes that must succeed or fail together</li>
+        <li>✅ Complex multi-step operations with conditional logic</li>
+        <li>✅ Operations spanning multiple collections with dependencies</li>
+        <li>✅ When you need to roll back based on business logic</li>
+      </ul>
     </section>
 
     <section>
-      <h2>Comparing Implicit vs Explicit</h2>
-      
-      <h3>💡 Implicit Transactions (SaveChanges)</h3>
+      <h2>Comparing Auto-commit vs Explicit</h2>
+
+      <h3>⚡ Auto-commit (default)</h3>
       <div class="comparison-box success">
         <strong>Best for:</strong>
         <ul>
-          <li>Simple CRUD operations</li>
-          <li>Batch inserts/updates/deletes</li>
-          <li>When you want EF Core-like experience</li>
-          <li>Rapid development</li>
+          <li>Independent inserts, updates, deletes</li>
+          <li>Bulk operations via <code>InsertBulkAsync</code></li>
+          <li>Rapid development and simple CRUD</li>
         </ul>
-        <pre><code><span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">MyDbContext</span>(<span class="string">"mydb.blite"</span>);
-db.Users.Insert(user1);
-db.Users.Insert(user2);
-db.SaveChanges(); <span class="comment">// Simple!</span></code></pre>
+        <pre><code><span class="comment">// Each write commits immediately</span>
+<span class="keyword">await</span> db.Users.InsertAsync(user1);
+<span class="keyword">await</span> db.Users.InsertAsync(user2);</code></pre>
       </div>
 
-      <h3>🔧 Explicit Transactions (BeginTransaction)</h3>
+      <h3>🔧 Explicit Transactions (<code>BeginTransaction</code>)</h3>
       <div class="comparison-box warning">
         <strong>Best for:</strong>
         <ul>
+          <li>Atomic multi-write batches</li>
           <li>Complex business logic with conditionals</li>
-          <li>Manual rollback control</li>
           <li>Cross-collection atomic operations</li>
-          <li>Fine-grained error handling</li>
+          <li>Fine-grained rollback control</li>
         </ul>
         <pre><code><span class="keyword">using</span> <span class="keyword">var</span> txn = db.BeginTransaction();
-<span class="keyword">try</span> {
-    db.Users.Insert(user);
-    <span class="keyword">if</span> (condition) txn.Commit();
-    <span class="keyword">else</span> txn.Rollback();
-} <span class="keyword">catch</span> { txn.Rollback(); }</code></pre>
+<span class="keyword">await</span> db.Users.InsertAsync(user, txn);
+<span class="keyword">if</span> (condition) <span class="keyword">await</span> txn.CommitAsync();
+<span class="keyword">else</span> <span class="keyword">await</span> txn.RollbackAsync();</code></pre>
       </div>
-    </section>
-
-    <section>
-      <h2>Error Handling with Implicit Transactions</h2>
-      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">MyDbContext</span>(<span class="string">"mydb.blite"</span>);
-
-<span class="keyword">try</span>
-{
-    db.Users.Insert(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Alice"</span> });
-    db.Users.Insert(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Bob"</span> });
-    
-    db.SaveChanges();
-}
-<span class="keyword">catch</span> (<span class="type">ValidationException</span> ex)
-{
-    <span class="comment">// Transaction auto-rolled back</span>
-    Console.WriteLine($<span class="string">"Validation failed: {ex.Message}"</span>);
-}
-<span class="keyword">catch</span> (<span class="type">IOException</span> ex)
-{
-    <span class="comment">// WAL write failure</span>
-    Console.WriteLine($<span class="string">"I/O error: {ex.Message}"</span>);
-}</code></pre>
     </section>
 
     <section>
       <h2>Batch Operations with Explicit Transactions</h2>
-      <p>Perform multiple operations atomically:</p>
-      <pre><code><span class="keyword">await using</span> <span class="keyword">var</span> txn = <span class="keyword">await</span> db.BeginTransactionAsync();
+      <p>Perform a delete-then-insert atomically:</p>
+      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> txn = <span class="keyword">await</span> db.BeginTransactionAsync();
 
-<span class="comment">// Delete old users</span>
-<span class="keyword">var</span> oldUsers = db.Users.AsQueryable()
+<span class="comment">// Collect IDs to delete (reads are outside the transaction)</span>
+<span class="type">List</span>&lt;<span class="type">ObjectId</span>&gt; toDelete = <span class="keyword">await</span> db.Users.AsQueryable()
     .Where(u => u.Age > <span class="number">60</span>)
-    .AsEnumerable();
-    
-<span class="keyword">foreach</span> (<span class="keyword">var</span> user <span class="keyword">in</span> oldUsers)
-{
-    <span class="keyword">await</span> db.Users.DeleteAsync(user.Id);
-}
+    .Select(u => u.Id)
+    .ToListAsync();
 
-<span class="comment">// Insert new batch</span>
-<span class="keyword">await</span> db.Users.InsertManyAsync(newBatch);
+<span class="keyword">foreach</span> (<span class="keyword">var</span> id <span class="keyword">in</span> toDelete)
+    <span class="keyword">await</span> db.Users.DeleteAsync(id, txn);
+
+<span class="comment">// Insert new batch atomically with the deletes</span>
+<span class="keyword">await</span> db.Users.InsertBulkAsync(newBatch, txn);
 
 <span class="keyword">await</span> txn.CommitAsync();</code></pre>
     </section>
 
     <section>
-      <h2>Thread-Safety & Concurrency</h2>
-      <p>BLite transactions are protected against race conditions using <strong>SemaphoreSlim</strong> to ensure thread-safe access to the current transaction state:</p>
-      <pre><code><span class="comment">// Safe to call from multiple threads</span>
-<span class="keyword">var</span> tasks = <span class="keyword">new</span> <span class="type">List</span>&lt;<span class="type">Task</span>&gt;();
+      <h2>Error Handling</h2>
+      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> txn = db.BeginTransaction();
 
-<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)
+<span class="keyword">try</span>
 {
-    tasks.Add(<span class="type">Task</span>.Run(<span class="keyword">async</span> () =>
-    {
-        <span class="keyword">await using</span> <span class="keyword">var</span> txn = <span class="keyword">await</span> db.BeginTransactionAsync();
-        <span class="keyword">await</span> db.Users.InsertAsync(<span class="keyword">new</span> <span class="type">User</span> { Name = $<span class="string">"User{i}"</span> });
-        <span class="keyword">await</span> txn.CommitAsync();
-    }));
+    <span class="keyword">await</span> db.Users.InsertAsync(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Alice"</span> }, txn);
+    <span class="keyword">await</span> db.Users.InsertAsync(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Bob"</span> }, txn);
+
+    <span class="keyword">await</span> txn.CommitAsync();
+}
+<span class="keyword">catch</span> (<span class="type">ValidationException</span> ex)
+{
+    <span class="comment">// Rolled back automatically on dispose</span>
+    Console.WriteLine($<span class="string">"Validation failed: {ex.Message}"</span>);
+}
+<span class="keyword">catch</span> (<span class="type">IOException</span> ex)
+{
+    Console.WriteLine($<span class="string">"I/O error: {ex.Message}"</span>);
+}</code></pre>
+    </section>
+
+    <section>
+      <h2>Explicit Rollback</h2>
+      <p>Call <code>RollbackAsync()</code> to explicitly discard all changes in a transaction:</p>
+      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> txn = db.BeginTransaction();
+
+<span class="keyword">await</span> db.Users.InsertAsync(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Test"</span> }, txn);
+
+<span class="keyword">if</span> (someCondition)
+{
+    <span class="keyword">await</span> txn.RollbackAsync(); <span class="comment">// Discard changes</span>
+    <span class="keyword">return</span>;
 }
 
-<span class="keyword">await</span> <span class="type">Task</span>.WhenAll(tasks);</code></pre>
+<span class="keyword">await</span> txn.CommitAsync();</code></pre>
+    </section>
 
-      <h3>CancellationToken Support</h3>
-      <h3>CancellationToken Support</h3>
-      <p>All async operations properly handle cancellation:</p>
+    <section>
+      <h2>CancellationToken Support</h2>
+      <p>All async operations accept an optional <code>CancellationToken</code>:</p>
       <pre><code><span class="keyword">var</span> cts = <span class="keyword">new</span> <span class="type">CancellationTokenSource</span>(<span class="type">TimeSpan</span>.FromSeconds(<span class="number">5</span>));
 
 <span class="keyword">try</span>
 {
-    <span class="keyword">await using</span> <span class="keyword">var</span> txn = <span class="keyword">await</span> db.BeginTransactionAsync(cts.Token);
-    
-    <span class="keyword">await</span> db.Users.InsertManyAsync(largeDataset, cts.Token);
+    <span class="keyword">using</span> <span class="keyword">var</span> txn = <span class="keyword">await</span> db.BeginTransactionAsync(cts.Token);
+
+    <span class="keyword">await</span> db.Users.InsertBulkAsync(largeDataset, txn, cts.Token);
     <span class="keyword">await</span> txn.CommitAsync(cts.Token);
 }
 <span class="keyword">catch</span> (<span class="type">OperationCanceledException</span>)
 {
-    <span class="comment">// Transaction automatically rolled back</span>
+    <span class="comment">// Transaction automatically rolled back on dispose</span>
     Console.WriteLine(<span class="string">"Operation cancelled"</span>);
 }</code></pre>
     </section>
 
     <section>
       <h2>Transaction Isolation</h2>
-      <p>BLite uses <strong>Snapshot Isolation</strong> to prevent dirty reads and ensure consistency:</p>
-      <pre><code><span class="comment">// Transaction 1 sees a consistent snapshot</span>
-<span class="keyword">using</span> <span class="keyword">var</span> txn1 = db.BeginTransaction();
-<span class="keyword">var</span> user = users.FindById(userId); <span class="comment">// Snapshot at txn1 start</span>
+      <p>BLite uses <strong>Read Committed</strong> isolation. Each read sees the last committed state; writes inside a transaction are not visible to other readers until commit.</p>
+      <pre><code><span class="comment">// Reader sees committed data only</span>
+<span class="keyword">var</span> user = <span class="keyword">await</span> db.Users.FindByIdAsync(userId);   <span class="comment">// reads last committed value</span>
 
-<span class="comment">// Transaction 2 modifies the same document</span>
-<span class="keyword">using</span> <span class="keyword">var</span> txn2 = db.BeginTransaction();
+<span class="comment">// Writer holds changes until commit</span>
+<span class="keyword">using</span> <span class="keyword">var</span> txn = db.BeginTransaction();
 user.Age = <span class="number">31</span>;
-users.Update(user);
-txn2.Commit();
+<span class="keyword">await</span> db.Users.UpdateAsync(user, txn);
 
-<span class="comment">// txn1 still sees Age = 30 (snapshot isolation)</span>
-Console.WriteLine(user.Age); <span class="comment">// 30</span></code></pre>
-    </section>
-
-    <section>
-      <h2>Explicit Rollback</h2>
-      <p>You can manually rollback a transaction if needed:</p>
-      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> txn = db.BeginTransaction();
-
-db.Users.Insert(<span class="keyword">new</span> <span class="type">User</span> { Name = <span class="string">"Test"</span> });
-
-<span class="keyword">if</span> (someCondition)
-{
-    txn.Rollback(); <span class="comment">// Discard changes</span>
-    <span class="keyword">return</span>;
-}
-
-txn.Commit();</code></pre>
+<span class="comment">// Another reader still sees Age = 30 until txn.CommitAsync() is called</span>
+<span class="keyword">await</span> txn.CommitAsync();</code></pre>
     </section>
 
     <section>
       <h2>Read-Only Operations</h2>
-      <p>Queries don't require transactions and never block writes:</p>
-      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">MyDbContext</span>(<span class="string">"mydb.blite"</span>);
+      <p>Queries are outside the transaction model and always read committed data:</p>
+      <pre><code><span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">AppDbContext</span>(<span class="string">"mydb.blite"</span>);
 
-<span class="comment">// No transaction needed for queries</span>
-<span class="keyword">var</span> users = db.Users.AsQueryable()
+<span class="comment">// Async LINQ — no transaction needed</span>
+<span class="type">List</span>&lt;<span class="type">User</span>&gt; users = <span class="keyword">await</span> db.Users.AsQueryable()
     .Where(u => u.Age > <span class="number">25</span>)
     .OrderBy(u => u.Name)
-    .AsEnumerable();
+    .ToListAsync();
 
-<span class="comment">// Complex aggregations also don't need transactions</span>
-<span class="keyword">var</span> stats = db.Users.AsQueryable()
-    .GroupBy(u => u.Age)
-    .Select(g => <span class="keyword">new</span> { Age = g.Key, Count = g.Count() })
-    .AsEnumerable();</code></pre>
+<span class="comment">// Streaming — no transaction needed</span>
+<span class="keyword">await foreach</span> (<span class="keyword">var</span> u <span class="keyword">in</span> db.Users.FindAllAsync())
+    Process(u);</code></pre>
     </section>
 
     <section>
@@ -371,9 +265,9 @@ txn.Commit();</code></pre>
 <span class="type">BsonId</span> id = <span class="keyword">await</span> session.InsertAsync(<span class="string">"users"</span>, userDoc, ct);
 <span class="type">BsonDocument</span>? doc = <span class="keyword">await</span> session.FindByIdAsync(<span class="string">"users"</span>, id, ct);
 
-<span class="comment">// Access collections scoped to this session</span>
+<span class="comment">// Access a collection scoped to this session</span>
 <span class="keyword">var</span> col = session.GetOrCreateCollection(<span class="string">"events"</span>);
-col.Insert(eventDoc);</code></pre>
+<span class="keyword">await</span> col.InsertAsync(eventDoc, ct);</code></pre>
       <div class="info-box">
         <strong>💡 When to use BLiteSession</strong>
         <ul>
@@ -386,31 +280,15 @@ col.Insert(eventDoc);</code></pre>
     </section>
 
     <section>
-      <h2>Best Practices</h2>
-      <ul>
-        <li>✅ <strong>Use <code>SaveChanges()</code></strong> for simple operations (recommended)</li>
-        <li>✅ <strong>Use explicit transactions</strong> for complex logic with conditionals</li>
-        <li>✅ <strong>Always use <code>using</code></strong> statements to ensure proper disposal</li>
-        <li>✅ <strong>Keep transactions short</strong> to minimize lock contention</li>
-        <li>✅ <strong>Use async methods</strong> for I/O-bound operations to improve scalability</li>
-        <li>✅ <strong>Handle exceptions</strong> gracefully - transactions auto-rollback on error</li>
-        <li>✅ <strong>Pass CancellationToken</strong> for long-running operations to enable timeouts and cancellation</li>
-        <li>✅ <strong>Thread-safe by design</strong> - BLite handles concurrent transactions automatically</li>
-        <li>⚠️ <strong>Avoid long-running transactions</strong> that hold resources</li>
-        <li>⚠️ <strong>Don't nest transactions</strong> - BLite uses a single transaction model</li>
-      </ul>
-    </section>
-
-    <section>
       <h2>Hot Backup (v1.8.0)</h2>
       <p>Create a <strong>consistent, online backup</strong> of the database without stopping or pausing the engine. Concurrent reads and writes remain safe during the copy.</p>
       <pre><code><span class="comment">// Typed API (DocumentDbContext)</span>
-<span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">MyDbContext</span>(<span class="string">"mydb.blite"</span>);
-<span class="keyword">await</span> db.BackupAsync(<span class="string">"backups/mydb-2026-02-24.blite"</span>);
+<span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> <span class="type">AppDbContext</span>(<span class="string">"mydb.blite"</span>);
+<span class="keyword">await</span> db.BackupAsync(<span class="string">"backups/mydb-2026-06-06.blite"</span>);
 
 <span class="comment">// Schema-less API (BLiteEngine)</span>
 <span class="keyword">using</span> <span class="keyword">var</span> engine = <span class="keyword">new</span> <span class="type">BLiteEngine</span>(<span class="string">"mydb.blite"</span>);
-<span class="keyword">await</span> engine.BackupAsync(<span class="string">"backups/mydb-2026-02-24.blite"</span>);</code></pre>
+<span class="keyword">await</span> engine.BackupAsync(<span class="string">"backups/mydb-2026-06-06.blite"</span>);</code></pre>
       <p>The backup file is a <strong>standalone, fully consistent database</strong> that can be opened directly with a new engine instance.</p>
       <div class="info-box">
         <strong>How it works:</strong>
@@ -428,24 +306,17 @@ col.Insert(eventDoc);</code></pre>
     </section>
 
     <section>
-      <h2>Error Handling with Explicit Transactions</h2>
-      <pre><code><span class="keyword">try</span>
-{
-    <span class="keyword">await using</span> <span class="keyword">var</span> txn = <span class="keyword">await</span> db.BeginTransactionAsync();
-    
-    <span class="keyword">await</span> db.Users.InsertAsync(newUser);
-    <span class="keyword">await</span> txn.CommitAsync();
-}
-<span class="keyword">catch</span> (<span class="type">TransactionConflictException</span> ex)
-{
-    <span class="comment">// Handle write conflicts (e.g., retry logic)</span>
-    Console.WriteLine(<span class="string">"Conflict detected, retrying..."</span>);
-}
-<span class="keyword">catch</span> (<span class="type">ValidationException</span> ex)
-{
-    <span class="comment">// Handle validation errors from attributes</span>
-    Console.WriteLine($<span class="string">"Validation failed: {ex.Message}"</span>);
-}</code></pre>
+      <h2>Best Practices</h2>
+      <ul>
+        <li>✅ <strong>Use auto-commit</strong> for independent single writes — simpler and sufficient</li>
+        <li>✅ <strong>Use explicit transactions</strong> when two or more writes must be atomic</li>
+        <li>✅ <strong>Always pass <code>txn</code></strong> to every write that must be part of the transaction</li>
+        <li>✅ <strong>Always use <code>using</code></strong> on transactions to guarantee rollback on exceptions</li>
+        <li>✅ <strong>Keep transactions short</strong> to minimize WAL pressure and lock contention</li>
+        <li>✅ <strong>Pass <code>CancellationToken</code></strong> for long-running operations</li>
+        <li>✅ <strong>Use <code>BLiteSession</code></strong> when multiple tasks share a single engine instance</li>
+        <li>⚠️ <strong>Don't nest transactions</strong> — BLite uses a single active transaction per context</li>
+      </ul>
     </section>
   </div>
 </template>

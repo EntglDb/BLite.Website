@@ -70,7 +70,7 @@ db.SensorReadings.Insert(<span class="keyword">new</span> <span class="type">Sen
 db.SaveChanges();
 
 <span class="comment">// Force prune immediately (tests / admin)</span>
-db.SensorReadings.ForcePrune();</code></pre>
+<span class="keyword">await</span> db.SensorReadings.ForcePruneAsync();</code></pre>
     </section>
 
     <section>
@@ -148,9 +148,9 @@ sensors.Insert(doc);</code></pre>
     <section>
       <h2>Force Prune (Testing / Admin)</h2>
       <p>
-        To trigger pruning immediately — useful in tests or admin tooling — call <code>ForcePrune()</code>:
+        To trigger pruning immediately — useful in tests or admin tooling — call <code>ForcePruneAsync()</code>:
       </p>
-      <pre><code>sensors.ForcePrune();
+      <pre><code><span class="keyword">await</span> sensors.ForcePruneAsync();
 engine.Commit();</code></pre>
       <p>
         In <strong>BLite Studio</strong>, the TimeSeries tab exposes a <em>⚡ Force Prune</em> button
@@ -212,7 +212,7 @@ engine.Commit();</code></pre>
         <thead><tr><th>API</th><th>Description</th></tr></thead>
         <tbody>
           <tr><td><code>.HasTimeSeries(x =&gt; x.Prop, retention)</code></td><td>Configure a typed collection as TimeSeries in <code>OnModelCreating</code>.</td></tr>
-          <tr><td><code>collection.ForcePrune()</code></td><td>Runs the prune pass immediately on a <code>DocumentCollection&lt;TId,T&gt;</code>.</td></tr>
+          <tr><td><code>collection.ForcePruneAsync()</code></td><td>Runs the prune pass immediately on a <code>DocumentCollection&lt;TId,T&gt;</code>.</td></tr>
           <tr><td><code>collection.Insert(entity)</code></td><td>Standard insert — routed to TS pages automatically.</td></tr>
           <tr><td><code>collection.FindAll()</code> / <code>FindById(id)</code></td><td>Standard reads work transparently on TS collections.</td></tr>
         </tbody>
@@ -225,7 +225,7 @@ engine.Commit();</code></pre>
           <tr><td><code>SetTimeSeries(field, retention)</code></td><td>Enable TimeSeries mode. <code>field</code> can be empty to use insertion time.</td></tr>
           <tr><td><code>IsTimeSeries</code></td><td>Returns <code>true</code> if the collection is in TimeSeries mode.</td></tr>
           <tr><td><code>GetTimeSeriesConfig()</code></td><td>Returns <code>(RetentionPolicyMs, TtlFieldName)</code>.</td></tr>
-          <tr><td><code>ForcePrune()</code></td><td>Runs the prune pass immediately, ignoring insert-count and time thresholds.</td></tr>
+          <tr><td><code>ForcePruneAsync()</code></td><td>Runs the prune pass immediately, ignoring insert-count and time thresholds.</td></tr>
           <tr><td><code>Insert(doc)</code> / <code>InsertAsync(doc)</code></td><td>Standard insert — routed to TS pages automatically when in TS mode.</td></tr>
           <tr><td><code>FindAll()</code> / BLQL <code>Query()</code></td><td>Standard reads — operate transparently across TS and slotted pages.</td></tr>
         </tbody>

@@ -16,16 +16,8 @@
 
 <span class="keyword">var</span> key = <span class="type">CryptoOptions</span>.DeriveKey(<span class="string">"my-passphrase"</span>, salt: myStoredSalt);
 
-<span class="keyword">var</span> options = <span class="keyword">new</span> <span class="type">BLiteEngineOptions</span>
-{
-    DatabasePath = <span class="string">"secure.blite"</span>,
-    Crypto = <span class="keyword">new</span> <span class="type">CryptoOptions</span>
-    {
-        Key = key   <span class="comment">// 32-byte AES-256 key</span>
-    }
-};
-
-<span class="keyword">await using var</span> engine = <span class="keyword">new</span> <span class="type">BLiteEngine</span>(options);
+<span class="keyword">var</span> crypto = <span class="keyword">new</span> <span class="type">CryptoOptions</span> { Key = key };  <span class="comment">// 32-byte AES-256 key</span>
+<span class="keyword">using var</span> engine = <span class="keyword">new</span> <span class="type">BLiteEngine</span>(<span class="string">"secure.blite"</span>, crypto);
 <span class="keyword">var</span> col = engine.GetOrCreateCollection(<span class="string">"users"</span>);</code></pre>
     </section>
 
@@ -53,11 +45,8 @@
     <span class="keyword">public</span> <span class="type">Memory</span>&lt;<span class="keyword">byte</span>&gt; Decrypt(<span class="type">ReadOnlySpan</span>&lt;<span class="keyword">byte</span>&gt; ciphertext, <span class="keyword">long</span> pageIndex) { <span class="comment">/* ... */</span> }
 }
 
-<span class="keyword">var</span> options = <span class="keyword">new</span> <span class="type">BLiteEngineOptions</span>
-{
-    DatabasePath = <span class="string">"secure.blite"</span>,
-    Crypto = <span class="keyword">new</span> <span class="type">CryptoOptions</span> { Provider = <span class="keyword">new</span> <span class="type">AzureKvsCryptoProvider</span>() }
-};</code></pre>
+<span class="keyword">var</span> crypto = <span class="keyword">new</span> <span class="type">CryptoOptions</span> { Provider = <span class="keyword">new</span> <span class="type">AzureKvsCryptoProvider</span>() };
+<span class="keyword">using var</span> engine = <span class="keyword">new</span> <span class="type">BLiteEngine</span>(<span class="string">"secure.blite"</span>, crypto);</code></pre>
     </section>
 
     <section>

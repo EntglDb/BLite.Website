@@ -110,6 +110,27 @@
 
 <span class="keyword">using var</span> db = <span class="keyword">new</span> <span class="type">AppDbContext</span>(<span class="string">"myapp.blite"</span>);
 <span class="keyword">var</span> users = db.Users;</code></pre>
+
+      <div class="warning-box">
+        <div class="warning-header">⚠️ Single-Process Access by Default</div>
+        <p>
+          BLite opens the database file with an <strong>exclusive lock</strong> by default
+          (<code>FileShare.None</code>). Only one process can hold the file open at a time.
+          Attempting to open the same file from a second process will throw an
+          <code>IOException</code>.
+        </p>
+        <p>
+          To allow multiple processes to read and write the same database simultaneously,
+          opt in to multi-process WAL coordination:
+        </p>
+        <pre><code><span class="keyword">using var</span> db = <span class="keyword">new</span> <span class="type">AppDbContext</span>(
+    <span class="string">"myapp.blite"</span>,
+    <span class="keyword">new</span> <span class="type">PageFileConfig</span> { AllowMultiProcessAccess = <span class="keyword">true</span> });</code></pre>
+        <p>
+          This activates a WAL shared-memory sidecar (<code>.wal-shm</code>) for cross-process
+          coordination. Not supported on WASM/browser or network filesystems (NFS/SMB).
+        </p>
+      </div>
     </section>
 
     <section>
@@ -128,13 +149,13 @@ Console.WriteLine($<span class="string">"Inserted with ID: {newUser.Id}"</span>)
 
       <h3>Query</h3>
       <pre><code><span class="comment">// Find by ID</span>
-<span class="keyword">var</span> user = <span class="keyword">await</span> users.FindByIdAsync(newUser.Id, ct);
+<span class="keyword">var</span> user = <span class="keyword">await</span> users.FindByIdAsync(newUser.Id);
 
 <span class="comment">// Query with async LINQ</span>
 <span class="type">List</span>&lt;<span class="type">User</span>&gt; results = <span class="keyword">await</span> users.AsQueryable()
     .Where(u => u.Age > <span class="number">25</span>)
     .OrderBy(u => u.Name)
-    .ToListAsync(ct);</code></pre>
+    .ToListAsync();</code></pre>
 
       <h3>Update</h3>
       <pre><code>user.Age = <span class="number">31</span>;

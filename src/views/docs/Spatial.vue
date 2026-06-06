@@ -20,10 +20,16 @@
 
     <section>
       <h2>Creating Spatial Index</h2>
-      <pre><code><span class="keyword">var</span> locations = db.GetCollection&lt;<span class="type">Location</span>&gt;();
+      <p>Declare the spatial index via the model builder in <code>OnModelCreating</code>:</p>
+      <pre><code><span class="comment">// Typed API — configure in your DocumentDbContext subclass</span>
+<span class="keyword">protected override void</span> OnModelCreating(<span class="type">ModelBuilder</span> builder)
+{
+    builder.Entity&lt;<span class="type">Location</span>&gt;()
+           .HasSpatialIndex(l => l.Coordinates);
+}
 
-<span class="comment">// Create R-Tree spatial index</span>
-locations.EnsureSpatialIndex(l => l.Coordinates);</code></pre>
+<span class="comment">// Then access the collection via your context property</span>
+<span class="keyword">var</span> locations = db.Locations;  <span class="comment">// DocumentCollection&lt;ObjectId, Location&gt;</span></code></pre>
     </section>
 
     <section>
