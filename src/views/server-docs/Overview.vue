@@ -27,7 +27,7 @@
 
     <section>
       <h2>What's New in BLite.Server 2.0.0</h2>
-      <p>BLite.Server 2.0.0 is built on <strong>BLite 5.0.0</strong> and exposes all new engine capabilities over REST and the Studio UI:</p>
+      <p>BLite.Server 2.0.0 is built on <strong>BLite 5.0.1</strong> and exposes all new engine capabilities over REST and the Studio UI:</p>
       <table class="info-table">
         <thead>
           <tr><th>Feature</th><th>Engine</th><th>Server exposure</th></tr>
