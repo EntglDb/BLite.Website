@@ -113,11 +113,11 @@ interface ClientRow {
 const serverMatrix: ServerRow[] = [
   {
     server: '2.0.0',
-    engine: '5.0.1',
+    engine: '5.0.2',
     status: 'stable',
     statusLabel: 'Stable',
-    date: '2026-06-07',
-    notes: 'Current stable release. BLite 5.0.1: patch release — API name alignment and doc corrections. Includes all features from 5.0.0: AES-256-GCM encryption at rest, Audit Trail (IBLiteAuditSink, BLiteMetrics, OTel), full GDPR toolkit ([PersonalData], subject export, GdprMode.Strict), generalized retention policies, VacuumAsync, multi-process WAL. New REST endpoints: /gdpr/inspect, /gdpr/export-subject, /metrics, /vacuum. New Studio GDPR page.'
+    date: '2026-06-08',
+    notes: 'Current stable release. BLite 5.0.2: patch release — Italian locale strings replaced with English in Studio UI. Includes all features from 5.0.0: AES-256-GCM encryption at rest, Audit Trail (IBLiteAuditSink, BLiteMetrics, OTel), full GDPR toolkit ([PersonalData], subject export, GdprMode.Strict), generalized retention policies, VacuumAsync, multi-process WAL. New REST endpoints: /gdpr/inspect, /gdpr/export-subject, /metrics, /vacuum. New Studio GDPR page.'
   },
   {
     server: '1.0.1',
