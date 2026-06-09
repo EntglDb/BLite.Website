@@ -26,7 +26,8 @@ const docSections = [
   { path: '/docs/wasm', label: 'Blazor WASM', icon: '🌐' },
   { path: '/docs/encryption', label: 'Encryption at Rest', icon: '🔐' },
   { path: '/docs/audit-trail', label: 'Audit Trail', icon: '📊' },
-  { path: '/docs/gdpr', label: 'GDPR', icon: '🛡️' }
+  { path: '/docs/gdpr', label: 'GDPR', icon: '🛡️' },
+  { path: '/docs/multi-process', label: 'Multi-Process Access', icon: '🔀' }
 ]
 
 const isActive = (path: string) => route.path === path

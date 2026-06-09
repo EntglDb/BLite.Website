@@ -29,6 +29,7 @@ import WasmSupport from '../views/docs/WasmSupport.vue'
 import Encryption from '../views/docs/Encryption.vue'
 import AuditTrail from '../views/docs/AuditTrail.vue'
 import GDPR from '../views/docs/GDPR.vue'
+import MultiProcess from '../views/docs/MultiProcess.vue'
 
 export const DEFAULT_TITLE = 'BLite – Embedded NoSQL Database for .NET'
 export const DEFAULT_DESC = 'BLite is the high-performance embedded NoSQL database for .NET. Zero-allocation BSON document store with ACID transactions, CDC streams, and spatial indexing — no server, no cloud. Install via NuGet.'
@@ -198,6 +199,14 @@ export const routes: RouteRecordRaw[] = [
                 meta: {
                     title: 'GDPR Compliance in BLite – Art. 30 Inspection, Subject Export & Retention',
                     description: 'BLite 5.0.0 includes a complete GDPR toolkit: [PersonalData] field tagging, Art. 30 database inspection, Art. 15/20 subject data export, configurable retention policies, secure erase, and GdprMode.Strict enforcement.'
+                }
+            },
+            {
+                path: 'multi-process',
+                component: MultiProcess,
+                meta: {
+                    title: 'Multi-Process Access in BLite – Shared WAL, Cross-Process Locking & Crash Safety',
+                    description: 'Open the same BLite database from multiple processes simultaneously. AllowMultiProcessAccess enables shared WAL coordination via .wal-shm, named Mutex on Windows and fcntl OFD locks on Linux/macOS, with automatic crash recovery.'
                 }
             }
         ]
