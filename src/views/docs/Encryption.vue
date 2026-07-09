@@ -12,11 +12,11 @@
     <section>
       <h2>Quick Start</h2>
       <pre><code><span class="keyword">using</span> <span class="type">BLite.Core</span>;
-<span class="keyword">using</span> <span class="type">BLite.Core.Crypto</span>;
+<span class="keyword">using</span> <span class="type">BLite.Core.Encryption</span>;
 
 <span class="keyword">var</span> key = <span class="type">CryptoOptions</span>.DeriveKey(<span class="string">"my-passphrase"</span>, salt: myStoredSalt);
 
-<span class="keyword">var</span> crypto = <span class="keyword">new</span> <span class="type">CryptoOptions</span> { Key = key };  <span class="comment">// 32-byte AES-256 key</span>
+<span class="keyword">var</span> crypto = <span class="type">CryptoOptions</span>.FromMasterKey(key);
 <span class="keyword">using var</span> engine = <span class="keyword">new</span> <span class="type">BLiteEngine</span>(<span class="string">"secure.blite"</span>, crypto);
 <span class="keyword">var</span> col = engine.GetOrCreateCollection(<span class="string">"users"</span>);</code></pre>
     </section>
@@ -38,21 +38,21 @@
 
     <section>
       <h2>Providing a Custom Crypto Provider</h2>
-      <p>For HSM or KMS integration, implement <code>IBLiteCryptoProvider</code>:</p>
-      <pre><code><span class="keyword">public class</span> <span class="type">AzureKvsCryptoProvider</span> : <span class="type">IBLiteCryptoProvider</span>
+      <p>For HSM or KMS integration, implement <code>ICryptoProvider</code>:</p>
+      <pre><code><span class="keyword">public class</span> <span class="type">AzureKvsCryptoProvider</span> : <span class="type">ICryptoProvider</span>
 {
     <span class="keyword">public</span> <span class="type">Memory</span>&lt;<span class="keyword">byte</span>&gt; Encrypt(<span class="type">ReadOnlySpan</span>&lt;<span class="keyword">byte</span>&gt; plaintext, <span class="keyword">long</span> pageIndex) { <span class="comment">/* ... */</span> }
     <span class="keyword">public</span> <span class="type">Memory</span>&lt;<span class="keyword">byte</span>&gt; Decrypt(<span class="type">ReadOnlySpan</span>&lt;<span class="keyword">byte</span>&gt; ciphertext, <span class="keyword">long</span> pageIndex) { <span class="comment">/* ... */</span> }
-}
-
-<span class="keyword">var</span> crypto = <span class="keyword">new</span> <span class="type">CryptoOptions</span> { Provider = <span class="keyword">new</span> <span class="type">AzureKvsCryptoProvider</span>() };
-<span class="keyword">using var</span> engine = <span class="keyword">new</span> <span class="type">BLiteEngine</span>(<span class="string">"secure.blite"</span>, crypto);</code></pre>
+}</code></pre>
+      <div class="doc-callout doc-callout-warning">
+        Custom provider injection via <code>CryptoOptions</code> is not currently supported. The <code>ICryptoProvider</code> interface is available for future extensibility.
+      </div>
     </section>
 
     <section>
       <h2>NullCryptoProvider (testing)</h2>
-      <p>For unit tests or environments where encryption is optional, use <code>NullCryptoProvider</code> — a no-op pass-through that conforms to the same interface without performing any encryption:</p>
-      <pre><code>Crypto = <span class="keyword">new</span> <span class="type">CryptoOptions</span> { Provider = <span class="type">NullCryptoProvider</span>.Instance }</code></pre>
+      <p>For unit tests or environments where encryption is not required, omit the <code>CryptoOptions</code> argument entirely — BLite will run without encryption in that case:</p>
+      <pre><code><span class="keyword">using var</span> engine = <span class="keyword">new</span> <span class="type">BLiteEngine</span>(<span class="string">"test.blite"</span>);  <span class="comment">// no encryption</span></code></pre>
     </section>
 
     <section>

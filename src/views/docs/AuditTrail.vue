@@ -67,10 +67,11 @@ services.AddSingleton&lt;<span class="type">IAuditContextProvider</span>, <span 
       <h2>Engine Metrics</h2>
       <p><code>BLiteMetrics</code> is updated atomically after every write and exposes counters readable without I/O:</p>
       <pre><code><span class="keyword">var</span> metrics = engine.AuditMetrics;
-Console.WriteLine(<span class="string">$"Inserts: {metrics.TotalInserts}"</span>);
-Console.WriteLine(<span class="string">$"Updates: {metrics.TotalUpdates}"</span>);
-Console.WriteLine(<span class="string">$"Deletes: {metrics.TotalDeletes}"</span>);
-Console.WriteLine(<span class="string">$"Storage: {metrics.StorageSizeBytes / 1024:N0} KB"</span>);</code></pre>
+Console.WriteLine(<span class="string">$"Inserts:             {metrics.TotalInserts}"</span>);
+Console.WriteLine(<span class="string">$"Index-scan queries:  {metrics.TotalQueriesIndexScan}"</span>);
+Console.WriteLine(<span class="string">$"BSON-scan queries:   {metrics.TotalQueriesBsonScan}"</span>);
+Console.WriteLine(<span class="string">$"Full-scan queries:   {metrics.TotalQueriesFullScan}"</span>);
+Console.WriteLine(<span class="string">$"Commits:             {metrics.TotalCommits}"</span>);</code></pre>
       <p>BLite.Server exposes these via the <code>GET /api/v1/{dbId}/metrics</code> REST endpoint.</p>
     </section>
 

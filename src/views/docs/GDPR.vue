@@ -72,16 +72,17 @@ Console.WriteLine(<span class="string">$"Audit enabled: {report.IsAuditEnabled}"
     <section>
       <h2>Retention Policies</h2>
       <p>BLite 5.0.0 generalises retention — it is no longer limited to TimeSeries collections. Any typed collection can declare a retention policy:</p>
-      <pre><code><span class="keyword">var</span> col = engine.GetOrCreateCollection&lt;<span class="type">ObjectId</span>, <span class="type">AuditEntry</span>&gt;(mapper);
+      <pre><code><span class="comment">// Typed collections come from your DocumentDbContext subclass</span>
+<span class="keyword">var</span> col = ctx.AuditEntries;  <span class="comment">// DocumentCollection&lt;ObjectId, AuditEntry&gt;</span>
 
-col.HasRetentionPolicy(<span class="keyword">new</span> <span class="type">RetentionPolicy</span>
+col.SetRetentionPolicy(<span class="keyword">new</span> <span class="type">RetentionPolicy</span>
 {
     MaxAge           = <span class="type">TimeSpan</span>.FromDays(90),   <span class="comment">// delete docs older than 90 days</span>
     TimestampField   = <span class="string">"CreatedAt"</span>
 });
 
 <span class="comment">// Force an immediate prune (otherwise runs automatically on insert)</span>
-<span class="keyword">await</span> col.PruneAsync();</code></pre>
+<span class="keyword">await</span> col.ForceApplyRetentionPolicyAsync();</code></pre>
     </section>
 
     <section>
