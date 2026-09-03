@@ -91,15 +91,23 @@ user.Email = <span class="string">"newemail@example.com"</span>;
 <span class="keyword">await</span> users.UpdateAsync(user);</code></pre>
 
       <h3>Upsert (Insert or Update)</h3>
-      <div class="info-box" style="margin-bottom:12px">
-        <strong>ℹ️ Note:</strong> A dedicated <code>UpsertAsync</code> method is not yet available. Use <code>FindByIdAsync</code> to check for an existing record and then call <code>InsertAsync</code> or <code>UpdateAsync</code> accordingly.
-      </div>
-      <pre><code><span class="comment">// Upsert pattern: insert if not found, update if found</span>
-<span class="keyword">var</span> existing = <span class="keyword">await</span> users.FindByIdAsync(user.Id, ct);
-<span class="keyword">if</span> (existing == <span class="keyword">null</span>)
-    <span class="keyword">await</span> users.InsertAsync(user);
+      <p>
+        <code>UpsertAsync</code> inserts the document if its id is unset or not present in the
+        collection, otherwise it replaces the existing document. It is <strong>not</strong> a
+        <code>FindByIdAsync</code> followed by a separate <code>InsertAsync</code>/<code>UpdateAsync</code> call —
+        it is resolved with a single primary-index lookup inside one transaction, so there is no
+        extra round-trip and no window for another writer to race the check.
+      </p>
+      <pre><code><span class="type">UpsertResult</span>&lt;<span class="type">ObjectId</span>&gt; result = <span class="keyword">await</span> users.UpsertAsync(user);
+
+<span class="keyword">if</span> (result.Inserted)
+    Console.WriteLine(<span class="string">$"created new user {result.Id}"</span>);
 <span class="keyword">else</span>
-    <span class="keyword">await</span> users.UpdateAsync(user);</code></pre>
+    Console.WriteLine(<span class="string">$"replaced existing user {result.Id}"</span>);</code></pre>
+
+      <h3>Bulk Upsert</h3>
+      <pre><code><span class="type">List</span>&lt;<span class="type">UpsertResult</span>&lt;<span class="type">ObjectId</span>&gt;&gt; results = <span class="keyword">await</span> users.UpsertBulkAsync(batch);
+<span class="comment">// each entity resolved independently, in order</span></code></pre>
 
       <h3>Partial Update</h3>
       <pre><code><span class="keyword">var</span> user = <span class="keyword">await</span> users.FindByIdAsync(userId, ct);

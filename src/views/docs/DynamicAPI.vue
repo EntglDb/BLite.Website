@@ -166,6 +166,27 @@ engine.SetVectorSource(<span class="string">"documents"</span>, config);
     </section>
 
     <section>
+      <h2>Upsert</h2>
+      <p>
+        <code>UpsertAsync</code> inserts a document if its <code>_id</code> is unset/absent or not
+        present in the collection, otherwise it replaces the existing document with that id. It
+        is <strong>not</strong> a <code>FindByIdAsync</code> followed by a separate
+        <code>InsertAsync</code>/<code>UpdateAsync</code> call — each document is resolved with a
+        single primary-index lookup inside one transaction.
+      </p>
+      <pre><code><span class="comment">// New document (no _id, or an _id not yet in the collection) → inserted</span>
+<span class="type">UpsertResult</span>&lt;<span class="type">BsonId</span>&gt; inserted = <span class="keyword">await</span> orders.UpsertAsync(newDoc, ct);
+Console.WriteLine(inserted.Inserted); <span class="comment">// true</span>
+
+<span class="comment">// Existing document → replaced in place, no "Duplicate key" exception</span>
+<span class="type">UpsertResult</span>&lt;<span class="type">BsonId</span>&gt; replaced = <span class="keyword">await</span> orders.UpsertAsync(existingDoc, ct);
+Console.WriteLine(replaced.Inserted); <span class="comment">// false</span>
+
+<span class="comment">// Bulk (single transaction) — each document resolved independently, in order</span>
+<span class="type">List</span>&lt;<span class="type">UpsertResult</span>&lt;<span class="type">BsonId</span>&gt;&gt; results = <span class="keyword">await</span> orders.UpsertBulkAsync([doc1, doc2, doc3], ct);</code></pre>
+    </section>
+
+    <section>
       <h2>Index Management</h2>
       <pre><code><span class="comment">// B-Tree secondary index on a top-level field</span>
 orders.CreateIndex(<span class="string">"status"</span>);
@@ -304,6 +325,8 @@ orders.Insert(doc);
           <tr><td><code>UpdateAsync(id, doc, ct)</code></td><td><code>Task&lt;bool&gt;</code></td></tr>
           <tr><td><code>UpdateBulk(updates)</code></td><td><code>int</code></td></tr>
           <tr><td><code>UpdateBulkAsync(updates, ct)</code></td><td><code>Task&lt;int&gt;</code></td></tr>
+          <tr><td><code>UpsertAsync(doc, ct)</code></td><td><code>ValueTask&lt;UpsertResult&lt;BsonId&gt;&gt;</code> — single primary-index lookup, insert or replace</td></tr>
+          <tr><td><code>UpsertBulkAsync(docs, ct)</code></td><td><code>ValueTask&lt;List&lt;UpsertResult&lt;BsonId&gt;&gt;&gt;</code></td></tr>
           <tr><td><code>Delete(id)</code></td><td><code>bool</code></td></tr>
           <tr><td><code>DeleteAsync(id, ct)</code></td><td><code>Task&lt;bool&gt;</code></td></tr>
           <tr><td><code>DeleteBulk(ids)</code></td><td><code>int</code></td></tr>
