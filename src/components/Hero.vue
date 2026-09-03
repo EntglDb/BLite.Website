@@ -13,7 +13,7 @@ const goGithub = () => window.open('https://github.com/EntglDb/BLite', '_blank')
     
     <div class="container hero-content">
       <div class="badge animate-fade-in" style="animation-delay: 0.1s">
-        <span class="badge-dot"></span> v5.0.2 Released — AES-256-GCM encryption at rest, Audit Trail, GDPR compliance primitives, Retention Policies, Secure Erase
+        <span class="badge-dot"></span> v5.1.0 Released — UpsertAsync/UpsertBulkAsync (single-lookup insert-or-replace), AES-256-GCM encryption at rest, Audit Trail, GDPR compliance primitives
       </div>
       
       <h1 class="hero-title animate-fade-in" style="animation-delay: 0.2s">
